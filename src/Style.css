@@ -1,0 +1,17 @@
+/*
+ <!--################################################################################
+   --# Nombre del Programa : GeoBooker                                              #
+   --# Autor               : Gandhi Soto Sanchez                                    #
+   --# Compania            : Codigo Geek                                            #
+   --# Proyecto            : GeoBooker                       Fecha: 14/05/2024      #
+   --# Descripcion General : Estilos globales                                       #
+   ---------------------------------------------------------------------------------#-->
+ */
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
