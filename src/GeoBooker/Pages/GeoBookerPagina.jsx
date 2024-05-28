@@ -7,6 +7,7 @@
 //   ---------------------------------------------------------------------------------#-->
 
 import {GeoBooker} from "../Views/GeoBookerPagina/Index.js";
+import Formulario from "../Views/GeoBookerPagina/Formulario.jsx";
 
 export const GeoBookerPagina = () => {
 
@@ -14,6 +15,7 @@ export const GeoBookerPagina = () => {
         <>
             <GeoBooker/>
 
+            <Formulario/>
         </>
 
     )
