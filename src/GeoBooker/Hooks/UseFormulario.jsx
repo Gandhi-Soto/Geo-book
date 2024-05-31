@@ -1,7 +1,15 @@
+// <!--################################################################################
+//   --# Nombre del Programa : GeoBooker                                              #
+//   --# Autor               : Caleb Martinez Cavazos                                 #
+//   --# Compania            : Codigo Geek                                            #
+//   --# Proyecto            : GeoBooker                       Fecha: 20/05/2024      #
+//   --# Descripcion General : Hook para realizar verificaciones al formulario        #
+//   ---------------------------------------------------------------------------------#-->
+
 import { useState } from 'react';
 import validator from 'validator';
 import axios from 'axios';
-import cities from '../../ClavesLada';
+import cities from '../Data/ClavesLada';
 
 const UseFormulario = () => {
     const [nombre, setNombre] = useState('');

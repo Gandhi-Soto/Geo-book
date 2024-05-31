@@ -1,3 +1,12 @@
+// <!--################################################################################
+//   --# Nombre del Programa : GeoBooker                                              #
+//   --# Autor               : Caleb Martinez Cavazos                                 #
+//   --# Compania            : Codigo Geek                                            #
+//   --# Proyecto            : GeoBooker                       Fecha: 22/05/2024      #
+//   --# Descripcion General : Datos de las LADAS de ciudades para la verificacion de #
+//                             telefono en el hook UseFormulario                      #
+//   ---------------------------------------------------------------------------------#-->
+
 const cities = [
   { "city": "Aguascalientes", "state": "Aguascalientes", "lada": "449" },
   { "city": "Asientos", "state": "Aguascalientes", "lada": "465" },

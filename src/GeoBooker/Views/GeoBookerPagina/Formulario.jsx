@@ -1,8 +1,21 @@
-import { useEffect, useState } from 'react'
-import { TextField, Stack, MenuItem, Checkbox, Button, CircularProgress, Grid } from '@mui/material';
+// <!--################################################################################
+//   --# Nombre del Programa : GeoBooker                                              #
+//   --# Autor               : Caleb Martinez Cavazos                                 #
+//   --# Compania            : Codigo Geek                                            #
+//   --# Proyecto            : GeoBooker                       Fecha: 20/05/2024      #
+//   --# Descripcion General : Componente del formulario de pre registro              #
+//   ---------------------------------------------------------------------------------#-->
+
+import { useEffect, useState, useContext } from 'react'
+import { TextField, Stack, MenuItem, Checkbox, Button, CircularProgress, Grid, InputAdornment } from '@mui/material';
 import UseFormulario from '../../Hooks/UseFormulario';
+import { Link } from 'react-router-dom';
+import { FormContext } from '../../Context/Index.js';
+import BanderaDeMexico from "../../../assets/UnSoloUso/BanderaDeMexico.svg";
 
 function Formulario() {
+
+    const { setFormTerminado, setVistaFinal } = useContext(FormContext);
 
     const {
         nombre, nombreValido, nombreTocado, setNombreTocado, handleNombre,
@@ -112,6 +125,7 @@ function Formulario() {
     // console.log(selectColonias);
 
     const [textoCheckbox, setTextoCheckbox] = useState('');
+    const [formValido, setFormValido] = useState(false);
 
     const validarFormulario = () => {
         // Marcar como tocados los campos que no se hayan tocado previamente
@@ -133,12 +147,15 @@ function Formulario() {
 
         // Verificar si todos los campos son válidos
         if (
-            nombreValido && apellidoPaternoValido && apellidoMaternoValido &&
-            edadValida && generoValido && servicioValido && subservicioValido && coloniaValida && nombreNegocioValido && calleValida &&
+            nombreValido && apellidoPaternoValido && apellidoMaternoValido && generoValido && servicioValido && subservicioValido && coloniaValida && nombreNegocioValido && calleValida &&
             numeroValido && telefonoValido && correoValido && checkboxValido && codigoPostalValido
         ) {
             // Mostrar mensaje en la consola si el formulario es válido
-            console.log('Formulario válido');
+            // console.log('Formulario válido');
+            localStorage.setItem('formTerminado', 'true');
+            localStorage.setItem("vistaFinal", "true");
+            setFormTerminado('true');
+            setVistaFinal('true');
         } else {
             // Mostrar mensaje en la consola si el formulario no es válido
             if (checkboxValido) {
@@ -148,10 +165,13 @@ function Formulario() {
                 // No hacer nada si el checkbox no está marcado
                 setTextoCheckbox('Debes aceptar los términos y condiciones');
             }
-            console.log('Formulario inválido');
+            // console.log('Formulario inválido');
+            localStorage.setItem('formTerminado', 'false');
+            localStorage.setItem("vistaFinal", "false");
+            setFormTerminado('false');
+            setVistaFinal('false');
         }
     };
-
 
     return (
         <>
@@ -338,7 +358,7 @@ function Formulario() {
                                 value={colonia}
                                 fullWidth
                                 onChange={handleColonia}
-                                helperText={setColoniaTocada && !coloniaValida ? '*Por favor, selecciona una opción' : ''}
+                                helperText={coloniaTocada && !coloniaValida ? '*Por favor, selecciona una opción' : ''}
                                 error={coloniaTocada && !coloniaValida}
                             >{selectColonias.map((option) => (
                                 <MenuItem key={option.value} value={option.value}>
@@ -379,7 +399,7 @@ function Formulario() {
                         />
                     </Stack>
                     <Grid container spacing={2} mb={2}>
-                        <Grid item xs={3}>
+                        <Grid item xs={4}>
                             <TextField
                                 id="outlined-helperText"
                                 label="LADA"
@@ -387,9 +407,16 @@ function Formulario() {
                                 variant='filled'
                                 disabled
                                 helperText=" "
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <img src={BanderaDeMexico} alt="Bandera de México" height={15} />
+                                        </InputAdornment>
+                                    ),
+                                }}
                             />
                         </Grid>
-                        <Grid item xs={9}>
+                        <Grid item xs={8}>
                             <TextField
                                 id="outlined-basic"
                                 label="Número de Teléfono"
@@ -435,18 +462,18 @@ function Formulario() {
                         alignItems="center"
                         mt={2}
                     >
-                        <Button
-                            variant='contained'
-                            size='large'
-                            onClick={validarFormulario}
-                        >
-                            Registrarme
-                        </Button>
+                        <Link to={formValido ? "/" : ""} state={formValido ? { formTerminado: true } : { formTerminado: false }}>
+                            <Button
+                                variant='contained'
+                                size='large'
+                                onClick={validarFormulario}
+                            >
+                                Registrarme
+                            </Button>
+                        </Link>
                     </Stack>
                 </div>
             </div>
-
-            <div className='pruebaContenedor'></div>
         </>
     )
 }
