@@ -5,26 +5,46 @@
 //   --# Proyecto            : GeoBooker                       Fecha: 20/05/2024      #
 //   --# Descripcion General : Componente del pie de pagina                           #
 //   ---------------------------------------------------------------------------------#-->
+//-------------------------------- MODIFICACIONES ------------------------------------#
+// <!--################################################################################
+//   --# Autor               : Gandhi Soto Sanchez                                    #
+//   --# Fecha               : 31/05/2024                                             #
+//   --# Modificacion        : Se cambiaron los typographies                          #
+//   --# Marca de cambio     : GSS-310524                                             #
+//   ---------------------------------------------------------------------------------#-->
 
 import {useContext} from 'react';
-import { Box, Container, Grid, Typography, Link } from '@mui/material';
+// INICIO CAMBIO GSS-310524
+import {Box, Container, Grid, Link, useTheme} from '@mui/material';
+// FIN CAMBIO GSS-310524
+
 import {ModalContext} from "../Context/Index.js";
 import {PoweredBy} from '../../assets/Footer/Index.js';
 import {ListaDeRedesSociales} from "./Index.js";
+
+// INICIO CAMBIO GSS-310524
+import {TypographySmallText} from "../Theme/index.js";
+// FIN CAMBIO GSS-310524
 
 export const Footer = () => {
     const lugarDeTrabajoEnGoogleMaps =
         'https://www.google.com.mx/maps/place/Codigo+Geek/@19.5971178,-99.0490081,18z/data=!4m6!3m5!1s0x85d1f10fd2ab71af:0x7358aa29011bf3ba!8m2!3d19.5972794!4d-99.0479566!16s%2Fg%2F11y4q43b_v?entry=ttu'
 
-    const {setMostrarCuartoModal} = useContext(ModalContext);
+    // INICIO CAMBIO GSS-310524
+    const {setMostrarDerechosReservadosModal} = useContext(ModalContext);
+    const theme = useTheme()
+    // FIN CAMBIO GSS-310524
+
     return (
         <Box sx={{bgcolor: 'black', color: 'white', py: 3}}>
             <Container>
                 <Grid container spacing={2} alignItems="center">
                     <Grid item xs={12}>
-                        <Typography variant="h6" align="center" className='fs-6' gutterBottom>
+                         {/*INICIO CAMBIO GSS-310524*/}
+                        <TypographySmallText sx={{ color: 'white' }} >
                             Visita nuestras redes para mantenerte informado de nuestras novedades.
-                        </Typography>
+                        </TypographySmallText>
+                        {/*FIN CAMBIO GSS-310524*/}
                     </Grid>
 
                     <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -33,17 +53,26 @@ export const Footer = () => {
 
                     <Grid item xs={12}>
                         <Link variant='body2' href={ lugarDeTrabajoEnGoogleMaps } target="_blank">
-                            Av. Insurgentes 2 Bis, Centro, 55000 Ecatepec de Morelos, Méx., México
+                            {/*INICIO CAMBIO GSS-310524*/}
+                            <TypographySmallText sx={{  color: theme.palette.link.main }}>
+                                Av. Insurgentes 2 Bis, Centro, 55000 Ecatepec de Morelos, Méx., México
+                            </TypographySmallText>
+                            {/*FIN CAMBIO GSS-310524*/}
                         </Link>
-                        {/*Av. Insurgentes 2 Bis, Centro, 55000 Ecatepec de Morelos, Méx., México*/}
 
                     </Grid>
-                    <Grid item xs={6}>
-                        <Link variant='body2' onClick={() => setMostrarCuartoModal(true)}>
-                            Todos los derechos reservados
+
+                    {/*INICIO CAMBIO GSS-310524*/}
+                    <Grid item xs={7}>
+                        <Link variant='body2' onClick={() => setMostrarDerechosReservadosModal(true)}>
+                            <TypographySmallText sx={{  color: theme.palette.link.main, textAlign: 'center' }} overrideSizes={{ xs: '0.8rem'}}>
+                                Todos los derechos reservados
+                            </TypographySmallText>
                         </Link>
                     </Grid>
-                    <Grid item xs={6}>
+                    {/*FIN CAMBIO GSS-310524*/}
+
+                    <Grid item xs={4}>
                         <Link href="https://codigogeek.com.mx/" target="_blank">
                             <img
                                 src={ PoweredBy }
@@ -52,6 +81,7 @@ export const Footer = () => {
                         </Link>
                     </Grid>
                 </Grid>
+
             </Container>
         </Box>
     );

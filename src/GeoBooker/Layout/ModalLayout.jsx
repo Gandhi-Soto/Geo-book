@@ -38,15 +38,12 @@ export const ModalLayout =
                 onHide={ onHideModal }
                 dialogClassName={dialogClassName + ' Modal-Style-ModalLayout'}
                 contentClassName={contentClassName}
-
                 centered
             >
                 <ModalDialog>
-                    <
-                        Modal.Header
+                    <Modal.Header
                         closeButton={mostrarCloseButton}>
-                        < Modal.Title> {titulo}
-                        </Modal.Title>
+                        <Modal.Title> {titulo} </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>{cuerpo}</Modal.Body>
 

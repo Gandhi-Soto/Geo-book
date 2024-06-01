@@ -48,7 +48,6 @@ const Cuerpo = () => {
 }
 
 const Footer = () => {
-    // todo cambiar el nombre de las funciones, esto es solo para tester el modal <DerechosReservadosModal />
     const {setMostrarPoliticasDeUsoDeCookiesModal, setMostrarAdministradorDeCookiesModal} = useContext(ModalContext);
     return (
         <Container className="d-flex justify-content-center align-items-center">

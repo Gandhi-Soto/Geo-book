@@ -34,5 +34,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           </FormProvider>
           {/*FIN DE CAMBIO: BCMC-310524*/}
       </BrowserRouter>
-  </React.StrictMode>,
+  </React.StrictMode>
 )

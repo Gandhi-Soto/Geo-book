@@ -5,7 +5,13 @@
 //   --# Proyecto            : GeoBooker                       Fecha: 20/05/2024      #
 //   --# Descripcion General : Componente de la lista redes sociales de Codigo Geek   #
 //   ---------------------------------------------------------------------------------#-->
-
+//-------------------------------- MODIFICACIONES ------------------------------------#
+// <!--################################################################################
+//   --# Autor               : Gandhi Soto Sanchez                                    #
+//   --# Fecha               : 31/05/2024                                             #
+//   --# Modificacion        : Se agrego el componente                                #
+//   --# Marca de cambio     : GSS-310524                                             #
+//   ---------------------------------------------------------------------------------#-->
 
 import {ImageList, ImageListItem, Link} from "@mui/material";
 import {
@@ -17,6 +23,27 @@ import {
     LinkedInIcon,
     WhatsappIcon
 } from '../../assets/RedesSociales/Index.js';
+
+// INICIO CAMBIO GSS-310524
+export const ListaDeRedesSociales = () => {
+    return (
+        <ImageList cols={7} gap={15}>
+            {
+                itemData.map( item =>
+                    <ImageListItem
+                        key={item.icon}
+                        sx={{width: 20, height: 20 }}
+                    >
+                        <Link href={ item.link } target="_blank" >
+                            <img src={item.icon} alt="Facebook"/>
+                        </Link>
+                    </ImageListItem>
+                )
+            }
+        </ImageList>
+    )
+}
+// INICIO FIN GSS-310524
 
 const itemData = [
     {
@@ -55,21 +82,3 @@ const itemData = [
         link: "https://www.whatsapp.com/catalog/5215527076098/?app_absent=0"
     }
 ]
-export const ListaDeRedesSociales = () => {
-    return (
-        <ImageList cols={7} gap={15}>
-            {
-                itemData.map( item =>
-                    <ImageListItem
-                        key={item.icon}
-                        sx={{width: 20, height: 20 }}
-                    >
-                        <Link href={ item.link } target="_blank" >
-                            <img src={item.icon} alt="Facebook"/>
-                        </Link>
-                    </ImageListItem>
-                )
-            }
-        </ImageList>
-    )
-}
