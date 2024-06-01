@@ -6,9 +6,9 @@
 //   --# Descripcion General : Componente principal de ruta                           #
 //   ---------------------------------------------------------------------------------#-->
 
+
 import {GeoBookerRuta} from "../GeoBooker/Routes/GeoBookerRuta.jsx";
 import {ModalProvider} from "../GeoBooker/Context/Index.js";
-import {GeoBookerLayout} from "../GeoBooker/Layout/Index.js";
 
 /**
  * Para posibles rutas que esten de alguna manera relacionadas con la aplicación pero fuera de la misma
@@ -25,9 +25,7 @@ export const AppRouter = () => {
 
     return (
         <ModalProvider>
-            <GeoBookerLayout>
                 <GeoBookerRuta/>
-            </GeoBookerLayout>
         </ModalProvider>
     )
 }

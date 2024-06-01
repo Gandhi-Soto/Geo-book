@@ -5,7 +5,13 @@
 //   --# Proyecto            : GeoBooker                       Fecha: 16/05/2024      #
 //   --# Descripcion General : Variables de modales dispersas por toda la app         #
 //   ---------------------------------------------------------------------------------#-->
-
+//-------------------------------- MODIFICACIONES ------------------------------------#
+// <!--################################################################################
+//   --# Autor               : Gandhi Soto Sanchez                                    #
+//   --# Fecha               : 31/05/2024                                             #
+//   --# Modificacion        : Se cambiaron los nombres de las variables              #
+//   --# Marca de cambio     : GSS-310524                                             #
+//   ---------------------------------------------------------------------------------#-->
 
 import {useEffect, useState} from 'react'
 import PropTypes from "prop-types";
@@ -19,7 +25,7 @@ import {ModalContext} from "./ModalContext.jsx";
  * @returns {Element}
  * @constructor
  */
-// eslint-disable-next-line react/prop-types
+
 export const ModalProvider = ({ children }) => {
     const [mostrarInicioCookiesModal, setMostrarInicioCookiesModal] = useState(true);
     const [mostrarAdministradorDeCookiesModal, setMostrarAdministradorDeCookiesModal] = useState(false);
@@ -30,25 +36,29 @@ export const ModalProvider = ({ children }) => {
         setMostrarInicioCookiesModal(true)
     }, []);
 
+    // MARCA INICIO GSS-310524
     return (
         <ModalContext.Provider value ={{
-            mostrarInicioCookiesModal: mostrarInicioCookiesModal,
-            setMostrarInicioCookiesModal: setMostrarInicioCookiesModal,
+            mostrarInicioCookiesModal,
+            setMostrarInicioCookiesModal,
 
-            mostrarAdministradorDeCookiesModal: mostrarAdministradorDeCookiesModal,
-            setMostrarAdministradorDeCookiesModal: setMostrarAdministradorDeCookiesModal,
+            mostrarAdministradorDeCookiesModal,
+            setMostrarAdministradorDeCookiesModal,
 
-            mostrarPoliticasDeUsoDeCookiesModal: mostrarPoliticasDeUsoDeCookiesModal,
-            setMostrarPoliticasDeUsoDeCookiesModal: setMostrarPoliticasDeUsoDeCookiesModal,
+            mostrarPoliticasDeUsoDeCookiesModal,
+            setMostrarPoliticasDeUsoDeCookiesModal,
 
-            mostrarDerechosReservadosModal: mostrarDerechosReservadosModal,
-            setMostrarDerechosReservadosModal: setMostrarDerechosReservadosModal
+            mostrarDerechosReservadosModal,
+            setMostrarDerechosReservadosModal
         }} >
                 { children }
         </ModalContext.Provider>
     )
+    // MARCA FIN GSS-310524
 }
 
-ModalProvider.prototype = {
+// MARCA INICIO GSS-310524
+ModalProvider.propTypes = {
     children: PropTypes.node.isRequired
 }
+// MARCA FIN GSS-310524
