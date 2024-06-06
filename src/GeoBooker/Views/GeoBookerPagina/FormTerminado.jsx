@@ -5,8 +5,15 @@
 //   --# Proyecto            : GeoBooker                       Fecha: 28/05/2024      #
 //   --# Descripcion General : Componente para la vista del registro terminado        #
 //   ---------------------------------------------------------------------------------#-->
+//-------------------------------- MODIFICACIONES ------------------------------------#
+// <!--################################################################################
+//   --# Autor               : Gandhi Soto Sanchez                                    #
+//   --# Fecha               : 05/06/2024                                             #
+//   --# Modificacion        : Se agrego la referencia para scrollear al formulario   #
+//   --# Marca de cambio     : GSS-050624                                             #
+//   ---------------------------------------------------------------------------------#-->
 
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import { Box, Grid, Stack, Button } from '@mui/material';
 import logoColor from "../../../assets/GeoBooker/LogoColor.svg";
 import * as Icons from "../../../assets/RedesSociales/Index.js";
@@ -17,8 +24,12 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 const FormTerminado = () => {
 
-    const { vistaFinal, setVistaFinal, formTerminado } = useContext(FormContext);
+    const { vistaFinal, setVistaFinal } = useContext(FormContext);
     const { isWeb } = useContext(BreakpointsContext);
+
+    // INICIO CAMBIO GSS-050624
+    const { formReferencia } = useContext(FormContext);
+    // FIN CAMBIO GSS-050624
 
     // useEffect(() => {
     //     if(vistaFinal === "true" && formTerminado === 'true') {
@@ -42,7 +53,7 @@ const FormTerminado = () => {
     };
 
     return (
-        <div>
+        <div ref={formReferencia}>
             {vistaFinal === 'true'
 
                 ?

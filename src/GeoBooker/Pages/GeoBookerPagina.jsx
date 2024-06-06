@@ -21,7 +21,7 @@
 
 //INICIO DE CAMBIO: BCMC-310524
 //Esenciales
-import { useContext } from "react";
+import {useContext} from "react";
 import { FormContext } from '../Context/Index.js';
 //FIN DE CAMBIO: BCMC-310524
 
@@ -44,7 +44,7 @@ export const GeoBookerPagina = () => {
             {/*FIN CAMBIO GSS-310524*/}
 
             {/* INICIO DE CAMBIO: BCMC-310524 */}
-            {formTerminado === 'true' ? <FormTerminado /> : <Formulario />}
+            {formTerminado === 'true' ? <FormTerminado /> : <Formulario/>}
             {/* FIN DE CAMBIO: BCMC-310524 */}
         </>
 

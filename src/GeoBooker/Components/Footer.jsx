@@ -12,6 +12,13 @@
 //   --# Modificacion        : Se cambiaron los typographies                          #
 //   --# Marca de cambio     : GSS-310524                                             #
 //   ---------------------------------------------------------------------------------#-->
+//-------------------------------- MODIFICACIONES ------------------------------------#
+// <!--################################################################################
+//   --# Autor               : Gandhi Soto Sanchez                                    #
+//   --# Fecha               : 05/06/2024                                             #
+//   --# Modificacion        : Se solucioono un problema del modal del footer         #
+//   --# Marca de cambio     : GSS-050624                                             #
+//   ---------------------------------------------------------------------------------#-->
 
 import {useContext} from 'react';
 // INICIO CAMBIO GSS-310524
@@ -21,10 +28,10 @@ import {Box, Container, Grid, Link, useTheme} from '@mui/material';
 import {ModalContext} from "../Context/Index.js";
 import {PoweredBy} from '../../assets/Footer/Index.js';
 import {ListaDeRedesSociales} from "./Index.js";
-
 // INICIO CAMBIO GSS-310524
 import {TypographySmallText} from "../Theme/index.js";
 // FIN CAMBIO GSS-310524
+import './FooterStyles.css';
 
 export const Footer = () => {
     const lugarDeTrabajoEnGoogleMaps =
@@ -52,7 +59,7 @@ export const Footer = () => {
                     </Grid>
 
                     <Grid item xs={12}>
-                        <Link variant='body2' href={ lugarDeTrabajoEnGoogleMaps } target="_blank">
+                        <Link href={ lugarDeTrabajoEnGoogleMaps } target="_blank">
                             {/*INICIO CAMBIO GSS-310524*/}
                             <TypographySmallText sx={{  color: theme.palette.link.main }}>
                                 Av. Insurgentes 2 Bis, Centro, 55000 Ecatepec de Morelos, Méx., México
@@ -63,21 +70,30 @@ export const Footer = () => {
                     </Grid>
 
                     {/*INICIO CAMBIO GSS-310524*/}
+                        { /* INICIO CAMBIO GSS-050624 */}
                     <Grid item xs={7}>
-                        <Link variant='body2' onClick={() => setMostrarDerechosReservadosModal(true)}>
+                        <Link
+                            href='#'
+                            onClick={(event) => {
+                                event.preventDefault();
+                                setMostrarDerechosReservadosModal(true);
+                            }}
+                        >
                             <TypographySmallText sx={{  color: theme.palette.link.main, textAlign: 'center' }} overrideSizes={{ xs: '0.8rem'}}>
                                 Todos los derechos reservados
                             </TypographySmallText>
                         </Link>
                     </Grid>
+                        {/* FIN CAMBIO GSS-050624 */}
                     {/*FIN CAMBIO GSS-310524*/}
 
                     <Grid item xs={4}>
                         <Link href="https://codigogeek.com.mx/" target="_blank">
-                            <img
-                                src={ PoweredBy }
-                                alt='Código Geek'
-                            />
+                                <img
+                                    className='Img-Color-PoweredBy'
+                                    src={ PoweredBy }
+                                    alt='Código Geek'
+                                />
                         </Link>
                     </Grid>
                 </Grid>

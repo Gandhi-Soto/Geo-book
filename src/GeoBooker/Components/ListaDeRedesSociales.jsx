@@ -12,6 +12,13 @@
 //   --# Modificacion        : Se agrego el componente                                #
 //   --# Marca de cambio     : GSS-310524                                             #
 //   ---------------------------------------------------------------------------------#-->
+//-------------------------------- MODIFICACIONES ------------------------------------#
+// <!--################################################################################
+//   --# Autor               : Gandhi Soto Sanchez                                    #
+//   --# Fecha               : 05/06/2024                                             #
+//   --# Modificacion        : Se aplico un efecto zoom a los iconos                 #
+//   --# Marca de cambio     : GSS-050624                                             #
+//   ---------------------------------------------------------------------------------#-->
 
 import {ImageList, ImageListItem, Link} from "@mui/material";
 import {
@@ -27,20 +34,32 @@ import {
 // INICIO CAMBIO GSS-310524
 export const ListaDeRedesSociales = () => {
     return (
-        <ImageList cols={7} gap={15}>
+
+        // INICIO CAMBIO GSS-060524
+        <ImageList cols={7} gap={15} style={{ overflow: 'visible' }} >
             {
                 itemData.map( item =>
                     <ImageListItem
                         key={item.icon}
-                        sx={{width: 20, height: 20 }}
+                        sx={{width: 20, height: 20, overflow: 'visible' }} // Añade 'overflow: visible'
                     >
                         <Link href={ item.link } target="_blank" >
-                            <img src={item.icon} alt="Facebook"/>
+                            <img
+                                src={item.icon}
+                                alt={item.alt}
+                                onMouseOver={e => e.currentTarget.style.transform = 'scale(1.3)'} // Añade esta línea
+                                onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'} // Añade esta línea
+                                style={{
+                                    transition: 'transform 0.3s ease-in-out', // Añade esta línea
+
+                                }}
+                            />
                         </Link>
                     </ImageListItem>
                 )
             }
         </ImageList>
+        // FIN CAMBIO GSS-060524
     )
 }
 // INICIO FIN GSS-310524

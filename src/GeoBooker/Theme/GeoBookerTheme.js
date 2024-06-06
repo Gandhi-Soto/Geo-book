@@ -5,11 +5,12 @@
 //   --# Proyecto            : GeoBooker                       Fecha: 22/05/2024      #
 //   --# Descripcion General : Tema de la pagina                                      #
 //   ---------------------------------------------------------------------------------#-->
+//-------------------------------- MODIFICACIONES ------------------------------------#
 // <!--################################################################################
 //   --# Autor               : Gandhi Soto Sanchez                                    #
 //   --# Fecha               : 31/05/2024                                             #
-//   --# Modificacion        : Se agrearon breakpoints y cambios al estilo            #
-//   --# Marca de cambio     : GSS-310524                                             #
+//   --# Modificacion        : Se agregaron breakpoints y cambios al estilo           #
+//   --# Marca de cambio     : GSS-050624                                             #
 //   ---------------------------------------------------------------------------------#-->
 
 

@@ -12,9 +12,15 @@
 //   --# Modificacion        : Se termino el componente                               #
 //   --# Marca de cambio     : GSS-310524                                             #
 //   ---------------------------------------------------------------------------------#-->
+// <!--################################################################################
+//   --# Autor               : Gandhi Soto Sanchez                                    #
+//   --# Fecha               : 05/06/2024                                             #
+//   --# Modificacion        : Se agrega la animacion a las cajitas                   #
+//   --# Marca de cambio     : GSS-050624                                             #
+//   ---------------------------------------------------------------------------------#-->
 
 import {Box, Grid} from "@mui/material";
-import {ImagenDeFondo, LogoGeoBooker } from '../../../assets/GeoBooker/Index.js'
+import {ImagenDeFondo, LogoGeoBooker} from '../../../assets/GeoBooker/Index.js'
 // INICIO CAMBIO GSS-310524
 import {CirculosDeServicios} from "./CirculosDeServicios.jsx";
 import {CajitaAmarilla} from "../../UtilComponents/Index.js";
@@ -52,25 +58,31 @@ export const GeoBooker = () => {
                 </Grid>
 
                 {/*INICIO CAMBIO GSS-310524*/}
-                <Grid item xs={12} mt={2} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <TypographyLargeText sx={{ color: 'white' }}>
+                <Grid item xs={12} mt={2} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                    <TypographyLargeText sx={{color: 'white'}}>
                         Si eres dueño de un negocio como:
                     </TypographyLargeText>
                 </Grid>
 
                 <Grid item xs={10} mt={2} mb={0.5}>
-                    <CirculosDeServicios />
+                    <CirculosDeServicios/>
                 </Grid>
 
-                <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <TypographySmallTitle sx={{ color: 'white'}} >
+                <Grid item xs={12} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                    <TypographySmallTitle sx={{color: 'white'}}>
                         SIN IMPORTAR SU GIRO O TAMAÑO
                     </TypographySmallTitle>
                 </Grid>
 
-                <Grid item xs={12} mt='0.5rem' sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <CajitaAmarilla sx={{ width: '18rem', height: '0.7rem'}}/>
+                { /*INICIO CAMBIO GSS-050624*/}
+                <Grid item xs={12} mt='0.5rem' sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                    <CajitaAmarilla
+                        sx={{width: '18rem', height: '0.7rem'}}
+                        animacionDeAnimateCss='animate__slideInLeft'
+                    />
                 </Grid>
+                { /*INICIO CAMBIO GSS-050624*/}
+
                 {/*FIN CAMBIO GSS-310524*/}
 
 

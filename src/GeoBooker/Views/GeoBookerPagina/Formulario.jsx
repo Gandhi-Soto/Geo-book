@@ -5,17 +5,27 @@
 //   --# Proyecto            : GeoBooker                       Fecha: 20/05/2024      #
 //   --# Descripcion General : Componente del formulario de pre registro              #
 //   ---------------------------------------------------------------------------------#-->
-
-import { useEffect, useState, useContext } from 'react'
-import { TextField, Stack, MenuItem, Checkbox, Button, CircularProgress, Grid, InputAdornment } from '@mui/material';
+//-------------------------------- MODIFICACIONES ------------------------------------#
+// <!--################################################################################
+//   --# Autor               : Gandhi Soto Sanchez                                    #
+//   --# Fecha               : 05/06/2024                                             #
+//   --# Modificacion        : Se agrego la referencia para scrollear al formulario   #
+//   --# Marca de cambio     : GSS-050624                                             #
+//   ---------------------------------------------------------------------------------#-->
+import {useState, useContext} from 'react'
+import { TextField, Stack, MenuItem, Checkbox, Button, Grid, InputAdornment } from '@mui/material';
 import UseFormulario from '../../Hooks/UseFormulario';
 import { Link } from 'react-router-dom';
 import { FormContext } from '../../Context/Index.js';
 import BanderaDeMexico from "../../../assets/UnSoloUso/BanderaDeMexico.svg";
 
-function Formulario() {
+const Formulario = () => {
 
     const { setFormTerminado, setVistaFinal } = useContext(FormContext);
+
+    // INICIO CAMBIO GSS-050624
+    const { formReferencia } = useContext(FormContext);
+    // FIN CAMBIO GSS-050624
 
     const {
         nombre, nombreValido, nombreTocado, setNombreTocado, handleNombre,
@@ -175,7 +185,7 @@ function Formulario() {
 
     return (
         <>
-            <div className="bg-dark bg-opacity-50 w-100 py-3">
+            <div className="bg-dark bg-opacity-50 w-100 py-3" ref={ formReferencia }>
                 <h2 className='text-center fs-2 fw-bold mt-2'>¡Queremos conocerte!</h2>
                 <h3 className='text-center fs-3 mt-3 w-75 mx-auto'>Registra <span className='fw-bold'>YA</span> tu negocio de forma <span className='fw-bold'>GRATUITA.</span></h3>
                 <p className="text-center fs-3 fw-bold mt-3">Solo tomará 2 minutos. ¡Vamos!</p>
