@@ -5,7 +5,13 @@
 //   --# Proyecto            : GeoBooker                       Fecha: 27/05/2024      #
 //   --# Descripcion General : Componente de quienes somos                            #
 //   ---------------------------------------------------------------------------------#-->
-
+//-------------------------------- MODIFICACIONES ------------------------------------#
+// <!--################################################################################
+//   --# Autor               : Gandhi Soto Sanchez                                    #
+//   --# Fecha               : 05/06/2024                                             #
+//   --# Modificacion        : Se agrega la animacion a las cajitas                   #
+//   --# Marca de cambio     : GSS-050624                                             #
+//   ---------------------------------------------------------------------------------#-->
 
 import {Grid} from "@mui/material";
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
@@ -28,7 +34,7 @@ export const QuienesSomos = () => {
                 xs={12}
                 sx={{
                     paddingLeft: '5rem',
-                    paddingRight: '5rem'
+                    paddingRight: '5rem',
                 }}
             >
                 <img src={LogoAColor}/>
@@ -41,13 +47,28 @@ export const QuienesSomos = () => {
                 </TypographyMediumTitle>
             </Grid>
 
-            <Grid item mt='3rem' xs={12} sx={{position: 'relative', display: 'flex', justifyContent: 'flex-end'}}>
-                <CajitaAmarilla sx={{position: 'absolute', top: '-0.5rem', width: anchoDeLasCajitasAmarillas}}/>
+            {/* INICIO CAMBIO GSS-050624 */}
+            <Grid
+                item
+                mt='3rem'
+                xs={12}
+                sx={{ position: 'relative', display: 'flex', justifyContent: 'flex-end', paddingTop: '1rem', overflow: 'hidden' }}
+            >
+                <CajitaAmarilla
+                    sx={{
+                        position: 'absolute',
+                        top: '0.6rem', // Ajusta este valor según sea necesario
+                        right: '0', // Asegura que la caja esté alineada a la derecha
+                        width: anchoDeLasCajitasAmarillas,
+                    }}
+                    animacionDeAnimateCss='animate__fadeInRight'
+                />
                 <img
                     src={ImagenDe4Personas}
                     style={{width: '100%', objectFit: 'cover'}}
                 />
             </Grid>
+            {/* FIN CAMBIO GSS-050624 */}
 
             <Grid mt='1.5rem' item xs={12} sx={{...estiloCentrado}}>
                 <TypographyMediumTitle>
@@ -71,9 +92,14 @@ export const QuienesSomos = () => {
                 </TypographyMediumText>
             </Grid>
 
-            <Grid item mt='2rem' xs={12} sx={{display: 'flex', justifyContent: 'flex-end'}}>
-                <CajitaAmarilla sx={{width: anchoDeLasCajitasAmarillas}}/>
+            {/* INICIO CAMBIO GSS-050624 */}
+            <Grid item mt='2rem' xs={12} sx={{display: 'flex', justifyContent: 'flex-end', overflow: 'hidden'}}>
+                <CajitaAmarilla
+                    sx={{width: anchoDeLasCajitasAmarillas}}
+                    animacionDeAnimateCss='animate__fadeInRight'
+                />
             </Grid>
+            {/* FIN CAMBIO GSS-050624 */}
 
             <Grid item xs={12} sx={{...estiloCentrado}}>
                 <img
@@ -83,9 +109,14 @@ export const QuienesSomos = () => {
                 />
             </Grid>
 
-            <Grid item mt='1rem' xs={12} sx={{display: 'flex', justifyContent: 'flex-start'}}>
-                <CajitaAmarilla sx={{width: anchoDeLasCajitasAmarillas}}/>
+            {/* INICIO CAMBIO GSS-050624 */}
+            <Grid item mt='1rem' xs={12} sx={{display: 'flex', justifyContent: 'flex-start', overflow: 'hidden'}}>
+                <CajitaAmarilla
+                    sx={{width: anchoDeLasCajitasAmarillas}}
+                    animacionDeAnimateCss='animate__fadeInLeft'
+                />
             </Grid>
+            {/* FIN CAMBIO GSS-050624 */}
 
             <Grid mt='1rem' item xs={12} sx={{...estiloCentrado}}>
                 <TypographyMediumTitle>
@@ -100,7 +131,7 @@ export const QuienesSomos = () => {
             </Grid>
 
             <Grid mt='1rem' mb='1rem' item xs={12} sx={{...estiloCentrado, paddingLeft: '2rem', paddingRight: '2rem'}}>
-                <TypographyMediumText sx={{ fontWeight: 'bold'}}>
+                <TypographyMediumText sx={{fontWeight: 'bold'}}>
                     Al registrarte, atenderemos y confirmaremos tus datos vía WhatsApp, donde te brindaremos un código
                     de suscripción GRATUITO que podrás usar en nuestra próxima etapa para darte de alta.
                 </TypographyMediumText>

@@ -5,15 +5,13 @@
 //   --# Proyecto            : GeoBooker                       Fecha: 24/05/2024      #
 //   --# Descripcion General : 9 Circulos de servicios                                #
 //   ---------------------------------------------------------------------------------#-->
-
-/**
- * Este componente despliega los 9 circulos de servicios en la pagina de GeoBooker
- * [Atencion medica, Salud y belleza, Alimentos y bebeidas]
- * [Diversion y entretenimiento, Servicios profesionales, Servicios vehiculares]
- * [Mantenimiento y construccion, educacion y capacitacion, comercios - mayoreo y menuddeo]
- * @returns {JSX.Element}
- * @constructor
- */
+//-------------------------------- MODIFICACIONES ------------------------------------#
+// <!--################################################################################
+//   --# Autor               : Gandhi Soto Sanchez                                    #
+//   --# Fecha               : 05/06/2024                                             #
+//   --# Modificacion        : Se agrego el efecto zoom a los iconos                  #
+//   --# Marca de cambio     : GSS-050624                                             #
+//   ---------------------------------------------------------------------------------#-->
 
 import {
     IconoAtencionMedica, IconoSaludYBelleza, IconoAlimentosYBebidas,
@@ -23,8 +21,33 @@ import {
 import {Box, Grid, ImageListItem, ImageListItemBar} from "@mui/material";
 import {TypographySmallText} from "../../Theme/index.js";
 
+// INICIO CAMBIO GSS-050624
+import {useContext} from "react";
+import {FormContext} from "../../Context/Index.js";
+import { animateScroll as scroll } from 'react-scroll';
+// FIN CAMBIO GSS-050624
 
+
+/**
+ * Este componente despliega los 9 circulos de servicios en la pagina de GeoBooker
+ * [Atencion medica, Salud y belleza, Alimentos y bebeidas]
+ * [Diversion y entretenimiento, Servicios profesionales, Servicios vehiculares]
+ * [Mantenimiento y construccion, educacion y capacitacion, comercios - mayoreo y menuddeo]
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export const CirculosDeServicios = () => {
+
+    // INICIO CAMBIO GSS-050624
+    const { formReferencia } = useContext(FormContext);
+
+    // Funcion para hacer scroll al formulario
+    const handleIconClick = () => {
+        const top = formReferencia.current.offsetTop - 60;
+        scroll.scrollTo(top, { duration: 500, smooth: 'easyInOutQuint' });
+    }
+    // FIN CAMBIO GSS-050624
+
     return (
         <Grid container spacing={2}>
             {
@@ -40,20 +63,28 @@ export const CirculosDeServicios = () => {
                     >
                         <ImageListItem
                             sx={{
-                                width: '5rem',
-                                height: '5rem',
                                 display: 'flex', // Añade esta línea
                                 flexDirection: 'column', // Añade esta línea
                                 alignItems: 'center', // Añade esta línea
                             }}
                             key={item.id}
                         >
+                            { /* INICIO CAMBIO GSS-050624 */ }
                             <img
                                 src={item.icono}
                                 alt={item.nombre}
-                                style={{ width: '5rem  ', height: '5rem' }}
+                                style={{
+                                    width: '4em',
+                                    height: '4rem',
+                                    transition: 'transform 0.3s ease-in-out', // Añade esta línea
+                                }}
+                                onClick={() => handleIconClick()}
+                                onMouseOver={e => e.currentTarget.style.transform = 'scale(1.2)'} // Añade esta línea
+                                onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'} // Añade esta línea
                             />
-                            <Box sx={{ width: '8rem' }}>
+                            { /* FIN CAMBIO GSS-050624 */ }
+
+                            <Box sx={{width: '8rem'}}>
                                 <ImageListItemBar
                                     title={
                                         <TypographySmallText

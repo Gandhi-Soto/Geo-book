@@ -19,7 +19,6 @@ import {GeoBookerApp} from "./GeoBookerApp.jsx";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter} from "react-router-dom";
 //INICIO DE CAMBIO: BCMC-310524
-import { FormProvider, BreakpointsProvider } from "./GeoBooker/Context/Index.js";
 //FIN DE CAMBIO: BCMC-310524
 
 
@@ -27,11 +26,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
       <BrowserRouter>
           {/*INICIO DE CAMBIO: BCMC-310524*/}
-          <FormProvider>
-            <BreakpointsProvider>
               <GeoBookerApp />
-            </BreakpointsProvider>
-          </FormProvider>
           {/*FIN DE CAMBIO: BCMC-310524*/}
       </BrowserRouter>
   </React.StrictMode>

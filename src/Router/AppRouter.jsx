@@ -5,10 +5,16 @@
 //   --# Proyecto            : GeoBooker                       Fecha: 15/05/2024      #
 //   --# Descripcion General : Componente principal de ruta                           #
 //   ---------------------------------------------------------------------------------#-->
-
+//-------------------------------- MODIFICACIONES ------------------------------------#
+// <!--################################################################################
+//   --# Autor               : Gandhi Soto Sanchez                                    #
+//   --# Fecha               : 05/06/2024                                             #
+//   --# Modificacion        : Se cambio el provider                                  #
+//   --# Marca de cambio     : GSS-050624                                             #
+//   ---------------------------------------------------------------------------------#-->
 
 import {GeoBookerRuta} from "../GeoBooker/Routes/GeoBookerRuta.jsx";
-import {ModalProvider} from "../GeoBooker/Context/Index.js";
+import {MainProvider} from "../GeoBooker/Context/Index.js";
 
 /**
  * Para posibles rutas que esten de alguna manera relacionadas con la aplicación pero fuera de la misma
@@ -19,13 +25,16 @@ import {ModalProvider} from "../GeoBooker/Context/Index.js";
 export const AppRouter = () => {
 
     /*
-        Modal provider se proporciona en este nivel para que pueda ser utilizado
+        Main provider se proporciona en este nivel para que pueda ser utilizado
         en cualquier parte de la aplicación.
      */
 
+    // INICIO CAMBIO GSS-050624
     return (
-        <ModalProvider>
+        <MainProvider>
                 <GeoBookerRuta/>
-        </ModalProvider>
+        </MainProvider>
     )
+    // FIN CAMBIO GSS-050624
+
 }

@@ -12,14 +12,19 @@
 //   --# Modificacion        : Se modifico el typography                              #
 //   --# Marca de cambio     : GSS-310524                                             #
 //   ---------------------------------------------------------------------------------#-->
+//-------------------------------- MODIFICACIONES ------------------------------------#
+// <!--################################################################################
+//   --# Autor               : Gandhi Soto Sanchez                                    #
+//   --# Fecha               : 05/06/2024                                             #
+//   --# Modificacion        : Ahora solo el navbar se muestra si no hay modales      #
+//   --# Marca de cambio     : GSS-050624                                             #
+//   ---------------------------------------------------------------------------------#-->
 
 // INICIO CAMBIO GSS-310524
-import {AppBar, CssBaseline, Slide, Toolbar, useScrollTrigger} from "@mui/material";
+import {AppBar, CssBaseline, Toolbar, useScrollTrigger} from "@mui/material";
 // FIN CAMBIO GSS-310524
 
 import PropTypes from "prop-types";
-import {useContext} from "react";
-import {ModalContext} from "../Context/Index.js";
 
 // INICIO CAMBIO GSS-310524
 import {TypographySmallText} from "../Theme/index.js";
@@ -28,17 +33,15 @@ import {TypographySmallText} from "../Theme/index.js";
 
 function HideOnScroll(props) {
     const {children, window} = props;
-    // Note that you normally won't need to set the window ref as useScrollTrigger
-    // will default to window.
-    // This is only being set here because the demo is in an iframe.
+
     const trigger = useScrollTrigger({
         target: window ? window() : undefined,
     });
 
     return (
-        <Slide appear={false} direction="down" in={!trigger}>
-            {children}
-        </Slide>
+        // <Slide appear={false} direction="down" in={!trigger}>
+        children
+        // </Slide>
     );
 
 }
@@ -47,23 +50,20 @@ function HideOnScroll(props) {
 export const Navbar = (props) => {
     // todo buscar la manera de no cambiar el color del navbar si se muestra un modal
 
-    // INICIO CAMBIO GSS-310524
-    const {
-        mostrarInicioCookiesModal,
-        mostrarAdministradorDeCookiesModal,
-        mostrarPoliticasDeUsoDeCookiesModal,
-        mostrarDerechosReservadosModal
-    } = useContext(ModalContext);
-    // FIN CAMBIO GSS-310524
-
-    const mostrandoUnModal = mostrarInicioCookiesModal || mostrarAdministradorDeCookiesModal || mostrarPoliticasDeUsoDeCookiesModal || mostrarDerechosReservadosModal;
     return (
         <>
             <CssBaseline/>
             <HideOnScroll {...props}>
-                <AppBar style={{
-                    backgroundColor: mostrandoUnModal ? 'rgba(64, 72, 176, 0.5)' : '#5558C4'
-                }} elevation={0}>
+                    { /* INICIO CAMBIO GSS-050624 */}
+                <AppBar
+                    style={{
+                        backgroundColor: '#5558C4'
+                    }}
+                    elevation={0}
+                    position='fixed'
+                >
+                    {/* FIN CAMBIO GSS-050624 */}
+
                     <Toolbar>
                         {/*INICIO CAMBIO GSS-310524*/}
                         <TypographySmallText

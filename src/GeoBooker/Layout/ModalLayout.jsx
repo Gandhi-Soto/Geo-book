@@ -5,7 +5,13 @@
 //   --# Proyecto            : GeoBooker                       Fecha: 22/05/2024      #
 //   --# Descripcion General : Layout que define todos los modales                    #
 //   ---------------------------------------------------------------------------------#-->
-
+//-------------------------------- MODIFICACIONES ------------------------------------#
+// <!--################################################################################
+//   --# Autor               : Gandhi Soto Sanchez                                    #
+//   --# Fecha               : 05/06/2024                                             #
+//   --# Modificacion        : Los modales no tendran animacion (soluciona bugs)      #
+//   --# Marca de cambio     : GSS-050624                                             #
+//   ---------------------------------------------------------------------------------#-->
 
 import {Modal, ModalDialog} from "react-bootstrap";
 import PropTypes from "prop-types";
@@ -35,10 +41,13 @@ export const ModalLayout =
         return (
             <Modal
                 show={mostrarModal}
-                onHide={ onHideModal }
+                onHide={onHideModal}
                 dialogClassName={dialogClassName + ' Modal-Style-ModalLayout'}
                 contentClassName={contentClassName}
                 centered
+                // INICIO CAMBIO GSS-050624
+                animation={false}
+                // FIN CAMBIO GSS-050624
             >
                 <ModalDialog>
                     <Modal.Header

@@ -5,11 +5,12 @@
 //   --# Proyecto            : GeoBooker                       Fecha: 17/05/2024      #
 //   --# Descripcion General : Todos los export del tema                              #
 //   ---------------------------------------------------------------------------------#-->
+//-------------------------------- MODIFICACIONES ------------------------------------#
 // <!--################################################################################
 //   --# Autor               : Gandhi Soto Sanchez                                    #
 //   --# Fecha               : 31/05/2024                                             #
 //   --# Modificacion        : Se exportan las nuevas tipografias                     #
-//   --# Marca de cambio     : GSS-310524                                             #
+//   --# Marca de cambio     : GSS-050624                                             #
 //   ---------------------------------------------------------------------------------#-->
 
 export * from './AppTheme.jsx';
