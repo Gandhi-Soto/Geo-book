@@ -11,7 +11,8 @@ import {ModalLayout} from "../../Layout/Index.js";
 import {useContext} from "react";
 import {ModalContext} from "../../Context/Index.js";
 import './StyleModal.css';
-import {Typography} from "@mui/material";
+import {Typography, useTheme} from "@mui/material";
+import {TypographySmallText} from "../../Theme/index.js";
 
 /**
  * Componente que muestra un modal de inicio de cookies
@@ -31,12 +32,21 @@ export const InicioCookiesModal = () => {
 }
 
 const Cuerpo = () => {
+
+    const theme = useTheme();
+
     return (
-        <Typography variant="p" className='fs-5 lh-sm'>
+        <TypographySmallText variant="p" className='fs-5 lh-sm' 
+            sx={{
+                [theme.breakpoints.up('defaultMobileSize')]: {
+                    color: "white"
+                },
+            }}
+        >
             Usamos cookies para mejorar GeoBooker, algunas son necesarias para el funcionamiento del sitio,
             otras son opcionales y te brindan una experiencia personalizada. Puedes aceptar todas las cookies, rechazar
             todas las opcionales o personalizarlas, para más información consulta nuestra Política de Cookies
-        </Typography>
+        </TypographySmallText>
     )
 }
 
@@ -46,7 +56,7 @@ const Footer = () => {
         <>
             <Container fluid='sm'>
                 <Row>
-                    <Col xs={6}>
+                    <Col defaultMobileSize={6}>
                         <Button
                             variant="secondary"
                             onClick={() => setMostrarInicioCookiesModal(false)}
@@ -57,7 +67,7 @@ const Footer = () => {
                         </Button>
                     </Col>
 
-                    <Col xs={6}>
+                    <Col defaultMobileSize={6}>
                         <Button
                             variant="secondary"
                             onClick={() => {

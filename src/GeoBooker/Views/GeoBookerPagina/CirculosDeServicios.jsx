@@ -13,13 +13,24 @@
 //   --# Marca de cambio     : GSS-050624                                             #
 //   ---------------------------------------------------------------------------------#-->
 
+/**
+ * Este componente despliega los 9 circulos de servicios en la pagina de GeoBooker
+ * [Atencion medica, Salud y belleza, Alimentos y bebeidas]
+ * [Diversion y entretenimiento, Servicios profesionales, Servicios vehiculares]
+ * [Mantenimiento y construccion, educacion y capacitacion, comercios - mayoreo y menuddeo]
+ * @returns {JSX.Element}
+ * @constructor
+ */
+
 import {
     IconoAtencionMedica, IconoSaludYBelleza, IconoAlimentosYBebidas,
     IconoDiversionYEntretenimiento, IconoServiciosProfesionales, IconoServiciosVehiculares,
     IconoMantenimientoYConstruccion, IconoEducacionYCapacitacion, IconoComerciosMayoreoYMenudeo
 } from "../../../assets/GeoBooker/Index.js";
-import {Box, Grid, ImageListItem, ImageListItemBar} from "@mui/material";
+import {Box, Grid, ImageListItem, ImageListItemBar, useTheme} from "@mui/material";
 import {TypographySmallText} from "../../Theme/index.js";
+import classNames from "classnames";
+import useBreakpoints from "../../Hooks/UseBreakpoints.jsx";
 
 // INICIO CAMBIO GSS-050624
 import {useContext} from "react";
@@ -38,6 +49,11 @@ import { animateScroll as scroll } from 'react-scroll';
  */
 export const CirculosDeServicios = () => {
 
+    const theme = useTheme();
+
+    const breakpoints = useBreakpoints();
+
+
     // INICIO CAMBIO GSS-050624
     const { formReferencia } = useContext(FormContext);
 
@@ -49,20 +65,32 @@ export const CirculosDeServicios = () => {
     // FIN CAMBIO GSS-050624
 
     return (
-        <Grid container spacing={2}>
+        <Grid container spacing={2}
+            sx={{
+                [theme.breakpoints.up('defaultWebSize')]: {
+                    display: "grid",
+                    gridTemplateColumns: "repeat(5, 1fr)",
+                    width: "51rem",
+                    // backgroundColor: "red",
+                    margin: "0 auto"
+                }
+            }}
+        >
             {
                 ListaDeServicios.map(item =>
-                    <Grid item
-                          xs={4}
+                    <Grid item defaultMobileSize={4} defaultWebSize={3}
                           sx={{
                               display: 'flex',
                               justifyContent: 'center',
                               alignItems: 'flex-start',
+                            //   border: "2px solid black",
                           }}
                           key={item.id}
                     >
                         <ImageListItem
                             sx={{
+                                width: '10rem',
+                                height: '5rem',
                                 display: 'flex', // Añade esta línea
                                 flexDirection: 'column', // Añade esta línea
                                 alignItems: 'center', // Añade esta línea
@@ -84,7 +112,21 @@ export const CirculosDeServicios = () => {
                             />
                             { /* FIN CAMBIO GSS-050624 */ }
 
-                            <Box sx={{width: '8rem'}}>
+                            <Box
+                                style={{ width: '5rem  ', height: '5rem' }}
+                                sx={{ 
+                                    width: '8rem',
+                                    [theme.breakpoints.up('smallMobileSize')]: {
+                                        width: '12rem',
+                                    },
+                                    [theme.breakpoints.up('mediumMobileSize')]: {
+                                        width: '15rem',
+                                    },
+                                    [theme.breakpoints.up('defaultWebSize')]: {
+                                        width: '10.4rem',
+                                    }
+                                }}
+                            >
                                 <ImageListItemBar
                                     title={
                                         <TypographySmallText
@@ -93,6 +135,9 @@ export const CirculosDeServicios = () => {
                                                 color: 'white',
                                                 fontWeight: 'bold',
                                                 wordWrap: 'break-word', // Asegura que las palabras largas se dividan
+                                                [theme.breakpoints.up('defaultWebSize')]: {
+                                                    color: "black",
+                                                }
                                             }}
                                         >
                                             {item.nombre}

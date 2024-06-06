@@ -12,18 +12,58 @@ import PropTypes from "prop-types";
 
 const TypographyTextSizes = {
     smallText: {
-        xs: '1rem',
-        sm: '1.5rem',
+        defaultMobileSize: '1rem',
+        smallMobileSize: '1.5rem',
+        mediumMobileSize: "1.875rem",
+        defaultWebSize: "",
+        smallWebSize: "",
+        mediumWebSize: "",
+        largeWebSize: "",
+        wideWebSize: ""
     },
     mediumText: {
-        xs: '1.2rem',
-        sm: '2rem',
+        defaultMobileSize: '1.2rem',
+        smallMobileSize: '1.8rem',
+        mediumMobileSize: "2.25rem",
+        defaultWebSize: "1.3rem",
+        smallWebSize: "",
+        mediumWebSize: "",
+        largeWebSize: "",
+        wideWebSize: ""
     },
     largeText: {
-        xs: '1.5rem',
-        sm: '2.3rem',
+        defaultMobileSize: '1.5rem',
+        smallMobileSize: '2.25rem',
+        mediumMobileSize: "2.8125rem",
+        defaultWebSize: "1.75rem",
+        smallWebSize: "",
+        mediumWebSize: "",
+        largeWebSize: "",
+        wideWebSize: ""
     },
 }
+
+const getFontSize = (theme, sizes) => {
+    const matches = {
+        wideWebSize: useMediaQuery(theme.breakpoints.up('wideWebSize')),
+        largeWebSize: useMediaQuery(theme.breakpoints.up('largeWebSize')),
+        mediumWebSize: useMediaQuery(theme.breakpoints.up('mediumWebSize')),
+        smallWebSize: useMediaQuery(theme.breakpoints.up('smallWebSize')),
+        defaultWebSize: useMediaQuery(theme.breakpoints.up('defaultWebSize')),
+        mediumMobileSize: useMediaQuery(theme.breakpoints.up('mediumMobileSize')),
+        smallMobileSize: useMediaQuery(theme.breakpoints.up('smallMobileSize')),
+    };
+
+    if (matches.wideWebSize) return sizes.wideWebSize;
+    if (matches.largeWebSize) return sizes.largeWebSize;
+    if (matches.mediumWebSize) return sizes.mediumWebSize;
+    if (matches.smallWebSize) return sizes.smallWebSize;
+    if (matches.defaultWebSize) return sizes.defaultWebSize;
+    if (matches.mediumMobileSize) return sizes.mediumMobileSize;
+    if (matches.smallMobileSize) return sizes.smallMobileSize;
+
+    return sizes.defaultMobileSize;
+};
 
 /**
  * @param sx
@@ -46,8 +86,9 @@ export const TypographySmallText =
         const defaultSizes = TypographyTextSizes.smallText;
         const sizes = {...defaultSizes, ...overrideSizes};
 
-        const matchMediumMobileSize = useMediaQuery(theme.breakpoints.up('sm'));
-        const matchSize = matchMediumMobileSize ? sizes.sm : sizes.xs;
+        // const matchMediumMobileSize = useMediaQuery(theme.breakpoints.up('sm'));
+        // const matchSize = matchMediumMobileSize ? sizes.sm : sizes.xs;
+        const matchSize = getFontSize(theme, sizes);
 
         return (
             <Typography
@@ -84,8 +125,9 @@ export const TypographyMediumText =
         const defaultSizes = TypographyTextSizes.mediumText;
         const sizes = {...defaultSizes, ...overrideSizes};
 
-        const matchMediumMobileSize = useMediaQuery(theme.breakpoints.up('sm'));
-        const matchSize = matchMediumMobileSize ? sizes.sm : sizes.xs;
+        // const matchMediumMobileSize = useMediaQuery(theme.breakpoints.up('sm'));
+        // const matchSize = matchMediumMobileSize ? sizes.sm : sizes.xs;
+        const matchSize = getFontSize(theme, sizes);
 
         return (
             <Typography
@@ -123,8 +165,9 @@ export const TypographyLargeText =
         const defaultSizes = TypographyTextSizes.largeText;
         const sizes = {...defaultSizes, ...overrideSizes};
 
-        const matchMediumMobileSize = useMediaQuery(theme.breakpoints.up('sm'));
-        const matchSize = matchMediumMobileSize ? sizes.sm : sizes.xs;
+        // const matchMediumMobileSize = useMediaQuery(theme.breakpoints.up('sm'));
+        // const matchSize = matchMediumMobileSize ? sizes.sm : sizes.xs;
+        const matchSize = getFontSize(theme, sizes);
 
         return (
             <Typography

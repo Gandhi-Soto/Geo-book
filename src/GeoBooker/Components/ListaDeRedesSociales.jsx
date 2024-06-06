@@ -20,7 +20,7 @@
 //   --# Marca de cambio     : GSS-050624                                             #
 //   ---------------------------------------------------------------------------------#-->
 
-import {ImageList, ImageListItem, Link} from "@mui/material";
+import {ImageList, ImageListItem, Link, useTheme} from "@mui/material";
 import {
     FacebookIcon,
     InstagramIcon,
@@ -33,6 +33,9 @@ import {
 
 // INICIO CAMBIO GSS-310524
 export const ListaDeRedesSociales = () => {
+
+    const theme = useTheme();
+
     return (
 
         // INICIO CAMBIO GSS-060524
@@ -41,7 +44,15 @@ export const ListaDeRedesSociales = () => {
                 itemData.map( item =>
                     <ImageListItem
                         key={item.icon}
-                        sx={{width: 20, height: 20, overflow: 'visible' }} // Añade 'overflow: visible'
+                        sx={{
+                            width: 20, height: 20, overflow: 'visible',
+                            [theme.breakpoints.up('smallMobileSize')]: {
+                                width: 40, height: 40
+                            },
+                            [theme.breakpoints.up('mediumMobileSize')]: {
+                                width: 45, height: 45
+                            }
+                        }}
                     >
                         <Link href={ item.link } target="_blank" >
                             <img

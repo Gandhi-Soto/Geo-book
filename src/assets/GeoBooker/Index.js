@@ -31,7 +31,9 @@ import GifDeUbicacion from './GifDeUbicacion.gif'
 import ImagenDe4Personas from './ImagenDe4Personas.webp'
 import LogoAColor from './LogoAColor.svg'
 
-export { ImagenDeFondo, LogoGeoBooker }
+import ImagenDeFondoWeb from './ImagenDeFondoWeb.webp';
+
+export { ImagenDeFondo, LogoGeoBooker, ImagenDeFondoWeb }
 export {
     IconoAtencionMedica, IconoSaludYBelleza, IconoAlimentosYBebidas,
     IconoDiversionYEntretenimiento, IconoServiciosProfesionales, IconoServiciosVehiculares,

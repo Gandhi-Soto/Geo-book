@@ -20,11 +20,14 @@ export const GeoBookerTheme = createTheme({
     // INICIO CAMBIO GSS-310524
     breakpoints: {
         values: {
-            xs: 0,
-            sm: 600,
-            md: 900,
-            lg: 1200,
-            xl: 1536,
+            defaultMobileSize: 0,
+            smallMobileSize: 480,
+            mediumMobileSize: 600,
+            defaultWebSize: 768,
+            smallWebSize: 992,
+            mediumWebSize: 1200,
+            largeWebSize: 1400,
+            wideWebSize: 2400
         },
     },
     // FIN CAMBIO GSS-310524

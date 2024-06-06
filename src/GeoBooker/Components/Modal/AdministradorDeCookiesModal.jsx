@@ -9,7 +9,7 @@
 
 import {ModalLayout} from "../../Layout/Index.js";
 import {Col, Container, Row} from "react-bootstrap";
-import {Switch, Button, Typography} from "@mui/material";
+import {Switch, Button, Typography, useTheme, Box} from "@mui/material";
 import {useContext} from "react";
 import {ModalContext} from "../../Context/Index.js";
 import {useSwitch} from "../../Hooks/useSwitch.js";
@@ -20,6 +20,8 @@ import PropTypes from "prop-types";
  * @constructor
  */
 export const AdministradorDeCookiesModal = () => {
+
+    const theme = useTheme();
 
     const { mostrarAdministradorDeCookiesModal } = useContext(ModalContext);
 
@@ -74,34 +76,43 @@ const Cuerpo =
         const {setMostrarAdministradorDeCookiesModal, setMostrarPoliticasDeUsoDeCookiesModal} = useContext(ModalContext)
         const estiloParaTextoDeSwitches = 'fs-5 text-nowrap fw-semibold'
 
+        const theme = useTheme();
+
         return (
             <>
-                <Typography  variant='p' className='fs-5 lh-sm'>
-                    Este sitio web usa cookies para mejorar tu experiencia en nuestro sitio web y también con fines de
-                    análisis y marketing. Respetamos tu privacidad, por lo que te damos la opción de rechazar cierto
-                    tipo de
-                    cookies no necesarias para el funcionamiento del sitio.
+                <Box
+                    sx={{
+                        [theme.breakpoints.up('defaultMobileSize')]: {
+                        },
+                    }}
+                >
+                    <Typography variant='p' className='fs-5 lh-sm'>
+                        Este sitio web usa cookies para mejorar tu experiencia en nuestro sitio web y también con fines de
+                        análisis y marketing. Respetamos tu privacidad, por lo que te damos la opción de rechazar cierto
+                        tipo de
+                        cookies no necesarias para el funcionamiento del sitio.
 
-                    Haz clic en la cookie que deseas bloquear, es posible que esto afecte tu experiencia en el sitio y
-                    limite los servicios que podemos ofrecerte. Para más información consulta nuestra. &nbsp;
-                    <a
-                        href=''
-                        onClick={(event) => {
-                            event.preventDefault();
-                            setMostrarAdministradorDeCookiesModal(false)
-                            setMostrarPoliticasDeUsoDeCookiesModal(true)
-                        }}
-                        style={{color: 'blue', textDecoration: 'none'}}
-                    > Política de Cookies
-                    </a>
-                </Typography>
+                        Haz clic en la cookie que deseas bloquear, es posible que esto afecte tu experiencia en el sitio y
+                        limite los servicios que podemos ofrecerte. Para más información consulta nuestra. &nbsp;
+                        <a
+                            href=''
+                            onClick={(event) => {
+                                event.preventDefault();
+                                setMostrarAdministradorDeCookiesModal(false)
+                                setMostrarPoliticasDeUsoDeCookiesModal(true)
+                            }}
+                            style={{ color: 'blue', textDecoration: 'none' }}
+                        > Política de Cookies
+                        </a>
+                    </Typography>
+                </Box>
 
-                <Container fluid='xs'>
+                <Container fluid='defaultMobileSize' className="d-flex flex-column">
                     <Row className="justify-content-center" >
-                        <Col xs={8} className="align-content-end"> {/* TODO content-end quizás no la mejor solución */}
+                        <Col defaultMobileSize={8} className="align-content-end"> {/* TODO content-end quizás no la mejor solución */}
                             <p className={estiloParaTextoDeSwitches}>Cookies para analítica web</p>
                         </Col>
-                        <Col xs={4} className="">
+                        <Col defaultMobileSize={4} className="">
                             <Switch
                                 checked={primerChecked}
                                 onClick={() => onInputChange({name: 'primerChecked', value: !primerChecked})}
@@ -110,10 +121,10 @@ const Cuerpo =
                     </Row>
 
                     <Row>
-                        <Col xs={8} className='align-content-end'> {/* TODO content-end quizás no la mejor solución */}
+                        <Col defaultMobileSize={8} className='align-content-end'> {/* TODO content-end quizás no la mejor solución */}
                             <p className={estiloParaTextoDeSwitches}>Cookies para analítica web</p>
                         </Col>
-                        <Col xs={4}>
+                        <Col defaultMobileSize={4}>
                             <Switch
                                 checked={segundoChecked}
                                 onClick={() => onInputChange({name: 'segundoChecked', value: !segundoChecked})}
@@ -122,11 +133,11 @@ const Cuerpo =
                     </Row>
 
                     <Row>
-                        <Col xs={8} className='align-content-end'>
+                        <Col defaultMobileSize={8} className='align-content-end'>
                             <p className={estiloParaTextoDeSwitches}>Cookies de funcionalidad</p>
                         </Col>
 
-                        <Col xs={4}>
+                        <Col defaultMobileSize={4}>
                             <Switch
                                 checked={tercerChecked}
                                 onClick={() => onInputChange({name: 'tercerChecked', value: !tercerChecked})}
@@ -135,11 +146,11 @@ const Cuerpo =
                     </Row>
 
                     <Row>
-                        <Col xs={7} className='m-0'>
+                        <Col defaultMobileSize={7} className='m-0'>
                             <p className={estiloParaTextoDeSwitches}>Cookies esenciales</p>
                         </Col>
 
-                        <Col xs={4}>
+                        <Col defaultMobileSize={4}>
                             <p className={estiloParaTextoDeSwitches}>Siempre activas</p>
                         </Col>
                     </Row>
@@ -158,9 +169,9 @@ const Footer = ({onResetState, onAcceptAll}) => {
 
     const {setMostrarAdministradorDeCookiesModal} = useContext(ModalContext)
     return (
-        <Container fluid='xs'>
+        <Container fluid='defaultMobileSize'>
             <Row>
-                <Col xs={ 6 }>
+                <Col defaultMobileSize={ 6 }>
                     <Button
                         variant='contained'
                         color='secondary'
@@ -173,7 +184,7 @@ const Footer = ({onResetState, onAcceptAll}) => {
                     </Button>
                 </Col>
 
-                <Col xs = { 6 }>
+                <Col defaultMobileSize = { 6 }>
                     <Button
                         variant='contained'
                         color='secondary'

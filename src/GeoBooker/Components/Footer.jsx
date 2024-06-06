@@ -46,7 +46,20 @@ export const Footer = () => {
         <Box sx={{bgcolor: 'black', color: 'white', py: 3}}>
             <Container>
                 <Grid container spacing={2} alignItems="center">
-                    <Grid item xs={12}>
+                    <Grid item 
+                        sx={{
+                            [theme.breakpoints.up('defaultMobileSize')]: {
+                                width: "30.4rem",
+                                margin: "0 auto"
+                            },
+                            [theme.breakpoints.up('smallMobileSize')]: {
+                                width: "44rem",
+                            },
+                            [theme.breakpoints.up('mediumMobileSize')]: {
+                                width: "54rem",
+                            }
+                        }}
+                    >
                          {/*INICIO CAMBIO GSS-310524*/}
                         <TypographySmallText sx={{ color: 'white' }} >
                             Visita nuestras redes para mantenerte informado de nuestras novedades.
@@ -54,12 +67,25 @@ export const Footer = () => {
                         {/*FIN CAMBIO GSS-310524*/}
                     </Grid>
 
-                    <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Grid item defaultMobileSize={12} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <ListaDeRedesSociales/>
                     </Grid>
 
-                    <Grid item xs={12}>
-                        <Link href={ lugarDeTrabajoEnGoogleMaps } target="_blank">
+                    <Grid item 
+                        sx={{
+                            [theme.breakpoints.up('defaultMobileSize')]: {
+                                width: "31rem",
+                                margin: "0 auto"
+                            },
+                            [theme.breakpoints.up('smallMobileSize')]: {
+                                width: "47rem",
+                            },
+                            [theme.breakpoints.up('mediumMobileSize')]: {
+                                width: "57rem",
+                            }
+                        }}
+                    >
+                        <Link variant='body2' href={ lugarDeTrabajoEnGoogleMaps } target="_blank">
                             {/*INICIO CAMBIO GSS-310524*/}
                             <TypographySmallText sx={{  color: theme.palette.link.main }}>
                                 Av. Insurgentes 2 Bis, Centro, 55000 Ecatepec de Morelos, Méx., México
@@ -71,7 +97,7 @@ export const Footer = () => {
 
                     {/*INICIO CAMBIO GSS-310524*/}
                         { /* INICIO CAMBIO GSS-050624 */}
-                    <Grid item xs={7}>
+                    <Grid item defaultMobileSize={7}>
                         <Link
                             href='#'
                             onClick={(event) => {
@@ -79,7 +105,7 @@ export const Footer = () => {
                                 setMostrarDerechosReservadosModal(true);
                             }}
                         >
-                            <TypographySmallText sx={{  color: theme.palette.link.main, textAlign: 'center' }} overrideSizes={{ xs: '0.8rem'}}>
+                            <TypographySmallText sx={{  color: theme.palette.link.main, textAlign: 'center' }} overrideSizes={{ defaultMobileSize: '0.8rem'}}>
                                 Todos los derechos reservados
                             </TypographySmallText>
                         </Link>
@@ -87,7 +113,7 @@ export const Footer = () => {
                         {/* FIN CAMBIO GSS-050624 */}
                     {/*FIN CAMBIO GSS-310524*/}
 
-                    <Grid item xs={4}>
+                    <Grid item defaultMobileSize={4}>
                         <Link href="https://codigogeek.com.mx/" target="_blank">
                                 <img
                                     className='Img-Color-PoweredBy'

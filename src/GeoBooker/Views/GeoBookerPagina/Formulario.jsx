@@ -13,13 +13,17 @@
 //   --# Marca de cambio     : GSS-050624                                             #
 //   ---------------------------------------------------------------------------------#-->
 import {useState, useContext} from 'react'
-import { TextField, Stack, MenuItem, Checkbox, Button, Grid, InputAdornment } from '@mui/material';
+import { TextField, Stack, MenuItem, Checkbox, Button, Grid, InputAdornment, useTheme, Box } from '@mui/material';
 import UseFormulario from '../../Hooks/UseFormulario';
 import { Link } from 'react-router-dom';
 import { FormContext } from '../../Context/Index.js';
 import BanderaDeMexico from "../../../assets/UnSoloUso/BanderaDeMexico.svg";
+import { TypographySmallText, TypographyMediumText, TypographyLargeText } from '../../Theme/TypografiasParaTextos';
+import { TypographySmallTitle, TypographyMediumTitle, TypographyLargeTitle } from '../../Theme/TypografiasParaTitulos';
 
-const Formulario = () => {
+function Formulario() {
+
+    const theme = useTheme();
 
     const { setFormTerminado, setVistaFinal } = useContext(FormContext);
 
@@ -185,58 +189,146 @@ const Formulario = () => {
 
     return (
         <>
-            <div className="bg-dark bg-opacity-50 w-100 py-3" ref={ formReferencia }>
-                <h2 className='text-center fs-2 fw-bold mt-2'>¡Queremos conocerte!</h2>
-                <h3 className='text-center fs-3 mt-3 w-75 mx-auto'>Registra <span className='fw-bold'>YA</span> tu negocio de forma <span className='fw-bold'>GRATUITA.</span></h3>
-                <p className="text-center fs-3 fw-bold mt-3">Solo tomará 2 minutos. ¡Vamos!</p>
-            </div>
+            <Box className="bg-dark bg-opacity-50 w-100 py-3" ref={ formReferencia }>
+                <TypographyMediumTitle>
+                    ¡Queremos conocerte!
+                </TypographyMediumTitle>
 
-            <div className="bg-dark pt-3 bg-opacity-25 pb-5">
-                <div className='mx-4 bg-light rounded px-4 pb-4'>
-                    <h1 className='text-center fs-1 my-4 py-3 pt-'>Pre-registro</h1>
-                    <TextField
-                        fullWidth
-                        id="outlined-basic"
-                        label="Nombre(s)"
-                        variant="filled"
-                        onInput={handleNombre}
-                        value={nombre}
-                        error={nombreTocado && !nombreValido}
-                        helperText={nombreTocado && !nombreValido ? '*Por favor, completa este campo' : ' '}
-                        inputProps={{ maxLength: 20 }}
-                    />
-                    <Stack
-                        direction="row"
-                        justifyContent="space-between"
-                        alignItems="center"
-                        spacing={2}
-                        mt={2}
+                <TypographySmallTitle
+                    sx={{
+                        width: '24rem',
+                        margin: "auto",
+                        fontWeight: '400!important',
+                        marginTop: "1rem",
+                        [theme.breakpoints.up('smallMobileSize')]: {
+                            width: '37rem'
+                        },
+                        [theme.breakpoints.up('mediumMobileSize')]: {
+                            width: '46rem'
+                        },
+                    }}
+                >
+                    Registra <span className="fw-bold">YA</span> tu negocio de forma  <span className="fw-bold">GRATUITA</span>.
+                </TypographySmallTitle>
+
+                <TypographySmallTitle
+                    sx={{
+                        fontWeight: "bold!important",
+                        marginTop: "1rem",
+                        [theme.breakpoints.up('defaultWebSize')]: {
+                            marginBottom: "1rem",
+                        }
+                    }}
+                >
+                    Solo tomará 2 minutos. ¡Vamos!
+                </TypographySmallTitle>
+            </Box>
+
+            <Box className="bg-dark pt-3 bg-opacity-25 pb-5 d-flex justify-content-center">
+                <Box className='mx-4 bg-light rounded px-4 pb-4'
+                    sx={{
+                        [theme.breakpoints.up('defaultMobileSize')]: {
+                            width: "29rem",
+                        },
+                        [theme.breakpoints.up('smallMobileSize')]: {
+                            width: "43.5rem",
+                        },
+                        [theme.breakpoints.up('mediumMobileSize')]: {
+                            width: "54.375rem",
+                        },
+                        [theme.breakpoints.up('defaultWebSize')]: {
+                            width: "72rem",
+                            marginTop: "2rem",
+                        }
+                    }}
+                >
+                    <TypographyMediumTitle
+                        sx={{
+                            fontWeight: "400!important",
+                            marginTop: "1rem",
+                            marginBottom: "1rem",
+                            paddingTop: "2rem",
+                            [theme.breakpoints.up('defaultWebSize')]: {
+                                fontWeight: "bold!important",
+                            }
+                        }}
+                    >
+                        Pre-registro
+                    </TypographyMediumTitle>
+                    <Box
+                        sx={{
+                            [theme.breakpoints.up('defaultWebSize')]: {
+                                display: "grid",
+                                gridTemplateColumns: "2fr 4fr",
+                                gap: "2rem",
+                            },
+                        }}
                     >
                         <TextField
                             fullWidth
                             id="outlined-basic"
-                            label="Apellido Paterno"
+                            label="Nombre(s)"
                             variant="filled"
-                            onInput={handleApellidoPaterno}
-                            value={apellidoPaterno}
-                            error={apellidoPaternoTocado && !apellidoPaternoValido}
-                            helperText={apellidoPaternoTocado && !apellidoPaternoValido ? '*Por favor, completa este campo' : ' '}
+                            onInput={handleNombre}
+                            value={nombre}
+                            error={nombreTocado && !nombreValido}
+                            helperText={nombreTocado && !nombreValido ? '*Por favor, completa este campo' : ' '}
                             inputProps={{ maxLength: 20 }}
+                            sx={{
+                                [theme.breakpoints.up('smallMobileSize')]: {
+                                    fontSize: "1.8rem",
+                                },
+                                [theme.breakpoints.up('mediumMobileSize')]: {
+                                    fontSize: "2.25rem",
+                                },
+                                [theme.breakpoints.up('defaultWebSize')]: {
+                                    paddingRight: "0.5rem"
+                                }
+                            }}
                         />
-                        <TextField
-                            fullWidth
-                            id="outlined-basic"
-                            label="Apellido Materno"
-                            variant="filled"
-                            onChange={handleApellidoMaterno}
-                            value={apellidoMaterno}
-                            error={apellidoMaternoTocado && !apellidoMaternoValido}
-                            helperText={apellidoMaternoTocado && !apellidoMaternoValido ? '*Por favor, completa este campo' : ' '}
-                            inputProps={{ maxLength: 20 }}
-                        />
-                    </Stack>
+                        <Stack
+                            direction="row"
+                            justifyContent="space-between"
+                            alignItems="center"
+                            spacing={2}
+                            mt={2}
+                            sx={{
+                                [theme.breakpoints.up('defaultWebSize')]: {
+                                    marginTop: "0"
+                                }
+                            }}
+                        >
+                            <TextField
+                                fullWidth
+                                id="outlined-basic"
+                                label="Apellido Paterno"
+                                variant="filled"
+                                onInput={handleApellidoPaterno}
+                                value={apellidoPaterno}
+                                error={apellidoPaternoTocado && !apellidoPaternoValido}
+                                helperText={apellidoPaternoTocado && !apellidoPaternoValido ? '*Por favor, completa este campo' : ' '}
+                                inputProps={{ maxLength: 20 }}
+                                sx={{
+                                    [theme.breakpoints.up('defaultWebSize')]: {
+                                        paddingRight: "1rem"
+                                    }
+                                }}
+                            />
+                            <TextField
+                                fullWidth
+                                id="outlined-basic"
+                                label="Apellido Materno"
+                                variant="filled"
+                                onChange={handleApellidoMaterno}
+                                value={apellidoMaterno}
+                                error={apellidoMaternoTocado && !apellidoMaternoValido}
+                                helperText={apellidoMaternoTocado && !apellidoMaternoValido ? '*Por favor, completa este campo' : ' '}
+                                inputProps={{ maxLength: 20 }}
+                            />
+                        </Stack>
+                    </Box>
                     <Grid container spacing={2} mb={1}>
-                        {/* <Grid item xs={6}>
+                        {/* <Grid item defaultMobileSize={6}>
               <TextField
                 id="outlined-basic"
                 label="Edad"
@@ -247,7 +339,7 @@ const Formulario = () => {
                 helperText={edadTocada && !edadValida ? '*Por favor, completa este campo' : ' '}
               />
             </Grid> */}
-                        <Grid item xs={6}>
+                        <Grid item defaultMobileSize={6} defaultWebSize={4}>
                             <TextField
                                 id="outlined-basic"
                                 select
@@ -268,88 +360,112 @@ const Formulario = () => {
                         </Grid>
                     </Grid>
 
-                    <TextField
-                        fullWidth
-                        id="outlined-basic"
-                        label="Nombre del negocio a registrar"
-                        value={nombreNegocio}
-                        onChange={handleNombreNegocio}
-                        helperText={nombreNegocioTocado && !nombreNegocioValido ? '*Por favor, completa este campo' : ''}
-                        error={nombreNegocioTocado && !nombreNegocioValido}
-                        variant="filled"
-                        inputProps={{ maxLength: 20 }}
-                    />
-                    <h3 className='mt-4'>¿Qué servicio ofertas?</h3>
-                    <Grid container spacing={2} mb={2}>
-                        <Grid item xs={6}>
-                            <TextField
-                                id="outlined-select-servicio"
-                                select
-                                label="Categoría"
-                                value={servicio}
-                                onChange={handleServicio}
-                                helperText={servicioTocado && !servicioValido ? '*Por favor, selecciona una opción' : ''}
-                                error={servicioTocado && !servicioValido}
-                                variant="filled"
-                                className='w-100'
-                            >
-                                {categorias.map((option) => (
-                                    <MenuItem key={option.value} value={option.value}>
-                                        {option.label}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <TextField
-                                id="outlined-select-subservicio"
-                                select
-                                label="Servicio"
-                                value={subservicio}
-                                onChange={handleSubservicio}
-                                helperText={subservicioTocado && !subservicioValido ? '*Por favor, selecciona una opción' : ''}
-                                error={subservicioTocado && !subservicioValido}
-                                variant="filled"
-                                className='w-100'
-                            >
-                                {subservicios.map((option) => (
-                                    <MenuItem key={option.value} value={option.value}>
-                                        {option.label}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
-                        </Grid>
-                    </Grid>
-                    <h3>Ubicación y contacto de tu negocio</h3>
-                    <Stack
-                        direction="row"
-                        justifyContent="space-between"
-                        alignItems="center"
-                        spacing={2}
-                        mt={2}
+                    <Box
+                        sx={{
+                            [theme.breakpoints.up('defaultWebSize')]: {
+                                display: "grid",
+                                gridTemplateColumns: "",
+                            }
+                        }}
                     >
                         <TextField
-                            id="codigo-postal"
-                            label="CP"
+                            fullWidth
+                            id="outlined-basic"
+                            label="Nombre del negocio a registrar"
+                            value={nombreNegocio}
+                            onChange={handleNombreNegocio}
+                            helperText={nombreNegocioTocado && !nombreNegocioValido ? '*Por favor, completa este campo' : ''}
+                            error={nombreNegocioTocado && !nombreNegocioValido}
                             variant="filled"
-                            value={codigoPostal}
-                            onChange={handleCodigoPostal}
-                            error={codigoPostalTocado && !codigoPostalValido} // Mostrar error solo si el campo ha sido tocado y no es válido
-                            helperText={codigoPostalTocado && !codigoPostalValido ? '*Por favor, completa este campo' : ' '}
-                            inputProps={{ maxLength: 5 }}
+                            inputProps={{ maxLength: 20 }}
                         />
-                        <TextField
-                            id="estado"
-                            label="Estado"
-                            variant="filled"
-                            value={estado}
-                            helperText=" "
-                            disabled
-                        />
-                    </Stack>
-
-                    <Grid container spacing={2} mb={2}>
-                        <Grid item xs={6}>
+                        <TypographyMediumText
+                            sx={{
+                                marginTop: "1rem",
+                                textAlign: "left",
+                                marginBottom: "1rem"
+                            }}
+                        >
+                            ¿Qué servicio ofertas?
+                        </TypographyMediumText>
+                        <Grid container spacing={2} mb={2}>
+                            <Grid item defaultMobileSize={6}>
+                                <TextField
+                                    id="outlined-select-servicio"
+                                    select
+                                    label="Categoría"
+                                    value={servicio}
+                                    onChange={handleServicio}
+                                    helperText={servicioTocado && !servicioValido ? '*Por favor, selecciona una opción' : ''}
+                                    error={servicioTocado && !servicioValido}
+                                    variant="filled"
+                                    className='w-100'
+                                >
+                                    {categorias.map((option) => (
+                                        <MenuItem key={option.value} value={option.value}>
+                                            {option.label}
+                                        </MenuItem>
+                                    ))}
+                                </TextField>
+                            </Grid>
+                            <Grid item defaultMobileSize={6}>
+                                <TextField
+                                    id="outlined-select-subservicio"
+                                    select
+                                    label="Servicio"
+                                    value={subservicio}
+                                    onChange={handleSubservicio}
+                                    helperText={subservicioTocado && !subservicioValido ? '*Por favor, selecciona una opción' : ''}
+                                    error={subservicioTocado && !subservicioValido}
+                                    variant="filled"
+                                    className='w-100'
+                                >
+                                    {subservicios.map((option) => (
+                                        <MenuItem key={option.value} value={option.value}>
+                                            {option.label}
+                                        </MenuItem>
+                                    ))}
+                                </TextField>
+                            </Grid>
+                        </Grid>
+                        <TypographyMediumText
+                            sx={{
+                                marginTop: "1rem",
+                                textAlign: "left",
+                                marginBottom: "1rem",
+                                [theme.breakpoints.up('defaultWebSize')]: {
+                                    textAlign: "center",
+                                }
+                            }}
+                        >
+                            Ubicación y contacto de tu negocio
+                        </TypographyMediumText>
+                        <Grid container spacing={2}>
+                            <Grid item defaultMobileSize={6} defaultWebSize={4}>
+                                <TextField
+                                    id="codigo-postal"
+                                    label="CP"
+                                    variant="filled"
+                                    value={codigoPostal}
+                                    onChange={handleCodigoPostal}
+                                    error={codigoPostalTocado && !codigoPostalValido} // Mostrar error solo si el campo ha sido tocado y no es válido
+                                    helperText={codigoPostalTocado && !codigoPostalValido ? '*Por favor, completa este campo' : ' '}
+                                    inputProps={{ maxLength: 5 }}
+                                    className='w-100'
+                                />
+                            </Grid>
+                            <Grid item defaultMobileSize={6} defaultWebSize={4}>
+                                <TextField
+                                    id="estado"
+                                    label="Estado"
+                                    variant="filled"
+                                    value={estado}
+                                    helperText=" "
+                                    disabled
+                                    className='w-100'
+                                />
+                            </Grid>
+                            <Grid item defaultMobileSize={6} defaultWebSize={4}>
                             <TextField
                                 id="municipio"
                                 label="Municipio"
@@ -357,9 +473,15 @@ const Formulario = () => {
                                 value={municipio}
                                 helperText=" "
                                 disabled
+                                className='w-100'
                             />
                         </Grid>
-                        <Grid item xs={6}>
+                        </Grid>
+                    </Box>
+
+                    <Grid container spacing={2} mb={2}>
+                        
+                        <Grid item defaultMobileSize={6}>
                             <TextField
                                 select
                                 id="colonia"
@@ -370,6 +492,7 @@ const Formulario = () => {
                                 onChange={handleColonia}
                                 helperText={coloniaTocada && !coloniaValida ? '*Por favor, selecciona una opción' : ''}
                                 error={coloniaTocada && !coloniaValida}
+                                className='w-100'
                             >{selectColonias.map((option) => (
                                 <MenuItem key={option.value} value={option.value}>
                                     {option.label}
@@ -379,37 +502,37 @@ const Formulario = () => {
                         </Grid>
                     </Grid>
 
-                    <Stack
-                        direction="row"
-                        justifyContent="space-between"
-                        alignItems="center"
-                        spacing={2}
-                        mt={2}
-                        mb={1}
-                    >
-                        <TextField
-                            id="outlined-basic"
-                            label="Calle"
-                            variant="filled"
-                            value={calle}
-                            onChange={handleCalle}
-                            helperText={calleTocada && !calleValida ? '*Por favor, completa este campo' : ' '}
-                            error={calleTocada && !calleValida}
-                            inputProps={{ maxLength: 30 }}
-                        />
-                        <TextField
-                            id="outlined-basic"
-                            label="Número"
-                            value={numero}
-                            onChange={handleNumero}
-                            helperText={numeroTocado && !numeroValido ? '*Por favor, completa este campo' : ' '}
-                            error={numeroTocado && !numeroValido}
-                            variant="filled"
-                            inputProps={{ maxLength: 10 }}
-                        />
-                    </Stack>
                     <Grid container spacing={2} mb={2}>
-                        <Grid item xs={4}>
+                        <Grid item defaultMobileSize={6}>
+                            <TextField
+                                id="outlined-basic"
+                                label="Calle"
+                                variant="filled"
+                                value={calle}
+                                onChange={handleCalle}
+                                helperText={calleTocada && !calleValida ? '*Por favor, completa este campo' : ' '}
+                                error={calleTocada && !calleValida}
+                                inputProps={{ maxLength: 30 }}
+                                className='w-100'
+                            />
+                        </Grid>
+                        <Grid item defaultMobileSize={6}>
+                            <TextField
+                                id="outlined-basic"
+                                label="Número"
+                                value={numero}
+                                onChange={handleNumero}
+                                helperText={numeroTocado && !numeroValido ? '*Por favor, completa este campo' : ' '}
+                                error={numeroTocado && !numeroValido}
+                                variant="filled"
+                                inputProps={{ maxLength: 10 }}
+                                className='w-100'
+                            />
+                        </Grid>
+                    </Grid>
+
+                    <Grid container spacing={2} mb={2}>
+                        <Grid item defaultMobileSize={4}>
                             <TextField
                                 id="outlined-helperText"
                                 label="LADA"
@@ -426,7 +549,7 @@ const Formulario = () => {
                                 }}
                             />
                         </Grid>
-                        <Grid item xs={8}>
+                        <Grid item defaultMobileSize={8}>
                             <TextField
                                 id="outlined-basic"
                                 label="Número de Teléfono"
@@ -462,10 +585,28 @@ const Formulario = () => {
                             onChange={handleCheckbox}
                             inputProps={{ 'aria-label': 'checkbox' }}
                         />
-                        <p>Manifiesto y confirmo ser mayor de edad y acepto las condiciones de uso de datos y políticas de privacidad.</p>
+                        <TypographyMediumText
+                            sx={{
+                                fontSize: "1.05rem",
+                            }}
+                        >
+                            Manifiesto y confirmo ser mayor de edad y acepto las condiciones de uso de datos y políticas de privacidad.
+                        </TypographyMediumText>
                     </Stack>
                     {checkboxValido ? null : <p className='text-danger text-center'>{textoCheckbox}</p>}
-                    <p className='text-center text-primary'><a href="#">Ver aviso de privacidad</a></p>
+                    <p className='text-center text-primary'><a href="#"></a></p>
+
+                    <Link to="#">
+                        <TypographyMediumText
+                            sx={{
+                                fontSize: "1.05rem",
+                                color: "blue",
+                            }}
+                        >
+                            Ver aviso de privacidad
+                        </TypographyMediumText>
+                    </Link>
+
                     <Stack
                         direction="row"
                         justifyContent="center"
@@ -482,8 +623,8 @@ const Formulario = () => {
                             </Button>
                         </Link>
                     </Stack>
-                </div>
-            </div>
+                </Box>
+            </Box>
         </>
     )
 }

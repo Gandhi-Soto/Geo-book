@@ -19,16 +19,18 @@
 //   --# Marca de cambio     : GSS-050624                                             #
 //   ---------------------------------------------------------------------------------#-->
 
-import {Box, Grid} from "@mui/material";
-import {ImagenDeFondo, LogoGeoBooker} from '../../../assets/GeoBooker/Index.js'
+import { Box, Grid, useTheme } from "@mui/material";
+import { ImagenDeFondo, LogoGeoBooker, ImagenDeFondoWeb } from '../../../assets/GeoBooker/Index.js'
 // INICIO CAMBIO GSS-310524
-import {CirculosDeServicios} from "./CirculosDeServicios.jsx";
-import {CajitaAmarilla} from "../../UtilComponents/Index.js";
+import { CirculosDeServicios } from "./CirculosDeServicios.jsx";
+import { CajitaAmarilla } from "../../UtilComponents/Index.js";
 import {
     TypographyLargeText,
     TypographySmallTitle
 } from "../../Theme/index.js";
 // FIN CAMBIO GSS-310524
+import { useContext } from "react";
+import { BreakpointsContext } from "../../Context/Index.js";
 
 /**
  * Despliega la primera vista que tiene el usuario al ingresar a la aplicación.
@@ -37,45 +39,61 @@ import {
  */
 
 export const GeoBooker = () => {
+
+    const theme = useTheme();
+
+    const { isWeb } = useContext(BreakpointsContext);
+
     return (
-        <Box
-            sx={{
-                height: "50rem",
-                backgroundImage: `url(${ImagenDeFondo})`, // Reemplaza esto con la ruta a tu imagen
-                backgroundRepeat: "no-repeat",
-                // INICIO CAMBIO GSS-310524
-                backgroundSize: "cover",
-                // FIN CAMBIO GSS-310524
+        <>
+            <Box
+                sx={{
+                    height: "52.5rem",
+                    backgroundImage: `url(${ImagenDeFondo})`, // Reemplaza esto con la ruta a tu imagen
+                    backgroundRepeat: "no-repeat",
+                    // INICIO CAMBIO GSS-310524
+                    backgroundSize: "cover",
+                    // FIN CAMBIO GSS-310524
 
-                backgroundPosition: "center",
-            }}
-        >
-            <Grid container
-                  sx={{display: "flex", justifyContent: "center", alignItems: "center"}}
+                    backgroundPosition: "center",
+                    [theme.breakpoints.up('smallMobileSize')]: {
+                        height: "60rem",
+                    },
+                    [theme.breakpoints.up('mediumMobileSize')]: {
+                        height: "67.5rem",
+                    },
+                    [theme.breakpoints.up('defaultWebSize')]: {
+                        display: "none"
+                    }
+                }}
             >
-                <Grid item xs={10} mt={2}>
-                    <img src={LogoGeoBooker} alt="Logo de GeoBooker"/>
-                </Grid>
+                <Grid container
+                    sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+                >
+                    <Grid item defaultMobileSize={10} mt={2} defaultWebSize={8}>
+                        <img src={LogoGeoBooker} alt="Logo de GeoBooker" />
+                    </Grid>
 
-                {/*INICIO CAMBIO GSS-310524*/}
-                <Grid item xs={12} mt={2} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                    <TypographyLargeText sx={{color: 'white'}}>
-                        Si eres dueño de un negocio como:
-                    </TypographyLargeText>
-                </Grid>
+                    {/*INICIO CAMBIO GSS-310524*/}
+                    <Grid item defaultMobileSize={12} mt={2} 
+                        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                        <TypographyLargeText sx={{ color: 'white' }}>
+                            Si eres dueño de un negocio como:
+                        </TypographyLargeText>
+                    </Grid>
 
-                <Grid item xs={10} mt={2} mb={0.5}>
-                    <CirculosDeServicios/>
-                </Grid>
+                    <Grid item defaultMobileSize={10} mt={2} mb={0.5}>
+                        <CirculosDeServicios />
+                    </Grid>
 
-                <Grid item xs={12} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                    <TypographySmallTitle sx={{color: 'white'}}>
-                        SIN IMPORTAR SU GIRO O TAMAÑO
-                    </TypographySmallTitle>
-                </Grid>
+                    <Grid item defaultMobileSize={12} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <TypographySmallTitle sx={{ color: 'white' }} >
+                            SIN IMPORTAR SU GIRO O TAMAÑO
+                        </TypographySmallTitle>
+                    </Grid>
 
                 { /*INICIO CAMBIO GSS-050624*/}
-                <Grid item xs={12} mt='0.5rem' sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                <Grid item defaultMobileSize={12} mt='0.5rem' sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                     <CajitaAmarilla
                         sx={{width: '18rem', height: '0.7rem'}}
                         animacionDeAnimateCss='animate__slideInLeft'
@@ -86,8 +104,76 @@ export const GeoBooker = () => {
                 {/*FIN CAMBIO GSS-310524*/}
 
 
-            </Grid>
+                </Grid>
 
-        </Box>
+            </Box>
+
+            <Box
+                sx={{
+                    display: "none",
+                    [theme.breakpoints.up('defaultWebSize')]: {
+                        display: "block",
+                    }
+                }}
+            >
+                <Box fullWidth className="d-flex justify-content-center py-5"
+                    sx={{
+                        [theme.breakpoints.up('defaultWebSize')]: {
+                            backgroundImage: `url(${ImagenDeFondoWeb})`,
+                            backgroundRepeat: "no-repeat",
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
+                        }
+                    }}
+                >
+                    <img src={LogoGeoBooker} alt="Logo de GeoBooker" className="w-50 my-4" />
+                </Box>
+
+                <Grid container
+                    sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+                >
+
+                    {/*INICIO CAMBIO GSS-310524*/}
+                    <Grid item defaultMobileSize={12} mt={2} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <TypographyLargeText 
+                            sx={{ 
+                                color: 'white',
+                                [theme.breakpoints.up('defaultWebSize')]: {
+                                    color: "black",
+                                }
+                            }}
+                        >
+                            Si eres dueño de un negocio como:
+                        </TypographyLargeText>
+                    </Grid>
+
+                    <Grid item defaultMobileSize={10} mt={2} mb={0.5}>
+                        <CirculosDeServicios />
+                    </Grid>
+
+                    <Grid item defaultMobileSize={12} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <TypographySmallTitle 
+                            sx={{ 
+                                color: 'white',
+                                [theme.breakpoints.up('defaultWebSize')]: {
+                                    color: "black",
+                                    fontWeight: "bold",
+                                }
+                            }} 
+                        >
+                            SIN IMPORTAR SU GIRO O TAMAÑO
+                        </TypographySmallTitle>
+                    </Grid>
+
+                    <Grid item defaultMobileSize={12} mt='0.5rem' sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <CajitaAmarilla sx={{ width: '18rem', height: '0.7rem' }} />
+                    </Grid>
+                    {/*FIN CAMBIO GSS-310524*/}
+
+
+                </Grid>
+
+            </Box>
+        </>
     );
 };
