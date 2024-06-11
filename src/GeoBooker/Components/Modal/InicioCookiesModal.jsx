@@ -5,6 +5,13 @@
 //   --# Proyecto            : GeoBooker                       Fecha: 15/05/2024      #
 //   --# Descripcion General : Componente modal de  Inicio de Cookies                 #
 //   ---------------------------------------------------------------------------------#-->
+//-------------------------------- MODIFICACIONES ------------------------------------#
+// <!--################################################################################
+//   --# Autor               : Gandhi Soto Sanchez                                    #
+//   --# Fecha               : 11/06/2024                                             #
+//   --# Modificacion        : Cambios en el uso de etiquetas de Material y BS5       #
+//   --# Marca de cambio     : GSS-110624                                             #
+//   ---------------------------------------------------------------------------------#-->
 
 import {Button, Col, Container, Row} from "react-bootstrap";
 import {ModalLayout} from "../../Layout/Index.js";
@@ -56,7 +63,8 @@ const Footer = () => {
         <>
             <Container fluid='sm'>
                 <Row>
-                    <Col defaultMobileSize={6}>
+                    {/* INICIO CAMBIO GSS-110624 */}
+                    <Col>
                         <Button
                             variant="secondary"
                             onClick={() => setMostrarInicioCookiesModal(false)}
@@ -66,8 +74,10 @@ const Footer = () => {
                             Aceptar todas
                         </Button>
                     </Col>
+                    {/* FIN CAMBIO GSS-110624 */}
 
-                    <Col defaultMobileSize={6}>
+                    {/* INICIO CAMBIO GSS-110624 */}
+                    <Col>
                         <Button
                             variant="secondary"
                             onClick={() => {
@@ -79,6 +89,7 @@ const Footer = () => {
                             Navegar sin cookies
                         </Button>
                     </Col>
+                    {/* FIN CAMBIO GSS-110624 */}
                 </Row>
                 <Row
                     style={{

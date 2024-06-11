@@ -5,6 +5,19 @@
 //   --# Proyecto            : GeoBooker                       Fecha: 31/05/2024      #
 //   --# Descripcion General : Tipografia de textos para toda la app                  #
 //   ---------------------------------------------------------------------------------#-->
+//-------------------------------- MODIFICACIONES ------------------------------------#
+// <!--################################################################################
+//   --# Autor               : Gandhi Soto Sanchez                                    #
+//   --# Fecha               : 11/06/2024                                             #
+//   --# Modificacion        : Se agregaron tamaños de fuente para tipografias        #
+//   --# Marca de cambio     : GSS-110624                                             #
+//   ---------------------------------------------------------------------------------#-->
+// <!--################################################################################
+//   --# Autor               : Caleb Martinez Cavazos                                 #
+//   --# Fecha               : 11/06/2024                                             #
+//   --# Modificacion        : Se agregaron tamaños de fuente para tipografias        #
+//   --# Marca de cambio     : BCMC-110624                                             #
+//   ---------------------------------------------------------------------------------#-->
 
 import {Typography, useMediaQuery, useTheme} from "@mui/material";
 import PropTypes from "prop-types";
@@ -14,21 +27,25 @@ const TypographyTextSizes = {
     smallText: {
         defaultMobileSize: '1rem',
         smallMobileSize: '1.5rem',
-        mediumMobileSize: "1.875rem",
-        defaultWebSize: "",
-        smallWebSize: "",
-        mediumWebSize: "",
-        largeWebSize: "",
-        wideWebSize: ""
+        // INICIO DE CAMBIO: GSS-110624
+        mediumMobileSize: '1.5rem',
+        defaultWebSize: '1.8rem',
+        smallWebSize: '1.8rem',
+        mediumWebSize: "2rem",
+        largeWebSize: "2rem",
+        wideWebSize: "2.2rem"
+        // FIN DE CAMBIO: GSS-110624
     },
     mediumText: {
         defaultMobileSize: '1.2rem',
         smallMobileSize: '1.8rem',
         mediumMobileSize: "2.25rem",
-        defaultWebSize: "1.3rem",
-        smallWebSize: "",
-        mediumWebSize: "",
-        largeWebSize: "",
+        // INICIO DE CAMBIO: BCMC-110624
+        defaultWebSize: "1.4rem",
+        smallWebSize: "1.75rem",
+        mediumWebSize: "2rem",
+        largeWebSize: "2.2rem",
+        // FIN DE CAMBIO: BCMC-110624
         wideWebSize: ""
     },
     largeText: {
@@ -36,10 +53,12 @@ const TypographyTextSizes = {
         smallMobileSize: '2.25rem',
         mediumMobileSize: "2.8125rem",
         defaultWebSize: "1.75rem",
-        smallWebSize: "",
-        mediumWebSize: "",
-        largeWebSize: "",
-        wideWebSize: ""
+        // INICIO DE CAMBIO: BCMC-110624
+        smallWebSize: "2rem",
+        mediumWebSize: "2.25rem",
+        largeWebSize: "2.5rem",
+        wideWebSize: "3rem"
+        // FIN DE CAMBIO: BCMC-110624
     },
 }
 

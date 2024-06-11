@@ -19,8 +19,15 @@
 //   --# Modificacion        : Se aplico un efecto zoom a los iconos                 #
 //   --# Marca de cambio     : GSS-050624                                             #
 //   ---------------------------------------------------------------------------------#-->
+//   --# Autor               : Gandhi Soto Sanchez                                    #
+//   --# Fecha               : 11/06/2024                                             #
+//   --# Modificacion        : Estilos responsivos para los iconos de RRSS            #
+//   --# Marca de cambio     : GSS-110624                                             #
+//   ---------------------------------------------------------------------------------#-->
 
-import {ImageList, ImageListItem, Link, useTheme} from "@mui/material";
+// INICIO CAMBIO GSS-110624
+import {ImageList, ImageListItem, Link, useMediaQuery, useTheme} from "@mui/material";
+// FIN CAMBIO GSS-110624
 import {
     FacebookIcon,
     InstagramIcon,
@@ -35,22 +42,35 @@ import {
 export const ListaDeRedesSociales = () => {
 
     const theme = useTheme();
+    // INICIO CAMBIO GSS-110624
+    const isSmallMobile = useMediaQuery(theme.breakpoints.down('mediumMobileSize'));
+    const isMediumMobile = useMediaQuery(theme.breakpoints.up('mediumMobileSize'));
+    const isWeb = useMediaQuery(theme.breakpoints.up('defaultWebSize'));
+    // FIN CAMBIO GSS-110624
 
+    // INICIO CAMBIO GSS-110624
+    const gap = isSmallMobile ? 10 : isMediumMobile ? 40 : isWeb ? 60 : 15;
+    // FIN CAMBIO GSS-110624
+
+    // INICIO CAMBIO GSS-110624
     return (
 
         // INICIO CAMBIO GSS-060524
-        <ImageList cols={7} gap={15} style={{ overflow: 'visible' }} >
+        <ImageList cols={7} gap={gap} style={{ overflow: 'visible' }} >
             {
                 itemData.map( item =>
                     <ImageListItem
                         key={item.icon}
                         sx={{
-                            width: 20, height: 20, overflow: 'visible',
-                            [theme.breakpoints.up('smallMobileSize')]: {
-                                width: 40, height: 40
+                            overflow: 'visible',
+                            [theme.breakpoints.up('defaultMobileSize')]: {
+                                width: 30, height: 30
                             },
                             [theme.breakpoints.up('mediumMobileSize')]: {
-                                width: 45, height: 45
+                                width: 40, height: 40
+                            },
+                            [theme.breakpoints.up('defaultWebSize')]: {
+                                width: 25, height: 25
                             }
                         }}
                     >
@@ -72,6 +92,7 @@ export const ListaDeRedesSociales = () => {
         </ImageList>
         // FIN CAMBIO GSS-060524
     )
+    // FIN CAMBIO GSS-110624
 }
 // INICIO FIN GSS-310524
 

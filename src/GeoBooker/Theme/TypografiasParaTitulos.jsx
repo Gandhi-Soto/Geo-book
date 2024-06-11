@@ -5,6 +5,13 @@
 //   --# Proyecto            : GeoBooker                       Fecha: 31/05/2024      #
 //   --# Descripcion General : Tipografia de titulos para toda la app                 #
 //   ---------------------------------------------------------------------------------#-->
+//-------------------------------- MODIFICACIONES ------------------------------------#
+// <!--################################################################################
+//   --# Autor               : Caleb Martinez Cavazos                                 #
+//   --# Fecha               : 11/06/2024                                             #
+//   --# Modificacion        : Se agregaron fuentes para tipografias                  #
+//   --# Marca de cambio     : BCMC-110624                                             #
+//   ---------------------------------------------------------------------------------#-->
 
 import {Typography, useMediaQuery, useTheme} from "@mui/material";
 import PropTypes from "prop-types";
@@ -15,9 +22,11 @@ const TypographyTitleSizes = {
         smallMobileSize: '2.25rem',
         mediumMobileSize: "2.8125rem",
         defaultWebSize: "1.7rem",
-        smallWebSize: "",
-        mediumWebSize: "",
-        largeWebSize: "",
+        // INICIO DE CAMBIO: BCMC-110624
+        smallWebSize: "2rem",
+        mediumWebSize: "2.25rem",
+        largeWebSize: "2.5rem",
+        // FIN DE CAMBIO: BCMC-110624
         wideWebSize: ""
     },
     mediumTitles: {
@@ -25,9 +34,11 @@ const TypographyTitleSizes = {
         smallMobileSize: '3rem',
         mediumMobileSize: "3.75rem",
         defaultWebSize: "2.5rem",
-        smallWebSize: "",
-        mediumWebSize: "",
-        largeWebSize: "",
+        // INICIO DE CAMBIO: BCMC-110624
+        smallWebSize: "2.5rem",
+        mediumWebSize: "2.75rem",
+        largeWebSize: "2.75rem",
+        // FIN DE CAMBIO: BCMC-110624
         wideWebSize: ""
     },
     largeTitles: {

@@ -18,6 +18,13 @@
 //   --# Modificacion        : Se agrega la animacion a las cajitas                   #
 //   --# Marca de cambio     : GSS-050624                                             #
 //   ---------------------------------------------------------------------------------#-->
+// <!--################################################################################
+//   --# Autor               : Caleb Martinez Cavazos                                 #
+//   --# Fecha               : 11/06/2024                                             #
+//   --# Modificacion        : Se hicieron cambios en la estructura para mostrar los  #
+//                             elementos correspondientes segun el breakpoint         #
+//   --# Marca de cambio     : BCMC-110624                                            #
+//   ---------------------------------------------------------------------------------#-->
 
 import { Box, Grid, useTheme } from "@mui/material";
 import { ImagenDeFondo, LogoGeoBooker, ImagenDeFondoWeb } from '../../../assets/GeoBooker/Index.js'
@@ -46,9 +53,10 @@ export const GeoBooker = () => {
 
     return (
         <>
+            {/* INICIO DE CAMBIO: BCMC-110624 */}
             <Box
                 sx={{
-                    height: "52.5rem",
+                    height: "45rem",
                     backgroundImage: `url(${ImagenDeFondo})`, // Reemplaza esto con la ruta a tu imagen
                     backgroundRepeat: "no-repeat",
                     // INICIO CAMBIO GSS-310524
@@ -57,10 +65,10 @@ export const GeoBooker = () => {
 
                     backgroundPosition: "center",
                     [theme.breakpoints.up('smallMobileSize')]: {
-                        height: "60rem",
+                        height: "55rem",
                     },
                     [theme.breakpoints.up('mediumMobileSize')]: {
-                        height: "67.5rem",
+                        height: "57rem",
                     },
                     [theme.breakpoints.up('defaultWebSize')]: {
                         display: "none"
@@ -112,7 +120,7 @@ export const GeoBooker = () => {
                 sx={{
                     display: "none",
                     [theme.breakpoints.up('defaultWebSize')]: {
-                        display: "block",
+                        display: "block"
                     }
                 }}
             >
@@ -174,6 +182,7 @@ export const GeoBooker = () => {
                 </Grid>
 
             </Box>
+            {/* FIN DE CAMBIO: BCMC-110624 */}
         </>
     );
 };
