@@ -16,7 +16,7 @@
 // <!--################################################################################
 //   --# Autor               : Gandhi Soto Sanchez                                    #
 //   --# Fecha               : 05/06/2024                                             #
-//   --# Modificacion        : Se aplico un efecto zoom a los iconos                 #
+//   --# Modificacion        : Se aplico un efecto zoom a los iconos                  #
 //   --# Marca de cambio     : GSS-050624                                             #
 //   ---------------------------------------------------------------------------------#-->
 //   --# Autor               : Gandhi Soto Sanchez                                    #
@@ -24,9 +24,14 @@
 //   --# Modificacion        : Estilos responsivos para los iconos de RRSS            #
 //   --# Marca de cambio     : GSS-110624                                             #
 //   ---------------------------------------------------------------------------------#-->
+//   --# Autor               : Gandhi Soto Sanchez                                    #
+//   --# Fecha               : 13/06/2024                                             #
+//   --# Modificacion        : La lista es responsiva en todos los breakpoints        #
+//   --# Marca de cambio     : GSS-130624                                             #
+//   ---------------------------------------------------------------------------------#-->
 
 // INICIO CAMBIO GSS-110624
-import {ImageList, ImageListItem, Link, useMediaQuery, useTheme} from "@mui/material";
+import {ImageList, ImageListItem, Link, useTheme} from "@mui/material";
 // FIN CAMBIO GSS-110624
 import {
     FacebookIcon,
@@ -37,44 +42,74 @@ import {
     LinkedInIcon,
     WhatsappIcon
 } from '../../assets/RedesSociales/Index.js';
+import {useContext} from "react";
+import {BreakpointsContext} from "../Context/Index.js";
 
 // INICIO CAMBIO GSS-310524
 export const ListaDeRedesSociales = () => {
 
     const theme = useTheme();
-    // INICIO CAMBIO GSS-110624
-    const isSmallMobile = useMediaQuery(theme.breakpoints.down('mediumMobileSize'));
-    const isMediumMobile = useMediaQuery(theme.breakpoints.up('mediumMobileSize'));
-    const isWeb = useMediaQuery(theme.breakpoints.up('defaultWebSize'));
-    // FIN CAMBIO GSS-110624
+    const {
+        isUpSmallMobile,
+        isUpMediumMobile,
+        isUpDefaultWebSize,
+        isUpSmallWebSize,
+        isUpMediumWebSize,
+        isUpLargeWebSize,
+        isUpWideWebSize,
+    } = useContext(BreakpointsContext);
+    
 
     // INICIO CAMBIO GSS-110624
-    const gap = isSmallMobile ? 10 : isMediumMobile ? 40 : isWeb ? 60 : 15;
+    // INICIO CAMBIO GSS-130624
+    const gap = isUpWideWebSize ? 190
+            : isUpLargeWebSize ? 110
+                : isUpMediumWebSize ? 100
+                    : isUpSmallWebSize ? 85
+                        : isUpDefaultWebSize ? 70
+                            : isUpMediumMobile ? 40
+                                : isUpSmallMobile ? 30 : 20;
+    // FIN CAMBIO GSS-130624
     // FIN CAMBIO GSS-110624
 
     // INICIO CAMBIO GSS-110624
     return (
 
         // INICIO CAMBIO GSS-060524
-        <ImageList cols={7} gap={gap} style={{ overflow: 'visible' }} >
+        <ImageList cols={7} gap={gap} style={{overflow: 'visible'}}>
             {
-                itemData.map( item =>
+                itemData.map(item =>
                     <ImageListItem
                         key={item.icon}
                         sx={{
+                            // INICIO CAMBIO GSS-130624
                             overflow: 'visible',
                             [theme.breakpoints.up('defaultMobileSize')]: {
+                                width: 20, height: 20
+                            },
+                            [theme.breakpoints.up('smallMobileSize')]: {
                                 width: 30, height: 30
                             },
                             [theme.breakpoints.up('mediumMobileSize')]: {
-                                width: 40, height: 40
+                                width: 35, height: 35
                             },
                             [theme.breakpoints.up('defaultWebSize')]: {
-                                width: 25, height: 25
+                                width: 30, height: 30
+                            },
+                            [theme.breakpoints.up('smallWebSize')]: {
+                                width: 40, height: 40
+                            },
+                            [theme.breakpoints.up('largeWebSize')]: {
+                                width: 50, height: 50
+                            },
+                            [theme.breakpoints.up('wideWebSize')]: {
+                                width: 65, height: 65
                             }
+                            // FIN CAMBIO GSS-130624
                         }}
                     >
-                        <Link href={ item.link } target="_blank" >
+
+                        <Link href={item.link} target="_blank">
                             <img
                                 src={item.icon}
                                 alt={item.alt}

@@ -38,8 +38,6 @@ import {
 } from "../../../assets/GeoBooker/Index.js";
 import {Box, Grid, ImageListItem, ImageListItemBar, useTheme} from "@mui/material";
 import {TypographySmallText} from "../../Theme/index.js";
-import classNames from "classnames";
-import useBreakpoints from "../../Hooks/UseBreakpoints.jsx";
 // INICIO CAMBIO GSS-050624
 import {useContext} from "react";
 import {FormContext} from "../../Context/Index.js";
@@ -48,7 +46,6 @@ import { animateScroll as scroll } from 'react-scroll';
 
 export const CirculosDeServicios = () => {
     const theme = useTheme();
-    const breakpoints = useBreakpoints();
     // INICIO CAMBIO GSS-050624
     const { formReferencia } = useContext(FormContext);
     // Funcion para hacer scroll al formulario
@@ -106,8 +103,8 @@ export const CirculosDeServicios = () => {
                                     width: "4rem",
                                     height: "4rem",
                                     [theme.breakpoints.up('defaultWebSize')]: {
-                                        width: "8rem",
-                                        height: "8rem",
+                                        width: "10rem",
+                                        height: "10rem",
                                     },
                                     [theme.breakpoints.up('smallWebSize')]: {
                                         width: "10rem",

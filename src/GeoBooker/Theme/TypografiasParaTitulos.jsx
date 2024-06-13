@@ -18,8 +18,9 @@
 //   --# Marca de cambio     : BCMC-130624                                            #
 //   ---------------------------------------------------------------------------------#-->
 
-import {Typography, useMediaQuery, useTheme} from "@mui/material";
+import {Typography} from "@mui/material";
 import PropTypes from "prop-types";
+import {useFontSizes} from "../Hooks/Index.js";
 
 const TypographyTitleSizes = {
     smallTitle: {
@@ -62,27 +63,6 @@ const TypographyTitleSizes = {
     },
 }
 
-const getFontSize = (theme, sizes) => {
-    const matches = {
-        wideWebSize: useMediaQuery(theme.breakpoints.up('wideWebSize')),
-        largeWebSize: useMediaQuery(theme.breakpoints.up('largeWebSize')),
-        mediumWebSize: useMediaQuery(theme.breakpoints.up('mediumWebSize')),
-        smallWebSize: useMediaQuery(theme.breakpoints.up('smallWebSize')),
-        defaultWebSize: useMediaQuery(theme.breakpoints.up('defaultWebSize')),
-        mediumMobileSize: useMediaQuery(theme.breakpoints.up('mediumMobileSize')),
-        smallMobileSize: useMediaQuery(theme.breakpoints.up('smallMobileSize')),
-    };
-
-    if (matches.wideWebSize) return sizes.wideWebSize;
-    if (matches.largeWebSize) return sizes.largeWebSize;
-    if (matches.mediumWebSize) return sizes.mediumWebSize;
-    if (matches.smallWebSize) return sizes.smallWebSize;
-    if (matches.defaultWebSize) return sizes.defaultWebSize;
-    if (matches.mediumMobileSize) return sizes.mediumMobileSize;
-    if (matches.smallMobileSize) return sizes.smallMobileSize;
-
-    return sizes.defaultMobileSize;
-};
 
 /**
  * @param sx
@@ -98,14 +78,10 @@ export const TypographySmallTitle =
          overrideSizes = {},
      }) => {
 
-        const theme = useTheme();
-
         const defaultSizes = TypographyTitleSizes.smallTitle;
         const sizes = {...defaultSizes, ...overrideSizes};
 
-        // const matchMediumMobileSize = useMediaQuery(theme.breakpoints.up('sm'));
-        // const matchSize = matchMediumMobileSize ? sizes.sm : sizes.xs;
-        const matchSize = getFontSize(theme, sizes);
+        const matchSize = useFontSizes(sizes);
 
         return (
             <Typography
@@ -135,15 +111,10 @@ export const TypographyMediumTitle =
          sx, children,
          overrideSizes = {},
      }) => {
-
-        const theme = useTheme();
-
         const defaultSizes = TypographyTitleSizes.mediumTitles;
         const sizes = {...defaultSizes, ...overrideSizes};
 
-        // const matchMediumMobileSize = useMediaQuery(theme.breakpoints.up('sm'));
-        // const matchSize = matchMediumMobileSize ? sizes.sm : sizes.xs;
-        const matchSize = getFontSize(theme, sizes);
+        const matchSize = useFontSizes(sizes);
 
         return (
             <Typography
@@ -173,15 +144,10 @@ export const TypographyLargeTitle =
          sx, children,
          overrideSizes = {},
      }) => {
-
-        const theme = useTheme();
-
         const defaultSizes = TypographyTitleSizes.largeTitles;
         const sizes = {...defaultSizes, ...overrideSizes};
 
-        // const matchMediumMobileSize = useMediaQuery(theme.breakpoints.up('sm'));
-        // const matchSize = matchMediumMobileSize ? sizes.sm : sizes.xs;
-        const matchSize = getFontSize(theme, sizes);
+        const matchSize = useFontSizes(sizes);
 
         return (
             <Typography

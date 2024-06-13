@@ -9,3 +9,4 @@
 export * from './UseObserve.js'
 export * from './useSwitch.js'
 export * from './UseFormulario.jsx'
+export * from './useFontSizes.js'
