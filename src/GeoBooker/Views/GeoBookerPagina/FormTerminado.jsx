@@ -17,6 +17,11 @@
 //   --# Modificacion        : Estilos responsivos para todo el componente            #
 //   --# Marca de cambio     : BCMC-110624                                            #
 //   ---------------------------------------------------------------------------------#-->
+//   --# Autor               : Caleb Martinez Cavazos                                 #
+//   --# Fecha               : 13/06/2024                                             #
+//   --# Modificacion        : Mejor distrubución y proporción de elementos responsive#
+//   --# Marca de cambio     : BCMC-130624                                            #
+//   ---------------------------------------------------------------------------------#-->
 
 import { useContext } from "react";
 import { Box, Grid, Stack, Button, useTheme } from '@mui/material';
@@ -105,6 +110,12 @@ const FormTerminado = () => {
                             [theme.breakpoints.up('largeWebSize')]: {
                                 height: "55rem",
                             },
+                            // INICIO DE CAMBIO: BCMC-130624
+                            [theme.breakpoints.up('wideWebSize')]: {
+                                height: "100rem",
+                                width: "140rem"
+                            }
+                            // FIN DE CAMBIO: BCMC-130624
                         }}
                     >
                         <Box
@@ -128,6 +139,11 @@ const FormTerminado = () => {
                                 [theme.breakpoints.up('smallWebSize')]: {
                                     fontSize: '2.5rem',
                                 },
+                                // INICIO DE CAMBIO: BCMC-130624
+                                [theme.breakpoints.up('wideWebSize')]: {
+                                    fontSize: '5rem',
+                                }
+                                // FIN DE CAMBIO: BCMC-130624
                             }}
                         >
                             Agradecemos tu confianza
@@ -148,6 +164,11 @@ const FormTerminado = () => {
                                 },
                                 [theme.breakpoints.up('largeWebSize')]: {
                                     width: "90rem"
+                                    // INICIO DE CAMBIO: BCMC-130624
+                                },
+                                [theme.breakpoints.up('wideWebSize')]: {
+                                    width: "160rem"
+                                    // FIN DE CAMBIO: BCMC-130624
                                 }
 
                             }}
@@ -161,6 +182,11 @@ const FormTerminado = () => {
                                 },
                                 [theme.breakpoints.up('largeWebSize')]: {
                                     width: "90rem"
+                                    // INICIO DE CAMBIO: BCMC-130624
+                                },
+                                [theme.breakpoints.up('wideWebSize')]: {
+                                    width: "160rem"
+                                    // FIN DE CAMBIO: BCMC-130624
                                 }
                             }}
                         >
@@ -307,7 +333,8 @@ const FormTerminado = () => {
                     <Box
                         className="bg-dark bg-opacity-50 w-100 py-3 mt-5 d-flex flex-column justify-center align-items-center"
                     >
-                        <TypographyMediumText
+                        {/* INICIO DE CAMBIO: BCMC-130624 */}
+                        <TypographyMediumTitle
                             sx={{
                                 fontWeight: 'bold!important',
                                 marginTop: '1.5rem',
@@ -315,22 +342,57 @@ const FormTerminado = () => {
                                 [theme.breakpoints.up('defaultWebSize')]: {
                                     color: "white",
                                 },
+                                [theme.breakpoints.up('smallWebSize')]: {
+                                    fontSize: "3rem"
+                                },
+                                [theme.breakpoints.up('mediumWebSize')]: {
+                                    fontSize: "3.5rem"
+                                },
+                                [theme.breakpoints.up('largeWebSize')]: {
+                                    fontSize: "4rem"
+                                },
+                                [theme.breakpoints.up('wideWebSize')]: {
+                                    fontSize: "7.5rem"
+                                }
                             }}
                         >
                             Parece que ya te has registrado.
-                        </TypographyMediumText>
-                        <CheckCircleIcon className="fs-1 mt-3" color="success" style={{ width: "6rem", height: "6rem", borderRadius: "50%", backgroundColor: "white" }} />
-                        <TypographyMediumText
+                        </TypographyMediumTitle>
+                        <CheckCircleIcon className="mt-3" color="success" style={{ borderRadius: "50%", backgroundColor: "white" }} 
+                            sx={{
+                                width: "6rem", height: "6rem",
+                                [theme.breakpoints.up('smallMobileSize')]: {
+                                    width: "9rem",
+                                    height: "9rem",
+                                },
+                                [theme.breakpoints.up('mediumMobileSize')]: {
+                                    width: "10rem",
+                                    height: "10rem",
+                                },
+                                [theme.breakpoints.up('defaultWebSize')]: {
+                                    width: "5rem",
+                                    height: "5rem",
+                                },
+                                [theme.breakpoints.up('wideWebSize')]: {
+                                    width: "13rem",
+                                    height: "13rem",
+                                },
+                            }}
+                        />
+                        <TypographySmallTitle
                             sx={{
                                 marginTop: '1.5rem',
                                 marginBottom: '1rem',
+                                fontWeight: "500!important",
                                 [theme.breakpoints.up('defaultWebSize')]: {
                                     color: "white",
+                                    fontWeight: 'bold!important',
                                 },
                             }}
                         >
                             En breve estaremos en contacto contigo.
-                        </TypographyMediumText>
+                        </TypographySmallTitle>
+                        {/* FIN DE CAMBIO: BCMC-130624 */}
                     </Box>
 
                     <Box
@@ -353,7 +415,9 @@ const FormTerminado = () => {
                             },
                             [theme.breakpoints.up('defaultWebSize')]: {
                                 height: "52.5rem",
-                                width: "57.5rem",
+                                // INICIO DE CAMBIO: BCMC-130624
+                                width: "40rem",
+                                // FIN DE CAMBIO: BCMC-130624
                                 // backgroundColor: "red",
                             },
                             [theme.breakpoints.up('smallWebSize')]: {
@@ -361,9 +425,19 @@ const FormTerminado = () => {
                             },
                             [theme.breakpoints.up('mediumWebSize')]: {
                                 height: "60rem",
+                                // INICIO DE CAMBIO: BCMC-130624
+                                width: "45rem"
+                                // FIN DE CAMBIO: BCMC-130624
                             },
                             [theme.breakpoints.up('largeWebSize')]: {
                                 height: "65rem",
+                                // INICIO DE CAMBIO: BCMC-130624
+                                width: "50rem"
+                            },
+                            [theme.breakpoints.up('wideWebSize')]: {
+                                height: "110rem",
+                                width: "140rem"
+                                // FIN DE CAMBIO: BCMC-130624
                             }
                         }}
                     >
@@ -381,6 +455,11 @@ const FormTerminado = () => {
                                 [theme.breakpoints.up('smallWebSize')]: {
                                     fontSize: '2.5rem',
                                 },
+                                // INICIO DE CAMBIO: BCMC-130624
+                                [theme.breakpoints.up('wideWebSize')]: {
+                                    fontSize: '5rem',
+                                }
+                                // FIN DE CAMBIO: BCMC-130624
                             }}
                         >
                             ¡Agradece tu confianza!
@@ -392,7 +471,10 @@ const FormTerminado = () => {
                                 marginBottom: '1rem',
                                 fontWeight: 'bold!important',
                                 [theme.breakpoints.up('defaultWebSize')]: {
-                                    width: "50rem"
+                                    // INICIO DE CAMBIO: BCMC-130624
+                                    width: "50rem",
+                                    fontWeight: '500!important',
+                                    // FIN DE CAMBIO: BCMC-130624
                                 },
                                 [theme.breakpoints.up('smallWebSize')]: {
                                     width: "62rem"
@@ -403,6 +485,11 @@ const FormTerminado = () => {
                                 },
                                 [theme.breakpoints.up('largeWebSize')]: {
                                     width: "85rem"
+                                    // INICIO DE CAMBIO: BCMC-130624
+                                },
+                                [theme.breakpoints.up('wideWebSize')]: {
+                                    width: "140rem"
+                                    // FIN DE CAMBIO: BCMC-130624
                                 }
                             }}
                         >
@@ -415,7 +502,10 @@ const FormTerminado = () => {
                                 marginBottom: '1rem',
                                 fontWeight: 'bold!important',
                                 [theme.breakpoints.up('defaultWebSize')]: {
-                                    width: "50rem"
+                                    // INICIO DE CAMBIO: BCMC-130624
+                                    width: "50rem",
+                                    fontWeight: '500!important',
+                                    // FIN DE CAMBIO: BCMC-130624
                                 },
                                 [theme.breakpoints.up('smallWebSize')]: {
                                     width: "57rem"
@@ -426,6 +516,11 @@ const FormTerminado = () => {
                                 },
                                 [theme.breakpoints.up('largeWebSize')]: {
                                     width: "80rem"
+                                    // INICIO DE CAMBIO: BCMC-130624
+                                },
+                                [theme.breakpoints.up('wideWebSize')]: {
+                                    width: "150rem"
+                                    // FIN DE CAMBIO: BCMC-130624
                                 }
                             }}
                         >
@@ -527,7 +622,10 @@ const FormTerminado = () => {
                                 sx={{
                                     marginTop: '1.5rem',
                                     marginBottom: '1rem',
-                                    fontWeight: 'bold!important'
+                                    // INICIO DE CAMBIO: BCMC-130624
+                                    fontWeight: 'bold!important',
+                                    cursor: "pointer"
+                                    // FIN DE CAMBIO: BCMC-130624
                                 }}
                             >
                                 ¡Chatear ahora!

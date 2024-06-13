@@ -25,6 +25,11 @@
 //                             elementos correspondientes segun el breakpoint         #
 //   --# Marca de cambio     : BCMC-110624                                            #
 //   ---------------------------------------------------------------------------------#-->
+//   --# Autor               : Caleb Martinez Cavazos                                 #
+//   --# Fecha               : 13/06/2024                                             #
+//   --# Modificacion        : Estilos responsivos para textos y cajita amarilla      #
+//   --# Marca de cambio     : BCMC-130624                                            #
+//   ---------------------------------------------------------------------------------#-->
 
 import { Box, Grid, useTheme } from "@mui/material";
 import { ImagenDeFondo, LogoGeoBooker, ImagenDeFondoWeb } from '../../../assets/GeoBooker/Index.js'
@@ -134,7 +139,9 @@ export const GeoBooker = () => {
                         }
                     }}
                 >
-                    <img src={LogoGeoBooker} alt="Logo de GeoBooker" className="w-50 my-4" />
+                    {/* INICIO DE CAMBIO: BCMC-130624 */}
+                    <img src={LogoGeoBooker} alt="Logo de GeoBooker" className="w-50 my-4 py-3" />
+                    {/* FIN DE CAMBIO: BCMC-130624 */}
                 </Box>
 
                 <Grid container
@@ -142,7 +149,17 @@ export const GeoBooker = () => {
                 >
 
                     {/*INICIO CAMBIO GSS-310524*/}
-                    <Grid item defaultMobileSize={12} mt={2} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    {/* INICIO DE CAMBIO: BCMC-130624 */}
+                    <Grid item defaultMobileSize={12} mt={2} 
+                        sx={{ 
+                            display: 'flex', justifyContent: 'center', alignItems: 'center',
+                            [theme.breakpoints.up('defaultWebSize')]: {
+                                marginTop: '3rem',
+                                marginBottom: '1rem'
+                            }
+                        }}
+                    >
+                    {/* FIN DE CAMBIO: BCMC-130624 */}
                         <TypographyLargeText 
                             sx={{ 
                                 color: 'white',
@@ -160,21 +177,51 @@ export const GeoBooker = () => {
                     </Grid>
 
                     <Grid item defaultMobileSize={12} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        {/* INICIO DE CAMBIO: BCMC-130624 */}
                         <TypographySmallTitle 
                             sx={{ 
                                 color: 'white',
                                 [theme.breakpoints.up('defaultWebSize')]: {
                                     color: "black",
                                     fontWeight: "bold",
+                                },
+                                [theme.breakpoints.up('smallWebSize')]: {
+                                    marginTop: '1rem'
+                                },
+                                [theme.breakpoints.up('mediumWebSize')]: {
+                                    marginTop: '1.5rem'
+                                },
+                                [theme.breakpoints.up('largeWebSize')]: {
+                                    marginTop: '2rem'
                                 }
                             }} 
                         >
                             SIN IMPORTAR SU GIRO O TAMAÑO
                         </TypographySmallTitle>
+                        {/* FIN DE CAMBIO: BCMC-130624 */}
                     </Grid>
 
                     <Grid item defaultMobileSize={12} mt='0.5rem' sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <CajitaAmarilla sx={{ width: '18rem', height: '0.7rem' }} />
+                        {/* INICIO CAMBIO: BCMC-130624 */}
+                        <CajitaAmarilla 
+                            sx={{ 
+                                width: '26rem', height: '0.7rem',
+                                [theme.breakpoints.up('defaultWebSize')]: {
+                                    width: '30rem',
+                                },
+                                [theme.breakpoints.up('mediumWebSize')]: {
+                                    width: '34rem',
+                                },
+                                [theme.breakpoints.up('largeWebSize')]: {
+                                    width: '37rem',
+                                },
+                                [theme.breakpoints.up('wideWebSize')]: {
+                                    width: '35rem',
+                                    height: '1.5rem'
+                                }
+                            }} 
+                        />
+                        {/* FIN DE CAMBIO: BCMC-130624 */}
                     </Grid>
                     {/*FIN CAMBIO GSS-310524*/}
 

@@ -18,6 +18,11 @@
 //                             diseño responsivo                                      #
 //   --# Marca de cambio     : BCMC-110624                                            #
 //   ---------------------------------------------------------------------------------#-->
+//   --# Autor               : Caleb Martinez Cavazos                                 #
+//   --# Fecha               : 13/06/2024                                             #
+//   --# Modificacion        : Mejor distrubución y proporción de elementos responsive#
+//   --# Marca de cambio     : BCMC-130624                                            #
+//   ---------------------------------------------------------------------------------#-->
 
 // INICIO DE CAMBIO: BCMC-110624
 import { Grid, Box } from "@mui/material";
@@ -48,8 +53,10 @@ export const QuienesSomos = () => {
                     margin={"0 auto"}
                     sx={{
                         [theme.breakpoints.up('defaultWebSize')]: {
-                            width: "100%",
-                            height: "8rem",
+                            // INICIO DE CAMBIO: BCMC-130624
+                            width: "90%",
+                            height: "9rem",
+                            // FIN DE CAMBIO: BCMC-130624
                             display: "flex",
                             justifyContent: "space-evenly",
                             marginTop: '2rem',
@@ -65,17 +72,29 @@ export const QuienesSomos = () => {
                             width: '100%',
                             paddingLeft: '5rem',
                             paddingRight: '5rem',
+                            // INICIO DE CAMBIO: BCMC-130624
+                            backgroundImage: `url(${LogoAColor})`, 
+                            backgroundRepeat: 'no-repeat',
+                            backgroundSize: 'contain',
+                            backgroundPosition: 'center',
+                            height: '5rem',
+                            [theme.breakpoints.up('smallMobileSize')]: {
+                                height: '7rem',
+                            },
+                            [theme.breakpoints.up('mediumMobileSize')]: {
+                                height: '9rem',
+                            },
+                            // FIN DE CAMBIO: BCMC-130624
                             [theme.breakpoints.up('defaultWebSize')]: {
-                                width: '40rem',
-                                marginTop: "0",
-                                paddingLeft: '0',
-                                paddingRight: '0',
-                                marginLeft: '5rem',
                                 // backgroundColor: "green",
                                 backgroundImage: `url(${LogoAColor})`,
                                 backgroundRepeat: 'no-repeat',
                                 backgroundSize: 'contain',
                                 backgroundPosition: 'center',
+                                //INICIO DE CAMBIO: BCMC-130624
+                                marginTop: '0',
+                                width: '40rem',
+                                // FIN DE CAMBIO: BCMC-130624
                             },
                             [theme.breakpoints.up('smallWebSize')]: {
                                 width: '50rem',
@@ -99,30 +118,52 @@ export const QuienesSomos = () => {
                                 // backgroundColor: "yellow",
                                 height: '100%',
                                 marginTop: "0",
+                                //INICIO DE CAMBIO: BCMC-130624
+                                display: "flex",
+                                // FIN DE CAMBIO: BCMC-130624
                             },
                         }}
                     >
                         <TypographySmallTitle
                             sx={{
                                 [theme.breakpoints.up('defaultMobileSize')]: {
-                                    width: '28rem',
+                                    //INICIO DE CAMBIO: BCMC-130624
+                                    width: '22rem',
+                                    fontSize: "1.75rem",
+                                    // backgroundColor: "red"
+                                    // FIN DE CAMBIO: BCMC-130624
                                 },
                                 [theme.breakpoints.up('smallMobileSize')]: {
                                     width: '37rem',
+                                    //INICIO DE CAMBIO: BCMC-130624
+                                    fontSize: "2.5rem",
+                                    // FIN DE CAMBIO: BCMC-130624
                                 },
                                 [theme.breakpoints.up('mediumMobileSize')]: {
                                     width: '46rem',
+                                    //INICIO DE CAMBIO: BCMC-130624
+                                    fontSize: "3.25rem",
+                                    // FIN DE CAMBIO: BCMC-130624
                                 },
                                 [theme.breakpoints.up('defaultWebSize')]: {
-                                    width: '47rem',
+                                    //INICIO DE CAMBIO: BCMC-130624
                                     fontWeight: "bold",
+                                    // backgroundColor: "red",
+                                    textAlign: "right",
+                                    width: "100%",
+                                    fontSize: "1.8rem",
+                                    marginTop: "1rem",
+                                },
+                                [theme.breakpoints.up('smallWebSize')]: {
+                                    fontSize: "2.3rem",
                                 },
                                 [theme.breakpoints.up('mediumWebSize')]: {
-                                    width: '50rem',
+                                    fontSize: "2.8rem",
                                 },
                                 [theme.breakpoints.up('largeWebSize')]: {
-                                    width: '55rem',
+                                    fontSize: "3.3rem",
                                 }
+                                    // FIN DE CAMBIO: BCMC-130624
                             }}
                         >
                             ¡Será tu aliado en el crecimiento de tu negocio!
@@ -142,7 +183,9 @@ export const QuienesSomos = () => {
                     className="w-100"
                 >
                     {/* INICIO CAMBIO GSS-050624 */}
-                    <Grid item mt='3rem'
+                        {/* INICIO DE CAMBIO: BCMC-130624 */}
+                    <Grid item mt='2rem'
+                        //FIN DE CAMBIO: BCMC-130624 
                         sx={{
                             position: 'relative', display: 'flex', justifyContent: 'flex-end', paddingTop: '1rem', overflow: 'hidden', width: "100%",
                             [theme.breakpoints.up('defaultWebSize')]: {
@@ -152,21 +195,49 @@ export const QuienesSomos = () => {
                             [theme.breakpoints.up('mediumWebSize')]: {
                                 height: "23rem",
                                 width: "50rem",
-                            }
+                                // INICIO DE CAMBIO: BCMC-130624
+                            },
+                            [theme.breakpoints.up('wideWebSize')]: {
+                                height: "40rem",
+                                width: "90rem",
+                            },
+                                // FIN DE CAMBIO: BCMC-130624
                         }}>
                         <CajitaAmarilla sx={{
                             position: 'absolute',
                             top: '0.6rem', // Ajusta este valor según sea necesario
                             right: '0', // Asegura que la caja esté alineada a la derecha 
-                            width: anchoDeLasCajitasAmarillas
+                            // INICIO DE CAMBIO: BCMC-130624
+                            width: anchoDeLasCajitasAmarillas,
+                            [theme.breakpoints.up('smallMobileSize')]: {
+                                width: '15rem',
+                                height: '1.5rem',
+                                borderRadius: "1rem"
+                            },
+                            [theme.breakpoints.up('mediumMobileSize')]: {
+                                width: '20rem',
+                            },
+                            [theme.breakpoints.up('defaultWebSize')]: {
+                                width: '9rem',
+                                height: '1.5rem'
+                            },
+                            [theme.breakpoints.up('wideWebSize')]: {
+                                width: '16rem',
+                                height: '2.75rem'
+                            }
+                            // FIN DE CAMBIO: BCMC-130624
                         }}
                             animacionDeAnimateCss='animate__fadeInRight'
                         />
 
                         <Box
+                            // INICIO DE CAMBIO: BCMC-130624
                             sx={{
-
+                                [theme.breakpoints.up('wideWebSize')]: {
+                                    
+                                }
                             }}
+                            // FIN DE CAMBIO: BCMC-130624
                         >
                             <img
                                 src={ImagenDe4Personas}
@@ -226,7 +297,11 @@ export const QuienesSomos = () => {
                                     },
                                     [theme.breakpoints.up('largeWebSize')]: {
                                         width: '85rem',
-
+                                        // INICIO DE CAMBIO: BCMC-130624
+                                    },
+                                    [theme.breakpoints.up('wideWebSize')]: {
+                                        width: '150rem',
+                                        // FIN DE CAMBIO: BCMC-130624
                                     }
                                 }}
                             >
@@ -245,7 +320,27 @@ export const QuienesSomos = () => {
                 {/* INICIO CAMBIO GSS-050624 */}
                 <Grid item mt='2rem' defaultMobileSize={12} sx={{ display: 'flex', justifyContent: 'flex-end', overflow: 'hidden' }}>
                     <CajitaAmarilla
-                        sx={{ width: anchoDeLasCajitasAmarillas }}
+                        // INICIO DE CAMBIO: BCMC-130624
+                        sx={{ 
+                            width: anchoDeLasCajitasAmarillas,
+                            [theme.breakpoints.up('smallMobileSize')]: {
+                                width: '15rem',
+                                height: '1.5rem',
+                                borderRadius: "1rem"
+                            },
+                            [theme.breakpoints.up('mediumMobileSize')]: {
+                                width: '20rem',
+                            },
+                            [theme.breakpoints.up('defaultWebSize')]: {
+                                width: '9rem',
+                                height: '1.5rem'
+                            },
+                            [theme.breakpoints.up('wideWebSize')]: {
+                                width: '16rem',
+                                height: '2.75rem'
+                            }
+                        }}
+                        // FIN DE CAMBIO: BCMC-130624
                         animacionDeAnimateCss='animate__fadeInRight'
                     />
                 </Grid>
@@ -266,12 +361,16 @@ export const QuienesSomos = () => {
                     }}
                 >
                     <Box
+                        // INICIO DE CAMBIO: BCMC-130624
                         sx={{
-                            [theme.breakpoints.up('defaultWebSize')]: {
-
+                            [theme.breakpoints.up('wideWebSize')]: {
+                                // backgroundColor: "red",
+                                width: "90rem"
+                        // FIN DE CAMBIO: BCMC-130624
                             },
                         }}
                     >
+                        {/* INICIO DE CAMBIO: BCMC-130624*/}
                         <Grid item
                             sx={{
                                 ...estiloCentrado,
@@ -283,14 +382,33 @@ export const QuienesSomos = () => {
                                 [theme.breakpoints.up('smallWebSize')]: {
                                     paddingRight: "7rem",
                                 },
+                                [theme.breakpoints.up('wideWebSize')]: {
+                                    paddingRight: "0rem",
+                                },
                             }}
                         >
-                            <img
-                                height='180rem'
-                                width='210rem'
-                                src={GifDeUbicacion}
-                            />
+                            <Box
+                                sx={{
+                                    height: "18rem",
+                                    width: "21rem",
+                                    [theme.breakpoints.up('smallWebSize')]: {
+                                        height: "23rem",
+                                        width: "26rem",
+                                    },
+                                    [theme.breakpoints.up('wideWebSize')]: {
+                                        height: "40rem",
+                                        width: "45rem",
+                                    }
+                                }}
+                            >
+                                <img
+                                    height='100%'
+                                    width='100%'
+                                    src={GifDeUbicacion}
+                                />
+                            </Box>
                         </Grid>
+                        {/* FIN DE CAMBIO: BCMC-130624*/}
                         {/* INICIO CAMBIO GSS-050624 */}
                         <Grid item mt='1rem' defaultMobileSize={12}
                             sx={{
@@ -300,8 +418,28 @@ export const QuienesSomos = () => {
                             <CajitaAmarilla
                                 sx={{
                                     width: anchoDeLasCajitasAmarillas,
+                                    // INICIO DE CAMBIO: BCMC-130624
+                                    [theme.breakpoints.up('smallMobileSize')]: {
+                                        width: '15rem',
+                                        height: '1.5rem',
+                                        borderRadius: "1rem"
+                                    },
+                                    [theme.breakpoints.up('mediumMobileSize')]: {
+                                        width: '20rem',
+                                    },
+                                    [theme.breakpoints.up('defaultWebSize')]: {
+                                        width: '9rem',
+                                        height: '1.5rem'
+                                    },
+                                    // FIN DE CAMBIO: BCMC-130624
                                     [theme.breakpoints.up('mediumWebSize')]: {
                                         marginTop: "2rem"
+                                        // INICIO DE CAMBIO: BCMC-130624
+                                    },
+                                    [theme.breakpoints.up('wideWebSize')]: {
+                                        width: '16rem',
+                                        height: '2.75rem'
+                                        // FIN DE CAMBIO: BCMC-130624
                                     }
                                 }}
                                 animacionDeAnimateCss='animate__fadeInLeft'
@@ -331,16 +469,28 @@ export const QuienesSomos = () => {
                                 ¡Llegas justo a tiempo!
                             </TypographyMediumTitle>
                         </Grid>
+                        {/* INICIO DE CAMBIO: BCMC-130624 */}
                         <Grid mt='1rem' item defaultMobileSize={12}
                             sx={{
                                 ...estiloCentrado,
                                 [theme.breakpoints.up('defaultWebSize')]: {
                                     marginBottom: '1.5rem',
-                                }
+                                },
                             }}
                         >
-                            <AccessTimeFilledIcon sx={{ fontSize: '3rem' }} />
+                            <AccessTimeFilledIcon 
+                                sx={{ 
+                                    fontSize: '3rem',
+                                    [theme.breakpoints.up('smallWebSize')]: {
+                                        fontSize: '4rem',
+                                    },
+                                    [theme.breakpoints.up('wideWebSize')]: {
+                                        fontSize: "7rem"
+                                    }
+                                }} 
+                            />
                         </Grid>
+                        {/* FIN DE CAMBIO: BCMC-130624 */}
                         <Grid mt='1rem' mb='1rem' item
                             sx={{
                                 ...estiloCentrado, paddingLeft: '2rem', paddingRight: '2rem', margin: "0 auto",
@@ -373,6 +523,11 @@ export const QuienesSomos = () => {
                                     },
                                     [theme.breakpoints.up('largeWebSize')]: {
                                         width: '75rem',
+                                        // INICIO DE CAMBIO: BCMC-130624
+                                    },
+                                    [theme.breakpoints.up('wideWebSize')]: {
+                                        width: '140rem',
+                                        // FIN DE CAMBIO: BCMC-130624
                                     }
                                 }}
                             >

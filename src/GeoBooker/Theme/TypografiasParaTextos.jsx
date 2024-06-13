@@ -18,6 +18,12 @@
 //   --# Modificacion        : Se agregaron tamaños de fuente para tipografias        #
 //   --# Marca de cambio     : BCMC-110624                                             #
 //   ---------------------------------------------------------------------------------#-->
+// <!--################################################################################
+//   --# Autor               : Caleb Martinez Cavazos                                 #
+//   --# Fecha               : 13/06/2024                                             #
+//   --# Modificacion        : Fuentes para breakpoints ultraanchos                   #
+//   --# Marca de cambio     : BCMC-130624                                            #
+//   ---------------------------------------------------------------------------------#-->
 
 import {Typography, useMediaQuery, useTheme} from "@mui/material";
 import PropTypes from "prop-types";
@@ -46,7 +52,9 @@ const TypographyTextSizes = {
         mediumWebSize: "2rem",
         largeWebSize: "2.2rem",
         // FIN DE CAMBIO: BCMC-110624
-        wideWebSize: ""
+        // INICIO DE CAMBIO: BCMC-130624
+        wideWebSize: "4rem"
+        // FIN DE CAMBIO: BCMC-130624
     },
     largeText: {
         defaultMobileSize: '1.5rem',
@@ -57,7 +65,9 @@ const TypographyTextSizes = {
         smallWebSize: "2rem",
         mediumWebSize: "2.25rem",
         largeWebSize: "2.5rem",
-        wideWebSize: "3rem"
+            // INICIO DE CAMBIO: BCMC-130624
+        wideWebSize: "5rem"
+            // FIN DE CAMBIO: BCMC-130624
         // FIN DE CAMBIO: BCMC-110624
     },
 }

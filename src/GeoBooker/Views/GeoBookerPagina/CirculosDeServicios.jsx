@@ -17,6 +17,11 @@
 //   --# Modificacion        : Estilos responsivos para los circulos                  #
 //   --# Marca de cambio     : BCMC-110624                                            #
 //   ---------------------------------------------------------------------------------#-->
+//   --# Autor               : Caleb Martinez Cavazos                                 #
+//   --# Fecha               : 13/06/2024                                             #
+//   --# Modificacion        : Mejor distrubución y proporción de elementos responsive#
+//   --# Marca de cambio     : BCMC-130624                                            #
+//   ---------------------------------------------------------------------------------#-->
 
 /**
  * Este componente despliega los 9 circulos de servicios en la pagina de GeoBooker
@@ -55,14 +60,20 @@ export const CirculosDeServicios = () => {
     return (
     <>
         {/* INICIO CAMBIO BCMC-110624 */}
-        <Grid container
+            {/* INICIO DE CAMBIO: BCMC-130624 */}
+        <Grid container 
               justifyContent='center'
               sx={{
                   [theme.breakpoints.up('defaultWebSize')]: {
                     //   backgroundColor: "red",
-                  }
+                    rowGap: "2rem",
+                  },
+                    [theme.breakpoints.up('mediumWebSize')]: {
+                        rowGap: "4rem",
+                    },
               }}
         >
+            {/* FIN DE CAMBIO: BCMC-130624 */}
         {/* FIN DE CAMBION BCMC-110624 */}
             {
                 ListaDeServicios.map(item =>
@@ -110,6 +121,12 @@ export const CirculosDeServicios = () => {
                                         width: "12rem",
                                         height: "12rem",
                                     },
+                                    // INICIO DE CAMBIO: BCMC-130624
+                                    [theme.breakpoints.up('wideWebSize')]: {
+                                        width: "18rem",
+                                        height: "18rem",
+                                    }
+                                    // FIN DE CAMBIO: BCMC-130624
                                 }}
                             >
                                 <img
@@ -149,6 +166,11 @@ export const CirculosDeServicios = () => {
                                     [theme.breakpoints.up('mediumWebSize')]: {
                                         width: '15rem',
                                     },
+                                    // INICIO DE CAMBIO: BCMC-130624
+                                    [theme.breakpoints.up('wideWebSize')]: {
+                                        width: '23rem',
+                                    }
+                                    // FIN DE CAMBIO: BCMC-130624
                                 // FIN DE CAMBIO: BCMC-110624
                                 }}
                             >
@@ -171,6 +193,11 @@ export const CirculosDeServicios = () => {
                                                 [theme.breakpoints.up('mediumWebSize')]: {
                                                     fontSize: "2rem",
                                                 },
+                                                // INICIO DE CAMBIO: BCMC-130624
+                                                [theme.breakpoints.up('wideWebSize')]: {
+                                                    fontSize: "3rem",
+                                                }
+                                                // FIN DE CAMBIO: BCMC-130624
                                                     // FIN DE CAMBIO: BCMC-110624
                                             }}
                                         >
