@@ -14,62 +14,85 @@
 //   ---------------------------------------------------------------------------------#-->
 //   --# Autor               : Gandhi Soto Sanchez                                    #
 //   --# Fecha               : 11/06/2024                                             #
-//   --# Modificacion        : Se reestructuró el componente en componente mas chicos #
+//   --# Modificacion        : Se reestructuró el componente en componentes mas chicos #
 //   --# Marca de cambio     : GSS-110624                                             #
 //   ---------------------------------------------------------------------------------#-->
+//   --# Autor               : Gandhi Soto Sanchez                                    #
+//   --# Fecha               : 13/06/2024                                             #
+//   --# Modificacion        : Se agrego labels para cada textfield                   #
+//   --# Marca de cambio     : GSS-130624                                             #
+//   ---------------------------------------------------------------------------------#-->
 // INICIO DE CAMBIO: GSS-110624
-import { useState, useContext } from 'react'
+import {useState, useContext} from 'react'
 // FIN DE CAMBIO: GSS-110624
-import { TextField, Stack, MenuItem, Checkbox, Button, Grid, InputAdornment, useTheme, Box } from '@mui/material';
+
+// INICIO DE CAMBIO: GSS-130624
+import {
+    TextField,
+    MenuItem,
+    Checkbox,
+    Button,
+    Grid,
+    InputAdornment,
+    useTheme,
+    Box,
+    InputLabel
+} from '@mui/material';
+// FIN DE CAMBIO: GSS-130624
+
 import UseFormulario from '../../Hooks/UseFormulario';
-import { Link } from 'react-router-dom';
-import { FormContext } from '../../Context/Index.js';
+import {Link} from 'react-router-dom';
+import {BreakpointsContext, FormContext} from '../../Context/Index.js';
 import BanderaDeMexico from "../../../assets/UnSoloUso/BanderaDeMexico.svg";
-import { TypographySmallText, TypographyMediumText, TypographyLargeText } from '../../Theme/TypografiasParaTextos';
-import { TypographySmallTitle, TypographyMediumTitle, TypographyLargeTitle } from '../../Theme/TypografiasParaTitulos';
+import {
+    TypographySmallText,
+    TypographyMediumText,
+    TypographySmallTitle,
+    TypographyMediumTitle
+} from '../../Theme/index.js';
 // INICIO CAMBIO GSS-110624
-import { ModalContext } from '../../Context/Index.js';
+import {ModalContext} from '../../Context/Index.js';
 // FIN CAMBIO GSS-110624
+
+const sxParaLosTypographyDeLosInputLabels = {
+    textAlign: 'start',
+    marginLeft: '1rem',
+}
+const overrideSizesParaLosTypographyDeLosInputLabels = {
+    defaultMobileSize: '1.5rem',
+    smallMobileSize: '1.8rem',
+    mediumMobileSize: '2.25rem',
+    defaultWebSize: '2.25rem',
+    smallWebSize: '2.25rem',
+    mediumWebSize: '2.5rem',
+    largeWebSize: '2.5rem',
+    wideWebSize: '2.5rem'
+}
 
 // INICIO CAMBIO GSS-110624
 function Formulario() {
 
-    const theme = useTheme();
     // INICIO CAMBIO GSS-110624
     const variablesDeFormulario = UseFormulario()
     // FIN CAMBIO GSS-110624
 
     return (
         <>
-            <QueremosConocerte />
+            <QueremosConocerte/>
 
+            {/* INICIO CAMBIO GSS-130624 */}
             <Box className="bg-dark pt-3 bg-opacity-25 pb-5 d-flex justify-content-center">
-                <Box className='mx-4 bg-light rounded px-4 pb-4'
-                    sx={{
-                        [theme.breakpoints.up('defaultMobileSize')]: {
-                            width: "29rem",
-                        },
-                        [theme.breakpoints.up('smallMobileSize')]: {
-                            width: "43.5rem",
-                        },
-                        [theme.breakpoints.up('mediumMobileSize')]: {
-                            width: "54.375rem",
-                        },
-                        [theme.breakpoints.up('defaultWebSize')]: {
-                            width: "72rem",
-                            marginTop: "2rem",
-                        }
-                    }}
-                >
 
+                <Grid container defaultMobileSize={11} className='mx-4 bg-light rounded px-4 pb-4'>
                     <PreRegistro {...variablesDeFormulario} />
 
                     <UbicacionYContacto {...variablesDeFormulario} />
 
                     <Manifiesto {...variablesDeFormulario} />
-
-                </Box>
+                </Grid>
             </Box>
+            {/* INICIO CAMBIO GSS-130624 */}
+
         </>
     )
 }
@@ -81,7 +104,7 @@ export default Formulario
 // INICIO CAMBIO: GSS-110624
 const QueremosConocerte = () => {
 
-    const { formReferencia } = useContext(FormContext);
+    const {formReferencia} = useContext(FormContext);
     const theme = useTheme();
 
     return (
@@ -106,7 +129,7 @@ const QueremosConocerte = () => {
                     }}
                 >
                     Registra <span className="fw-bold">YA</span> tu negocio de forma <span
-                        className="fw-bold">GRATUITA</span>.
+                    className="fw-bold">GRATUITA</span>.
                 </TypographySmallTitle>
 
                 <TypographySmallTitle
@@ -157,9 +180,16 @@ const PreRegistro = (props) => {
         subservicioTocado,
         subservicioValido
     } = props;
+    const {
+        theme,
+        isUpDefaultWebSize
+    } = useContext(BreakpointsContext);
 
-    const theme = useTheme();
+    const sxParaLosInputLabels = {
+        marginBottom: isUpDefaultWebSize ? '-1rem' : '-0.5rem'
+    }
 
+    // INICIO CAMBIO GSS-130624
     return (
         <Grid defaultMobileSize={12} defaultWebSize={12} container spacing={1}>
             <Grid item defaultMobileSize={12} defaultWebSize={12}>
@@ -179,68 +209,84 @@ const PreRegistro = (props) => {
             </Grid>
 
             <Grid item defaultMobileSize={12} defaultWebSize={4}>
+                <InputLabel shrink htmlFor='nombre' sx={sxParaLosInputLabels}>
+                    <TypographySmallText
+                        sx={sxParaLosTypographyDeLosInputLabels}
+                        overrideSizes={overrideSizesParaLosTypographyDeLosInputLabels}
+                    >
+                        Nombre(s)
+                    </TypographySmallText>
+                </InputLabel>
                 <TextField
+                    label="Agregue su nombre(s)"
+                    id='nombre'
                     fullWidth
-                    id="outlined-basic"
-                    label="Nombre(s)"
                     variant="filled"
                     onInput={handleNombre}
                     value={nombre}
                     error={nombreTocado && !nombreValido}
                     helperText={nombreTocado && !nombreValido ? '*Por favor, completa este campo' : ' '}
-                    inputProps={{ maxLength: 20 }}
-                    sx={{
-                        [theme.breakpoints.up('smallMobileSize')]: {
-                            fontSize: "1.8rem",
-                        },
-                        [theme.breakpoints.up('mediumMobileSize')]: {
-                            fontSize: "2.25rem",
-                        },
-                        [theme.breakpoints.up('defaultWebSize')]: {
-                            paddingRight: "0.5rem"
-                        }
-                    }}
+                    inputProps={{maxLength: 20}}
                 />
             </Grid>
 
             <Grid item defaultMobileSize={6} defaultWebSize={4}>
+                <InputLabel shrink htmlFor='apellido-paterno' sx={sxParaLosInputLabels}>
+                    <TypographySmallText
+                        sx={sxParaLosTypographyDeLosInputLabels}
+                        overrideSizes={overrideSizesParaLosTypographyDeLosInputLabels}
+                    >
+                        Apellido Paterno
+                    </TypographySmallText>
+                </InputLabel>
                 <TextField
                     fullWidth
-                    id="outlined-basic"
-                    label="Apellido Paterno"
+                    id="apellido-paterno"
+                    label="Agregue su apellido paterno"
                     variant="filled"
                     onInput={handleApellidoPaterno}
                     value={apellidoPaterno}
                     error={apellidoPaternoTocado && !apellidoPaternoValido}
                     helperText={apellidoPaternoTocado && !apellidoPaternoValido ? '*Por favor, completa este campo' : ' '}
-                    inputProps={{ maxLength: 20 }}
-                    sx={{
-                        [theme.breakpoints.up('defaultWebSize')]: {
-                            paddingRight: "1rem"
-                        }
-                    }}
+                    inputProps={{maxLength: 20}}
                 />
             </Grid>
 
             <Grid item defaultMobileSize={6} defaultWebSize={4}>
+                <InputLabel shrink htmlFor='apellido-materno' sx={sxParaLosInputLabels}>
+                    <TypographySmallText
+                        sx={sxParaLosTypographyDeLosInputLabels}
+                        overrideSizes={overrideSizesParaLosTypographyDeLosInputLabels}
+                    >
+                        Apellido Materno
+                    </TypographySmallText>
+                </InputLabel>
                 <TextField
                     fullWidth
-                    id="outlined-basic"
-                    label="Apellido Materno"
+                    id="apellido-materno"
+                    label='Agregue su apellido materno'
                     variant="filled"
                     onChange={handleApellidoMaterno}
                     value={apellidoMaterno}
                     error={apellidoMaternoTocado && !apellidoMaternoValido}
                     helperText={apellidoMaternoTocado && !apellidoMaternoValido ? '*Por favor, completa este campo' : ' '}
-                    inputProps={{ maxLength: 20 }}
+                    inputProps={{maxLength: 20}}
                 />
             </Grid>
 
             <Grid item defaultMobileSize={6} defaultWebSize={4}>
+                <InputLabel shrink htmlFor='genero' sx={sxParaLosInputLabels}>
+                    <TypographySmallText
+                        sx={sxParaLosTypographyDeLosInputLabels}
+                        overrideSizes={overrideSizesParaLosTypographyDeLosInputLabels}
+                    >
+                        Género
+                    </TypographySmallText>
+                </InputLabel>
                 <TextField
-                    id="outlined-basic"
+                    id="genero"
                     select
-                    label="Género"
+                    label="Seleccione su género"
                     value={genero}
                     onChange={handleGenero}
                     helperText={generoTocado && !generoValido ? '*Por favor, selecciona una opción' : ' '}
@@ -256,96 +302,104 @@ const PreRegistro = (props) => {
                 </TextField>
             </Grid>
 
-            <Grid item defaultWebSize={8} /> { /* No se como esto funciona */}
+            <Grid item defaultWebSize={8}/> { /* No se como esto funciona */}
 
-            <Grid
-                item defaultMobileSize={12}
-                defaultWebSize={12}
-                container spacing={2} sx={{
-                    display: 'flex',
-                    alignItems: 'flex-end',
-                }}>
-                <Grid item defaultMobileSize={12} defaultWebSize={4}>
-                    <TextField
-                        fullWidth
-                        id="outlined-basic"
-                        label="Nombre del negocio a registrar"
-                        value={nombreNegocio}
-                        onChange={handleNombreNegocio}
-                        helperText={nombreNegocioTocado && !nombreNegocioValido ? '*Por favor, completa este campo' : ''}
-                        error={nombreNegocioTocado && !nombreNegocioValido}
-                        variant="filled"
-                        inputProps={{ maxLength: 20 }}
-                    />
-                </Grid>
-
-                <Grid item defaultMobileSize={6} defaultWebSize={4}>
-                    <Grid container direction="column">
-                        <Grid item>
-                            <TypographyMediumText
-                                sx={{
-                                    marginTop: "1rem",
-                                    marginBottom: "1rem",
-                                    textAlign: "left",
-                                    display: 'inline-block', // Añadido
-                                    verticalAlign: 'middle', // Añadido
-                                }}
-                            >
-                                ¿Qué servicio ofertas?
-                            </TypographyMediumText>
-                        </Grid>
-
-                        <Grid item>
-                            <TextField
-                                fullWidth
-                                id="outlined-select-servicio"
-                                select
-                                label="Categoría"
-                                value={servicio}
-                                onChange={handleServicio}
-                                helperText={servicioTocado && !servicioValido ? '*Por favor, selecciona una opción' : ''}
-                                error={servicioTocado && !servicioValido}
-                                variant="filled"
-                                sx={{
-                                    verticalAlign: 'middle', // Añadido
-                                }}
-                            >
-                                {categorias.map((option) => (
-                                    <MenuItem key={option.value} value={option.value}>
-                                        {option.label}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
-                        </Grid>
-                    </Grid>
-                </Grid>
-
-                <Grid item defaultMobileSize={6} defaultWebSize={4}>
-                    <TextField
-                        id="outlined-select-subservicio"
-                        select
-                        label="Servicio"
-                        value={subservicio}
-                        onChange={handleSubservicio}
-                        helperText={subservicioTocado && !subservicioValido ? '*Por favor, selecciona una opción' : ''}
-                        error={subservicioTocado && !subservicioValido}
-                        variant="filled"
-                        className='w-100'
+            <Grid item defaultMobileSize={12} defaultWebSize={4}>
+                <InputLabel shrink htmlFor='nombre-del-negocio' sx={sxParaLosInputLabels}>
+                    <TypographySmallText
+                        sx={sxParaLosTypographyDeLosInputLabels}
+                        overrideSizes={overrideSizesParaLosTypographyDeLosInputLabels}
                     >
-                        {subservicios.map((option) => (
-                            <MenuItem key={option.value} value={option.value}>
-                                {option.label}
-                            </MenuItem>
-                        ))}
-                    </TextField>
-                </Grid>
+                        Nombre del negocio a registrar
+                    </TypographySmallText>
+                </InputLabel>
+                <TextField
+                    fullWidth
+                    id="nombre-del-negocio"
+                    label="Nombre del negocio"
+                    value={nombreNegocio}
+                    onChange={handleNombreNegocio}
+                    helperText={nombreNegocioTocado && !nombreNegocioValido ? '*Por favor, completa este campo' : ' '}
+                    error={nombreNegocioTocado && !nombreNegocioValido}
+                    variant="filled"
+                    inputProps={{maxLength: 20}}
+                />
             </Grid>
+
+            <Grid item defaultMobileSize={6} defaultWebSize={4}>
+                <InputLabel shrink htmlFor='categoria' sx={sxParaLosInputLabels}>
+                    <TypographySmallText
+                        sx={sxParaLosTypographyDeLosInputLabels}
+                        overrideSizes={overrideSizesParaLosTypographyDeLosInputLabels}
+                    >
+                        ¿Qué servicio ofertas?
+                    </TypographySmallText>
+                </InputLabel>
+                <TextField
+                    fullWidth
+                    id="categoria"
+                    select
+                    label="Seleccione la categoria"
+                    value={servicio}
+                    onChange={handleServicio}
+                    helperText={servicioTocado && !servicioValido ? '*Por favor, selecciona una opción' : ' '}
+                    error={servicioTocado && !servicioValido}
+                    variant="filled"
+                    sx={{
+                        verticalAlign: 'middle', // Añadido
+                    }}
+                >
+                    {categorias.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                            {option.label}
+                        </MenuItem>
+                    ))}
+                </TextField>
+            </Grid>
+
+            <Grid item defaultMobileSize={6} defaultWebSize={4}>
+                <InputLabel shrink htmlFor='servicio' sx={sxParaLosInputLabels}>
+                    <TypographySmallText
+                        sx={sxParaLosTypographyDeLosInputLabels}
+                        overrideSizes={overrideSizesParaLosTypographyDeLosInputLabels}
+                    >
+                        &nbsp;
+                    </TypographySmallText>
+                </InputLabel>
+                <TextField
+                    id="servicio"
+                    select
+                    label="Seleccione el servicio"
+                    value={subservicio}
+                    onChange={handleSubservicio}
+                    helperText={subservicioTocado && !subservicioValido ? '*Por favor, selecciona una opción' : ' '}
+                    error={subservicioTocado && !subservicioValido}
+                    variant="filled"
+                    fullWidth
+                >
+                    {subservicios.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                            {option.label}
+                        </MenuItem>
+                    ))}
+                </TextField>
+            </Grid>
+
         </Grid>
     )
+    // FIN CAMBIO GSS-130624
 }
 
 const UbicacionYContacto = (props) => {
-    const theme = useTheme();
+    const {
+        theme,
+        isUpDefaultWebSize
+    } = useContext(BreakpointsContext);
+
+    const sxParaLosInputLabels = {
+        marginBottom: isUpDefaultWebSize ? '-1rem' : '-0.5rem'
+    }
+
     const {
         codigoPostal,
         handleCodigoPostal,
@@ -387,25 +441,39 @@ const UbicacionYContacto = (props) => {
             }
         )
     );
+    // INICIO CAMBIO GSS-130624
     return (
         <>
             <Grid container defaultMobileSize={12} defaultWebSize={12} spacing={1}>
                 <Grid item defaultMobileSize={12} defaultWebSize={12}>
-                    <TypographyMediumText
+                    <TypographySmallTitle
                         sx={{
                             marginTop: "1rem",
-                            textAlign: "left",
                             marginBottom: "1rem",
-                            [theme.breakpoints.up('defaultWebSize')]: {
-                                textAlign: "center",
+                            [theme.breakpoints.down('defaultWebSize')]: {
+                                textAlign: "left",
                             }
+                        }}
+                        overrideSizes={{
+                            smallMobileSize: '1.5rem',
+                            mediumMobileSize: '1.5rem',
+                            defaultWebSize: '2rem',
                         }}
                     >
                         Ubicación y contacto de tu negocio
-                    </TypographyMediumText>
+                    </TypographySmallTitle>
                 </Grid>
 
                 <Grid item defaultMobileSize={6} defaultWebSize={4}>
+                    <InputLabel shrink htmlFor='codigo-postal' sx={sxParaLosInputLabels}>
+                        <TypographySmallText
+                            sx={sxParaLosTypographyDeLosInputLabels}
+                            overrideSizes={overrideSizesParaLosTypographyDeLosInputLabels}
+                        >
+                            Código Postal
+                        </TypographySmallText>
+                    </InputLabel>
+
                     <TextField
                         fullWidth
                         id="codigo-postal"
@@ -421,10 +489,18 @@ const UbicacionYContacto = (props) => {
                 </Grid>
 
                 <Grid item defaultMobileSize={6} defaultWebSize={4}>
+                    <InputLabel shrink htmlFor='estado' sx={sxParaLosInputLabels}>
+                        <TypographySmallText
+                            sx={sxParaLosTypographyDeLosInputLabels}
+                            overrideSizes={overrideSizesParaLosTypographyDeLosInputLabels}
+                        >
+                            Estado
+                        </TypographySmallText>
+                    </InputLabel>
+
                     <TextField
                         fullWidth
                         id="estado"
-                        label="Estado"
                         variant="filled"
                         value={estado}
                         helperText=" "
@@ -434,29 +510,46 @@ const UbicacionYContacto = (props) => {
                 </Grid>
 
                 <Grid item defaultMobileSize={6} defaultWebSize={4}>
+                    <InputLabel shrink htmlFor='municipio' sx={sxParaLosInputLabels}>
+                        <TypographySmallText
+                            sx={sxParaLosTypographyDeLosInputLabels}
+                            overrideSizes={overrideSizesParaLosTypographyDeLosInputLabels}
+                        >
+                            Municipio
+                        </TypographySmallText>
+                    </InputLabel>
+
                     <TextField
                         id="municipio"
-                        label="Municipio"
                         variant="filled"
                         value={municipio}
                         helperText=" "
                         disabled
-                        className='w-100'
+                        fullWidth
                     />
                 </Grid>
 
                 <Grid item defaultMobileSize={6} defaultWebSize={4}>
+                    <InputLabel shrink htmlFor='colonia' sx={sxParaLosInputLabels}>
+                        <TypographySmallText
+                            sx={sxParaLosTypographyDeLosInputLabels}
+                            overrideSizes={overrideSizesParaLosTypographyDeLosInputLabels}
+                        >
+                            Colonia
+                        </TypographySmallText>
+                    </InputLabel>
+
+                    {/*aumentar el height de este componente*/}
                     <TextField
                         select
                         id="colonia"
-                        label="Colonia"
+                        label="Seleccione su colonia"
                         variant="filled"
                         value={colonia}
                         fullWidth
                         onChange={handleColonia}
-                        helperText={coloniaTocada && !coloniaValida ? '*Por favor, selecciona una opción' : ''}
+                        helperText={coloniaTocada && !coloniaValida ? '*Por favor, selecciona una opción' : ' '}
                         error={coloniaTocada && !coloniaValida}
-                        className='w-100'
                     >
                         {
                             selectColonias.map((option) =>
@@ -471,10 +564,19 @@ const UbicacionYContacto = (props) => {
                 </Grid>
 
                 <Grid item defaultMobileSize={6} defaultWebSize={4}>
+                    <InputLabel shrink htmlFor='calle' sx={sxParaLosInputLabels}>
+                        <TypographySmallText
+                            sx={sxParaLosTypographyDeLosInputLabels}
+                            overrideSizes={overrideSizesParaLosTypographyDeLosInputLabels}
+                        >
+                            Calle
+                        </TypographySmallText>
+                    </InputLabel>
+
                     <TextField
                         fullWidth
-                        id="outlined-basic"
-                        label="Calle"
+                        id="calle"
+                        label="Escriba su calle"
                         variant="filled"
                         value={calle}
                         onChange={handleCalle}
@@ -485,10 +587,19 @@ const UbicacionYContacto = (props) => {
                 </Grid>
 
                 <Grid item defaultMobileSize={6} defaultWebSize={4}>
+                    <InputLabel shrink htmlFor='numero' sx={sxParaLosInputLabels}>
+                        <TypographySmallText
+                            sx={sxParaLosTypographyDeLosInputLabels}
+                            overrideSizes={overrideSizesParaLosTypographyDeLosInputLabels}
+                        >
+                            Número
+                        </TypographySmallText>
+                    </InputLabel>
+
                     <TextField
                         fullWidth
-                        id="outlined-basic"
-                        label="Número"
+                        id="numero"
+                        label="##"
                         value={numero}
                         onChange={handleNumero}
                         helperText={numeroTocado && !numeroValido ? '*Por favor, completa este campo' : ' '}
@@ -499,6 +610,14 @@ const UbicacionYContacto = (props) => {
                 </Grid>
 
                 <Grid item defaultMobileSize={4} defaultWebSize={2}>
+                    <InputLabel shrink htmlFor='numero' sx={sxParaLosInputLabels}>
+                        <TypographySmallText
+                            sx={sxParaLosTypographyDeLosInputLabels}
+                            overrideSizes={overrideSizesParaLosTypographyDeLosInputLabels}
+                        >
+                            &nbsp;
+                        </TypographySmallText>
+                    </InputLabel>
                     <TextField
                         fullWidth
                         id="outlined-helperText"
@@ -518,10 +637,18 @@ const UbicacionYContacto = (props) => {
                 </Grid>
 
                 <Grid item defaultMobileSize={8} defaultWebSize={5}>
+                    <InputLabel shrink htmlFor='numero' sx={sxParaLosInputLabels}>
+                        <TypographySmallText
+                            sx={sxParaLosTypographyDeLosInputLabels}
+                            overrideSizes={overrideSizesParaLosTypographyDeLosInputLabels}
+                        >
+                            Número de Teléfono
+                        </TypographySmallText>
+                    </InputLabel>
                     <TextField
                         fullWidth
                         id="outlined-basic"
-                        label="Número de Teléfono"
+                        label="Agregue su número de teléfono"
                         value={telefono}
                         onChange={handleTelefono}
                         helperText={telefonoTocado && !telefonoValido ? '*Por favor, completa este campo' : ' '}
@@ -532,24 +659,34 @@ const UbicacionYContacto = (props) => {
                 </Grid>
 
                 <Grid item defaultMobileSize={12} defaultWebSize={5}>
+                    <InputLabel shrink htmlFor='numero' sx={sxParaLosInputLabels}>
+                        <TypographySmallText
+                            sx={sxParaLosTypographyDeLosInputLabels}
+                            overrideSizes={overrideSizesParaLosTypographyDeLosInputLabels}
+                        >
+                            E-mail
+                        </TypographySmallText>
+                    </InputLabel>
                     <TextField
                         fullWidth
                         id="outlined-basic"
-                        label="E-mail"
+                        label="correo@gmail.com"
                         variant="filled"
                         onInput={handleCorreo}
                         value={correo}
                         error={correoTocado && !correoValido}
-                        helperText={correoTocado && !correoValido ? mensajeCorreo : ''}
+                        helperText={correoTocado && !correoValido ? mensajeCorreo : ' '}
                     />
                 </Grid>
             </Grid>
         </>
     )
+    // FIN CAMBIO GSS-130624
 }
 
 const Manifiesto = (props) => {
-    const { setMostrarAvisoDePrivacidadModal } = useContext(ModalContext);
+    const {setMostrarAvisoDePrivacidadModal} = useContext(ModalContext);
+
     const {
         checkbox,
         handleCheckbox,
@@ -574,7 +711,7 @@ const Manifiesto = (props) => {
         calleValida, numeroValido, telefonoValido, correoValido, codigoPostalValido
     } = props;
 
-    const [textoCheckbox, setTextoCheckbox] = useState('');
+    const [textoCheckbox, setTextoCheckbox] = useState(' ');
     const [formValido] = useState(false);
     const {setFormTerminado, setVistaFinal} = useContext(FormContext);
 
@@ -640,14 +777,12 @@ const Manifiesto = (props) => {
                         onChange={handleCheckbox}
                         inputProps={{'aria-label': 'checkbox'}}
                     />
-                    <TypographyMediumText
-                        sx={{
-                            fontSize: "1.05rem",
-                        }}
-                    >
+                    {/* INICIO CAMBIO GSS-130624 */}
+                    <TypographyMediumText>
                         Manifiesto y confirmo ser mayor de edad y acepto las condiciones de uso de datos y políticas
                         de privacidad.
                     </TypographyMediumText>
+                    {/* FIN CAMBIO GSS-130624 */}
                 </Grid>
 
                 <Grid item defaultMobileSize={12}>

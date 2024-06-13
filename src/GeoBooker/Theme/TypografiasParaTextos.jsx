@@ -25,8 +25,9 @@
 //   --# Marca de cambio     : BCMC-130624                                            #
 //   ---------------------------------------------------------------------------------#-->
 
-import {Typography, useMediaQuery, useTheme} from "@mui/material";
+import {Typography} from "@mui/material";
 import PropTypes from "prop-types";
+import {useFontSizes} from "../Hooks/Index.js";
 
 
 const TypographyTextSizes = {
@@ -72,28 +73,6 @@ const TypographyTextSizes = {
     },
 }
 
-const getFontSize = (theme, sizes) => {
-    const matches = {
-        wideWebSize: useMediaQuery(theme.breakpoints.up('wideWebSize')),
-        largeWebSize: useMediaQuery(theme.breakpoints.up('largeWebSize')),
-        mediumWebSize: useMediaQuery(theme.breakpoints.up('mediumWebSize')),
-        smallWebSize: useMediaQuery(theme.breakpoints.up('smallWebSize')),
-        defaultWebSize: useMediaQuery(theme.breakpoints.up('defaultWebSize')),
-        mediumMobileSize: useMediaQuery(theme.breakpoints.up('mediumMobileSize')),
-        smallMobileSize: useMediaQuery(theme.breakpoints.up('smallMobileSize')),
-    };
-
-    if (matches.wideWebSize) return sizes.wideWebSize;
-    if (matches.largeWebSize) return sizes.largeWebSize;
-    if (matches.mediumWebSize) return sizes.mediumWebSize;
-    if (matches.smallWebSize) return sizes.smallWebSize;
-    if (matches.defaultWebSize) return sizes.defaultWebSize;
-    if (matches.mediumMobileSize) return sizes.mediumMobileSize;
-    if (matches.smallMobileSize) return sizes.smallMobileSize;
-
-    return sizes.defaultMobileSize;
-};
-
 /**
  * @param sx
  * @param children
@@ -109,15 +88,9 @@ export const TypographySmallText =
          className = '',
          overrideSizes = {},
      }) => {
-
-        const theme = useTheme();
-
         const defaultSizes = TypographyTextSizes.smallText;
         const sizes = {...defaultSizes, ...overrideSizes};
-
-        // const matchMediumMobileSize = useMediaQuery(theme.breakpoints.up('sm'));
-        // const matchSize = matchMediumMobileSize ? sizes.sm : sizes.xs;
-        const matchSize = getFontSize(theme, sizes);
+        const matchSize = useFontSizes(sizes);
 
         return (
             <Typography
@@ -137,6 +110,7 @@ export const TypographySmallText =
 /**
  * @param sx
  * @param children
+ * @param className
  * @param overrideSizes objeto con las propiedades de los breakpoints que definen el tamaño de la tipografía, por defecto se
  * usa un tamaño especificado, sobreescribe el tamaño por defecto si se pasa un objeto con propiedades de breakpoints
  * @returns {JSX.Element}
@@ -148,15 +122,10 @@ export const TypographyMediumText =
          className = '',
          overrideSizes = {},
      }) => {
-
-        const theme = useTheme();
-
         const defaultSizes = TypographyTextSizes.mediumText;
         const sizes = {...defaultSizes, ...overrideSizes};
 
-        // const matchMediumMobileSize = useMediaQuery(theme.breakpoints.up('sm'));
-        // const matchSize = matchMediumMobileSize ? sizes.sm : sizes.xs;
-        const matchSize = getFontSize(theme, sizes);
+        const matchSize = useFontSizes(sizes);
 
         return (
             <Typography
@@ -188,15 +157,10 @@ export const TypographyLargeText =
          className = '',
          overrideSizes = {},
      }) => {
-
-        const theme = useTheme();
-
         const defaultSizes = TypographyTextSizes.largeText;
         const sizes = {...defaultSizes, ...overrideSizes};
 
-        // const matchMediumMobileSize = useMediaQuery(theme.breakpoints.up('sm'));
-        // const matchSize = matchMediumMobileSize ? sizes.sm : sizes.xs;
-        const matchSize = getFontSize(theme, sizes);
+        const matchSize = useFontSizes(sizes);
 
         return (
             <Typography

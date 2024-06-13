@@ -12,8 +12,6 @@
 //   --# Modificacion        : Se cambiaron los typographies                          #
 //   --# Marca de cambio     : GSS-310524                                             #
 //   ---------------------------------------------------------------------------------#-->
-//-------------------------------- MODIFICACIONES ------------------------------------#
-// <!--################################################################################
 //   --# Autor               : Gandhi Soto Sanchez                                    #
 //   --# Fecha               : 05/06/2024                                             #
 //   --# Modificacion        : Se solucioono un problema del modal del footer         #
@@ -24,28 +22,42 @@
 //   --# Modificacion        : Estilos responsivos para todo el Footer                #
 //   --# Marca de cambio     : GSS-110624                                             #
 //   ---------------------------------------------------------------------------------#-->
+//   --# Autor               : Gandhi Soto Sanchez                                    #
+//   --# Fecha               : 13/06/2024                                             #
+//   --# Modificacion        : El footer es responsivo en todos los breakpoints       #
+//   --# Marca de cambio     : GSS-130624                                             #
+//   ---------------------------------------------------------------------------------#-->
 
 import {useContext} from 'react';
 // INICIO CAMBIO GSS-310524
-    // INICIO DE CAMBIO GSS-110624
-import {Grid, Link, useMediaQuery, useTheme} from '@mui/material';
-    // FIN DE CAMBIO GSS-110624
+// INICIO DE CAMBIO GSS-110624
+import {Box, Grid, Link, useTheme} from '@mui/material';
+// FIN DE CAMBIO GSS-110624
 // FIN CAMBIO GSS-310524
 
-import {ModalContext} from "../Context/Index.js";
+//INICIO CAMBIO GSS-130624
+import {BreakpointsContext, ModalContext} from "../Context/Index.js";
+// FIN CAMBIO GSS-130624
+
 import {PoweredBy} from '../../assets/Footer/Index.js';
 import {ListaDeRedesSociales} from "./Index.js";
+
 // INICIO CAMBIO GSS-310524
-import {TypographySmallText} from "../Theme/index.js";
+// INICIO CAMBIO GSS-130624
+import {TypographyLargeText, TypographySmallText} from "../Theme/index.js";
+// FIN CAMBIO GSS-130624
 // FIN CAMBIO GSS-310524
 import './FooterStyles.css';
+import PropTypes from "prop-types";
 
 // INICIO CAMBIO GSS-110624
 const overrideSizes = {
     defaultMobileSize: '1rem',
-    defaultWebSize: '1rem',
-    smallWebSize: '1rem',
-    mediumWebSize: "1rem",
+    defaultWebSize: '1.2rem',
+    smallWebSize: '1.4rem',
+    mediumWebSize: "1.6rem",
+    largeWebSize: "1.8rem",
+    wideWebSize: "3rem"
 }
 // FIN CAMBIO GSS-110624
 export const Footer = () => {
@@ -58,16 +70,22 @@ export const Footer = () => {
     // FIN CAMBIO GSS-310524
 
     // INICIO CAMBIO GSS-110624
-    const isMediumMobileSize = useMediaQuery(theme.breakpoints.down('mediumMobileSize'));
-    const isMediumWebSize = useMediaQuery(theme.breakpoints.up('mediumWebSize'));
-    const columnSpacing = isMediumWebSize ? 17 : isMediumMobileSize ? 0 : 10;
+    // INICIO CAMBIO GSS-130624
+    const {
+        isDownMediumMobileSize,
+        isUpDefaultWebSize,
+        isUpMediumWebSize
+    } = useContext(BreakpointsContext);
+
+    const columnSpacing = isUpMediumWebSize ? 17 : isDownMediumMobileSize ? 0 : 10;
+    // FIN CAMBIO GSS-130624
     // FIN CAMBIO GSS-110624
 
     // INICIO CAMBIO GSS-110624
     return (
-        <Grid container sx={{bgcolor: 'black', color: 'white', py: 3, display: 'flex', justifyContent: 'center'}}>
+        <Grid container maxWidth sx={{bgcolor: 'black', color: 'white', py: 3, display: 'flex', justifyContent: 'center'}}>
             <Grid item
-                  defaultMobileSize={12}
+                  defaultMobileSize={11}
                   sx={{
                       width: {
                           defaultMobileSize: "30.4rem",
@@ -77,9 +95,23 @@ export const Footer = () => {
                       margin: "0 auto"
                   }}
             >
-                <TypographySmallText sx={{color: 'white'}} >
+                {/*INICIO CAMBIO GSS-130624*/}
+                <TypographyLargeText sx={{color: 'white'}} overrideSizes={{
+                    // mobile sizes
+                    defaultMobileSize: '1.2rem',
+                    smallMobileSize: '1.7rem',
+                    mediumMobileSize: '2.1rem',
+
+                    // web sizes
+                    defaultWebSize: '2.2rem',
+                    smallWebSize: '2.7rem',
+                    mediumWebSize: '3rem',
+                    largeWebSize: '3.5rem',
+                    wideWebSize: '5.5rem'
+                }}>
                     Visita nuestras redes para mantenerte informado de nuestras novedades.
-                </TypographySmallText>
+                </TypographyLargeText>
+                {/*FIN CAMBIO GSS-130624*/}
             </Grid>
 
             <Grid item mt={3} defaultMobileSize={12}
@@ -87,36 +119,144 @@ export const Footer = () => {
                 <ListaDeRedesSociales/>
             </Grid>
 
+            {/*INICIO CAMBIO GSS-130624*/}
+            {
+                // Las unicas diferencia entre un componente y el otro, es el orden los grid items y algunos estilos
+                isUpDefaultWebSize ?
+                    <WebFootFooter
+                        lugarDeTrabajoEnGoogleMaps={lugarDeTrabajoEnGoogleMaps}
+                        setMostrarDerechosReservadosModal={setMostrarDerechosReservadosModal}
+                        theme={theme}
+                        columnSpacing={columnSpacing}
+                        overrideSizes={overrideSizes}
+                    />
+                    :
+                    <MobileFootFooter
+                        lugarDeTrabajoEnGoogleMaps={lugarDeTrabajoEnGoogleMaps}
+                        setMostrarDerechosReservadosModal={setMostrarDerechosReservadosModal}
+                        theme={theme}
+                        overrideSizes={overrideSizes}
+                    />
+            }
+            {/*FIN CAMBIO GSS-130624*/}
+
+        </Grid>
+    );
+    // FIN CAMBIO GSS-110624
+}
+
+/**
+ * Este componente incluye la información de la dirección de la empresa, los derechos reservados y la firma de Código Geek.
+ * Solo se renderiza si está por debajo de 768 píxeles, es decir en dispositivos móviles (mediumMobileSize para abajo)
+ * @returns {JSX.Element}
+ * @constructor
+ */
+const MobileFootFooter =
+    ({
+         lugarDeTrabajoEnGoogleMaps,
+         setMostrarDerechosReservadosModal,
+         theme,
+         overrideSizes
+     }) => {
+
+    const {
+        isDownSmallMobileSize
+    } = useContext(BreakpointsContext)
+    const tamanoDeLaFirma = isDownSmallMobileSize ? '10rem' : '15rem';
+
+        return (
             <Grid container
-                  columnSpacing={columnSpacing}
                   rowSpacing={2}
                   mt={0.5}
                   sx={{
                       display: 'flex',
                       justifyContent: 'center',
                       alignItems: 'center',
-                      flexDirection: {xs: 'column', md: 'row'},
                       textAlign: 'center'
                   }}
             >
-                <Grid item sx={{mx: 1}} xs={12} md={4}>
+                <Grid item defaultMobileSize={11}>
                     <Link variant='body2' href={lugarDeTrabajoEnGoogleMaps} target="_blank">
                         <TypographySmallText
                             sx={{color: theme.palette.link.main}}
-                            overrideSizes={ overrideSizes }
+                            overrideSizes={overrideSizes}
                         >
                             Av. Insurgentes 2 Bis, Centro, 55000 Ecatepec de Morelos, Méx., México
                         </TypographySmallText>
                     </Link>
                 </Grid>
 
-                <Grid item sx={{mx: 1}} xs={12} md={4}>
+                <Grid item defaultMobileSize={12} display='flex' justifyContent='center'>
                     <Link href='#' onClick={(event) => {
                         event.preventDefault();
                         setMostrarDerechosReservadosModal(true);
                     }}>
                         <TypographySmallText
-                            overrideSizes={ overrideSizes }
+                            overrideSizes={overrideSizes}
+                            sx={{color: theme.palette.link.main, textAlign: 'center'}}
+                        >
+                            Todos los derechos reservados
+                        </TypographySmallText>
+                    </Link>
+
+                    <Box width='4.5rem' />
+
+                    <Link href="https://codigogeek.com.mx/" target="_blank">
+                        <img
+                            className='Img-Color-PoweredBy'
+                            src={PoweredBy}
+                            alt='Código Geek'
+                            style={{ width: tamanoDeLaFirma }} // Controla el tamaño de la imagen
+                        />
+                    </Link>
+                </Grid>
+            </Grid>
+        )
+    }
+
+MobileFootFooter.propTypes = {
+    lugarDeTrabajoEnGoogleMaps: PropTypes.string.isRequired,
+    setMostrarDerechosReservadosModal: PropTypes.func.isRequired,
+    theme: PropTypes.object.isRequired,
+    overrideSizes: PropTypes.object.isRequired,
+}
+
+/**
+ * Este componente incluye la información de la dirección de la empresa, los derechos reservados y la firma de Código Geek.
+ * Solo se renderiza si está por arriba de 768 píxeles, es decir en tamaño web (defaultWebSize para arriba)
+ * @returns {JSX.Element}
+ * @constructor
+ */
+const WebFootFooter =
+    ({
+         lugarDeTrabajoEnGoogleMaps,
+         setMostrarDerechosReservadosModal,
+         theme,
+         overrideSizes
+     }) => {
+    const {
+        isUpWideWebSize
+    } = useContext(BreakpointsContext)
+    const tamanoDeLaFirma = isUpWideWebSize ? '25rem' : '15rem';
+        return (
+            <Grid container
+                  rowSpacing={2}
+                  mt={0.5}
+                  mb={3}
+                  sx={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      textAlign: 'center'
+                  }}
+            >
+                <Grid item defaultWebSize={3.5}>
+                    <Link href='#' onClick={(event) => {
+                        event.preventDefault();
+                        setMostrarDerechosReservadosModal(true);
+                    }}>
+                        <TypographySmallText
+                            overrideSizes={overrideSizes}
                             sx={{color: theme.palette.link.main, textAlign: 'center'}}
                         >
                             Todos los derechos reservados
@@ -124,18 +264,35 @@ export const Footer = () => {
                     </Link>
                 </Grid>
 
-                <Grid item sx={{mx: 1, textAlign: 'center'}} xs={12} md={4}>
+                <Grid item defaultWebSize={5}>
+                    <Link variant='body2' href={lugarDeTrabajoEnGoogleMaps} target="_blank">
+                        <TypographySmallText
+                            sx={{color: theme.palette.link.main, noWrap: false}}
+                            overrideSizes={overrideSizes}
+                        >
+                            Av. Insurgentes 2 Bis, Centro, 55000 Ecatepec de Morelos, Méx., México
+                        </TypographySmallText>
+                    </Link>
+                </Grid>
+
+                <Grid item defaultWebSize={3.5}>
                     <Link href="https://codigogeek.com.mx/" target="_blank">
                         <img
                             className='Img-Color-PoweredBy'
                             src={PoweredBy}
                             alt='Código Geek'
-                            style={{maxWidth: '100px', width: '100%'}} // Controla el tamaño de la imagen
+                            style={{ width: tamanoDeLaFirma }} // Controla el tamaño de la imagen
                         />
                     </Link>
                 </Grid>
             </Grid>
-        </Grid>
-    );
-    // FIN CAMBIO GSS-110624
+        )
+    }
+
+WebFootFooter.propTypes = {
+    lugarDeTrabajoEnGoogleMaps: PropTypes.string.isRequired,
+    setMostrarDerechosReservadosModal: PropTypes.func.isRequired,
+    theme: PropTypes.object.isRequired,
+    columnSpacing: PropTypes.number.isRequired,
+    overrideSizes: PropTypes.object.isRequired,
 }
