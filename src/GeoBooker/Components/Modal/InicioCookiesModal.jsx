@@ -5,13 +5,21 @@
 //   --# Proyecto            : GeoBooker                       Fecha: 15/05/2024      #
 //   --# Descripcion General : Componente modal de  Inicio de Cookies                 #
 //   ---------------------------------------------------------------------------------#-->
+//-------------------------------- MODIFICACIONES ------------------------------------#
+// <!--################################################################################
+//   --# Autor               : Gandhi Soto Sanchez                                    #
+//   --# Fecha               : 11/06/2024                                             #
+//   --# Modificacion        : Cambios en el uso de etiquetas de Material y BS5       #
+//   --# Marca de cambio     : GSS-110624                                             #
+//   ---------------------------------------------------------------------------------#-->
 
 import {Button, Col, Container, Row} from "react-bootstrap";
 import {ModalLayout} from "../../Layout/Index.js";
 import {useContext} from "react";
 import {ModalContext} from "../../Context/Index.js";
 import './StyleModal.css';
-import {Typography} from "@mui/material";
+import {Typography, useTheme} from "@mui/material";
+import {TypographySmallText} from "../../Theme/index.js";
 
 /**
  * Componente que muestra un modal de inicio de cookies
@@ -31,12 +39,21 @@ export const InicioCookiesModal = () => {
 }
 
 const Cuerpo = () => {
+
+    const theme = useTheme();
+
     return (
-        <Typography variant="p" className='fs-5 lh-sm'>
+        <TypographySmallText variant="p" className='fs-5 lh-sm' 
+            sx={{
+                [theme.breakpoints.up('defaultMobileSize')]: {
+                    color: "white"
+                },
+            }}
+        >
             Usamos cookies para mejorar GeoBooker, algunas son necesarias para el funcionamiento del sitio,
             otras son opcionales y te brindan una experiencia personalizada. Puedes aceptar todas las cookies, rechazar
             todas las opcionales o personalizarlas, para más información consulta nuestra Política de Cookies
-        </Typography>
+        </TypographySmallText>
     )
 }
 
@@ -46,7 +63,8 @@ const Footer = () => {
         <>
             <Container fluid='sm'>
                 <Row>
-                    <Col xs={6}>
+                    {/* INICIO CAMBIO GSS-110624 */}
+                    <Col>
                         <Button
                             variant="secondary"
                             onClick={() => setMostrarInicioCookiesModal(false)}
@@ -56,8 +74,10 @@ const Footer = () => {
                             Aceptar todas
                         </Button>
                     </Col>
+                    {/* FIN CAMBIO GSS-110624 */}
 
-                    <Col xs={6}>
+                    {/* INICIO CAMBIO GSS-110624 */}
+                    <Col>
                         <Button
                             variant="secondary"
                             onClick={() => {
@@ -69,6 +89,7 @@ const Footer = () => {
                             Navegar sin cookies
                         </Button>
                     </Col>
+                    {/* FIN CAMBIO GSS-110624 */}
                 </Row>
                 <Row
                     style={{

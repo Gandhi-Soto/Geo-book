@@ -5,6 +5,13 @@
 //   --# Proyecto            : GeoBooker                       Fecha: 21/05/2024      #
 //   --# Descripcion General : Componente que controla el despliegue de cada modal    #
 //   ---------------------------------------------------------------------------------#-->
+//-------------------------------- MODIFICACIONES ------------------------------------#
+// <!--################################################################################
+//   --# Autor               : Gandhi Soto Sanchez                                    #
+//   --# Fecha               : 11/06/2024                                             #
+//   --# Modificacion        : Se agregó el modal de aviso de privacidad              #
+//   --# Marca de cambio     : GSS-110624                                             #
+//   ---------------------------------------------------------------------------------#-->
 
 
 import {useContext} from 'react'
@@ -12,7 +19,10 @@ import {
     AdministradorDeCookiesModal,
     DerechosReservadosModal,
     InicioCookiesModal,
-    PoliticaDeUsoDeCookiesModal
+    // INICIO CAMBIO GSS-110624
+    PoliticaDeUsoDeCookiesModal,
+    AvisoDePrivacidadModal
+    // FIN CAMBIO GSS-110624
 } from "./Index.js";
 import {ModalContext} from "../../Context/Index.js";
 
@@ -27,7 +37,10 @@ export const DesplegarModales = () => {
         mostrarInicioCookiesModal,
         mostrarAdministradorDeCookiesModal,
         mostrarPoliticasDeUsoDeCookiesModal,
-        mostrarDerechosReservadosModal
+        // INICIO CAMBIO GSS-110624
+        mostrarDerechosReservadosModal,
+        mostrarAvisoDePrivacidadModal
+        // FIN CAMBIO GSS-110624
     } = useContext(ModalContext);
 
     return (
@@ -39,6 +52,9 @@ export const DesplegarModales = () => {
             {mostrarPoliticasDeUsoDeCookiesModal && <PoliticaDeUsoDeCookiesModal/>}
 
             {mostrarDerechosReservadosModal && <DerechosReservadosModal/>}
+            {/* INICIO CAMBIO GSS-110624 */}
+            {mostrarAvisoDePrivacidadModal && <AvisoDePrivacidadModal/>}
+            {/* FIN CAMBIO GSS-110624 */}
         </>
     )
 }

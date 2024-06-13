@@ -12,6 +12,12 @@
 //   --# Modificacion        : Se agregan animaciones a las cajitas                   #
 //   --# Marca de cambio     : GSS-050624                                             #
 //   ---------------------------------------------------------------------------------#-->
+// <!--################################################################################
+//   --# Autor               : Gandhi Soto Sanchez                                    #
+//   --# Fecha               : 11/06/2024                                             #
+//   --# Modificacion        : Cambio en el color de la caja amarilla                 #
+//   --# Marca de cambio     : GSS-110624                                             #
+//   ---------------------------------------------------------------------------------#-->
 
 
 import {Box, useTheme} from '@mui/material';
@@ -39,7 +45,9 @@ export const CajitaAmarilla =
                 sx={{
                     width: '20rem',
                     height: '1rem',
-                    backgroundColor: theme.palette.primary.main,
+                    //INICIO CAMBIO GSS-110624
+                    backgroundColor: theme.palette.primary.secondary,
+                    //FIN CAMBIO GSS-110624
                     borderRadius: '0.5rem / 0.25rem',
                     ...sx,
                 }}

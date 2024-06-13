@@ -5,6 +5,25 @@
 //   --# Proyecto            : GeoBooker                       Fecha: 31/05/2024      #
 //   --# Descripcion General : Tipografia de textos para toda la app                  #
 //   ---------------------------------------------------------------------------------#-->
+//-------------------------------- MODIFICACIONES ------------------------------------#
+// <!--################################################################################
+//   --# Autor               : Gandhi Soto Sanchez                                    #
+//   --# Fecha               : 11/06/2024                                             #
+//   --# Modificacion        : Se agregaron tamaños de fuente para tipografias        #
+//   --# Marca de cambio     : GSS-110624                                             #
+//   ---------------------------------------------------------------------------------#-->
+// <!--################################################################################
+//   --# Autor               : Caleb Martinez Cavazos                                 #
+//   --# Fecha               : 11/06/2024                                             #
+//   --# Modificacion        : Se agregaron tamaños de fuente para tipografias        #
+//   --# Marca de cambio     : BCMC-110624                                             #
+//   ---------------------------------------------------------------------------------#-->
+// <!--################################################################################
+//   --# Autor               : Caleb Martinez Cavazos                                 #
+//   --# Fecha               : 13/06/2024                                             #
+//   --# Modificacion        : Fuentes para breakpoints ultraanchos                   #
+//   --# Marca de cambio     : BCMC-130624                                            #
+//   ---------------------------------------------------------------------------------#-->
 
 import {Typography, useMediaQuery, useTheme} from "@mui/material";
 import PropTypes from "prop-types";
@@ -12,18 +31,68 @@ import PropTypes from "prop-types";
 
 const TypographyTextSizes = {
     smallText: {
-        xs: '1rem',
-        sm: '1.5rem',
+        defaultMobileSize: '1rem',
+        smallMobileSize: '1.5rem',
+        // INICIO DE CAMBIO: GSS-110624
+        mediumMobileSize: '1.5rem',
+        defaultWebSize: '1.8rem',
+        smallWebSize: '1.8rem',
+        mediumWebSize: "2rem",
+        largeWebSize: "2rem",
+        wideWebSize: "2.2rem"
+        // FIN DE CAMBIO: GSS-110624
     },
     mediumText: {
-        xs: '1.2rem',
-        sm: '2rem',
+        defaultMobileSize: '1.2rem',
+        smallMobileSize: '1.8rem',
+        mediumMobileSize: "2.25rem",
+        // INICIO DE CAMBIO: BCMC-110624
+        defaultWebSize: "1.4rem",
+        smallWebSize: "1.75rem",
+        mediumWebSize: "2rem",
+        largeWebSize: "2.2rem",
+        // FIN DE CAMBIO: BCMC-110624
+        // INICIO DE CAMBIO: BCMC-130624
+        wideWebSize: "4rem"
+        // FIN DE CAMBIO: BCMC-130624
     },
     largeText: {
-        xs: '1.5rem',
-        sm: '2.3rem',
+        defaultMobileSize: '1.5rem',
+        smallMobileSize: '2.25rem',
+        mediumMobileSize: "2.8125rem",
+        defaultWebSize: "1.75rem",
+        // INICIO DE CAMBIO: BCMC-110624
+        smallWebSize: "2rem",
+        mediumWebSize: "2.25rem",
+        largeWebSize: "2.5rem",
+            // INICIO DE CAMBIO: BCMC-130624
+        wideWebSize: "5rem"
+            // FIN DE CAMBIO: BCMC-130624
+        // FIN DE CAMBIO: BCMC-110624
     },
 }
+
+const getFontSize = (theme, sizes) => {
+    const matches = {
+        wideWebSize: useMediaQuery(theme.breakpoints.up('wideWebSize')),
+        largeWebSize: useMediaQuery(theme.breakpoints.up('largeWebSize')),
+        mediumWebSize: useMediaQuery(theme.breakpoints.up('mediumWebSize')),
+        smallWebSize: useMediaQuery(theme.breakpoints.up('smallWebSize')),
+        defaultWebSize: useMediaQuery(theme.breakpoints.up('defaultWebSize')),
+        mediumMobileSize: useMediaQuery(theme.breakpoints.up('mediumMobileSize')),
+        smallMobileSize: useMediaQuery(theme.breakpoints.up('smallMobileSize')),
+    };
+
+    if (matches.wideWebSize) return sizes.wideWebSize;
+    if (matches.largeWebSize) return sizes.largeWebSize;
+    if (matches.mediumWebSize) return sizes.mediumWebSize;
+    if (matches.smallWebSize) return sizes.smallWebSize;
+    if (matches.defaultWebSize) return sizes.defaultWebSize;
+    if (matches.mediumMobileSize) return sizes.mediumMobileSize;
+    if (matches.smallMobileSize) return sizes.smallMobileSize;
+
+    return sizes.defaultMobileSize;
+};
 
 /**
  * @param sx
@@ -46,8 +115,9 @@ export const TypographySmallText =
         const defaultSizes = TypographyTextSizes.smallText;
         const sizes = {...defaultSizes, ...overrideSizes};
 
-        const matchMediumMobileSize = useMediaQuery(theme.breakpoints.up('sm'));
-        const matchSize = matchMediumMobileSize ? sizes.sm : sizes.xs;
+        // const matchMediumMobileSize = useMediaQuery(theme.breakpoints.up('sm'));
+        // const matchSize = matchMediumMobileSize ? sizes.sm : sizes.xs;
+        const matchSize = getFontSize(theme, sizes);
 
         return (
             <Typography
@@ -84,8 +154,9 @@ export const TypographyMediumText =
         const defaultSizes = TypographyTextSizes.mediumText;
         const sizes = {...defaultSizes, ...overrideSizes};
 
-        const matchMediumMobileSize = useMediaQuery(theme.breakpoints.up('sm'));
-        const matchSize = matchMediumMobileSize ? sizes.sm : sizes.xs;
+        // const matchMediumMobileSize = useMediaQuery(theme.breakpoints.up('sm'));
+        // const matchSize = matchMediumMobileSize ? sizes.sm : sizes.xs;
+        const matchSize = getFontSize(theme, sizes);
 
         return (
             <Typography
@@ -123,8 +194,9 @@ export const TypographyLargeText =
         const defaultSizes = TypographyTextSizes.largeText;
         const sizes = {...defaultSizes, ...overrideSizes};
 
-        const matchMediumMobileSize = useMediaQuery(theme.breakpoints.up('sm'));
-        const matchSize = matchMediumMobileSize ? sizes.sm : sizes.xs;
+        // const matchMediumMobileSize = useMediaQuery(theme.breakpoints.up('sm'));
+        // const matchSize = matchMediumMobileSize ? sizes.sm : sizes.xs;
+        const matchSize = getFontSize(theme, sizes);
 
         return (
             <Typography

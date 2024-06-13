@@ -5,23 +5,34 @@
 //   --# Proyecto            : GeoBooker                       Fecha: 15/05/2024      #
 //   --# Descripcion General : Modal de Administracion de cookies                     #
 //   ---------------------------------------------------------------------------------#-->
+//-------------------------------- MODIFICACIONES ------------------------------------#
+// <!--################################################################################
+//   --# Autor               : Gandhi Soto Sanchez                                    #
+//   --# Fecha               : 11/06/2024                                             #
+//   --# Modificacion        : Estilos responsivos para el modal de admin. de cookies #
+//   --# Marca de cambio     : GSS-110624                                             #
+//   ---------------------------------------------------------------------------------#-->
 
 
 import {ModalLayout} from "../../Layout/Index.js";
-import {Col, Container, Row} from "react-bootstrap";
-import {Switch, Button, Typography} from "@mui/material";
+import {Switch, Button, useTheme, Box, Grid} from "@mui/material";
 import {useContext} from "react";
 import {ModalContext} from "../../Context/Index.js";
 import {useSwitch} from "../../Hooks/useSwitch.js";
 import PropTypes from "prop-types";
+// INICIO CAMBIO GSS-110624
+import {TypographySmallText,} from "../../Theme/index.js";
+// FIN CAMBIO GSS-110624
+
 /**
  * TODO buscar la manera de que el componente switch tenga el botón negro como aparece en la HU
  * @returns {JSX.Element}
  * @constructor
  */
 export const AdministradorDeCookiesModal = () => {
-
-    const { mostrarAdministradorDeCookiesModal } = useContext(ModalContext);
+    // INICIO DE CAMBIO: GSS-110624
+    const {mostrarAdministradorDeCookiesModal} = useContext(ModalContext);
+    // FIN DE CAMBIO: GSS-110624
 
     const initialForm = {
         primerChecked: false,
@@ -60,10 +71,19 @@ export const AdministradorDeCookiesModal = () => {
     )
 }
 
+// INICIO CAMBIO: GSS-110624
 const Titulo = () => {
-    return <h2 className='fs-1'>Administrador de Cookies</h2>
+    return (
+        <Grid container sx={{marginLeft: 1}}>
+            <Grid item defaultMobileSize={12}>
+                <h2 className='fs-1'>Administrador de Cookies</h2>
+            </Grid>
+        </Grid>
+    )
 }
+// FIN DE CAMBIO: GSS-110624
 
+// INICIO CAMBIO: GSS-110624
 const Cuerpo =
     ({
          primerChecked,
@@ -73,80 +93,88 @@ const Cuerpo =
      }) => {
         const {setMostrarAdministradorDeCookiesModal, setMostrarPoliticasDeUsoDeCookiesModal} = useContext(ModalContext)
         const estiloParaTextoDeSwitches = 'fs-5 text-nowrap fw-semibold'
-
+        
         return (
             <>
-                <Typography  variant='p' className='fs-5 lh-sm'>
-                    Este sitio web usa cookies para mejorar tu experiencia en nuestro sitio web y también con fines de
-                    análisis y marketing. Respetamos tu privacidad, por lo que te damos la opción de rechazar cierto
-                    tipo de
-                    cookies no necesarias para el funcionamiento del sitio.
+                <Box sx={{marginLeft: 1, marginRight: 1}}>
+                    <Grid container defaultMobileSize={12}>
+                        <Grid item defaultMobileSize={12}>
+                            <TypographySmallText sx={{textAlign: 'start'}}>
+                                Este sitio web usa cookies para mejorar tu experiencia en nuestro sitio web y también
+                                con fines de
+                                análisis y marketing. Respetamos tu privacidad, por lo que te damos la opción de
+                                rechazar cierto
+                                tipo de
+                                cookies no necesarias para el funcionamiento del sitio.
 
-                    Haz clic en la cookie que deseas bloquear, es posible que esto afecte tu experiencia en el sitio y
-                    limite los servicios que podemos ofrecerte. Para más información consulta nuestra. &nbsp;
-                    <a
-                        href=''
-                        onClick={(event) => {
-                            event.preventDefault();
-                            setMostrarAdministradorDeCookiesModal(false)
-                            setMostrarPoliticasDeUsoDeCookiesModal(true)
-                        }}
-                        style={{color: 'blue', textDecoration: 'none'}}
-                    > Política de Cookies
-                    </a>
-                </Typography>
+                                Haz clic en la cookie que deseas bloquear, es posible que esto afecte tu experiencia en
+                                el sitio y
+                                limite los servicios que podemos ofrecerte. Para más información consulta
+                                nuestra. &nbsp;
+                                <a
+                                    href=''
+                                    onClick={(event) => {
+                                        event.preventDefault();
+                                        setMostrarAdministradorDeCookiesModal(false)
+                                        setMostrarPoliticasDeUsoDeCookiesModal(true)
+                                    }}
+                                    style={{color: 'blue', textDecoration: 'none'}}
+                                > Política de Cookies
+                                </a>
+                            </TypographySmallText>
+                        </Grid>
 
-                <Container fluid='xs'>
-                    <Row className="justify-content-center" >
-                        <Col xs={8} className="align-content-end"> {/* TODO content-end quizás no la mejor solución */}
-                            <p className={estiloParaTextoDeSwitches}>Cookies para analítica web</p>
-                        </Col>
-                        <Col xs={4} className="">
-                            <Switch
-                                checked={primerChecked}
-                                onClick={() => onInputChange({name: 'primerChecked', value: !primerChecked})}
-                            />
-                        </Col>
-                    </Row>
+                        <Grid container sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                        }}>
+                            <Grid item defaultMobileSize={10}>
+                                <p className={estiloParaTextoDeSwitches}>Cookies para analítica web</p>
+                            </Grid>
+                            <Grid item defaultMobileSize={2}>
+                                <Switch
+                                    checked={primerChecked}
+                                    onClick={() => onInputChange({name: 'primerChecked', value: !primerChecked})}
+                                />
+                            </Grid>
 
-                    <Row>
-                        <Col xs={8} className='align-content-end'> {/* TODO content-end quizás no la mejor solución */}
-                            <p className={estiloParaTextoDeSwitches}>Cookies para analítica web</p>
-                        </Col>
-                        <Col xs={4}>
-                            <Switch
-                                checked={segundoChecked}
-                                onClick={() => onInputChange({name: 'segundoChecked', value: !segundoChecked})}
-                            />
-                        </Col>
-                    </Row>
+                            <Grid item defaultMobileSize={10}>
+                                <p className={estiloParaTextoDeSwitches}>Cookies para publicidad</p>
+                            </Grid>
+                            <Grid item defaultMobileSize={2}>
+                                <Switch
+                                    checked={segundoChecked}
+                                    onClick={() => onInputChange({name: 'segundoChecked', value: !segundoChecked})}
+                                />
+                            </Grid>
 
-                    <Row>
-                        <Col xs={8} className='align-content-end'>
-                            <p className={estiloParaTextoDeSwitches}>Cookies de funcionalidad</p>
-                        </Col>
+                            <Grid item defaultMobileSize={10}>
+                                <p className={estiloParaTextoDeSwitches}>Cookies de funcionalidad</p>
+                            </Grid>
+                            <Grid item defaultMobileSize={2}>
+                                <Switch
+                                    checked={tercerChecked}
+                                    onClick={() => onInputChange({name: 'tercerChecked', value: !tercerChecked})}
+                                />
+                            </Grid>
 
-                        <Col xs={4}>
-                            <Switch
-                                checked={tercerChecked}
-                                onClick={() => onInputChange({name: 'tercerChecked', value: !tercerChecked})}
-                            />
-                        </Col>
-                    </Row>
+                            <Grid item defaultMobileSize={8.5}>
+                                <p className={estiloParaTextoDeSwitches}>Cookies esenciales</p>
+                            </Grid>
+                            <Grid item defaultMobileSize={3.5}>
+                                <p className={estiloParaTextoDeSwitches}>Siempre activas</p>
 
-                    <Row>
-                        <Col xs={7} className='m-0'>
-                            <p className={estiloParaTextoDeSwitches}>Cookies esenciales</p>
-                        </Col>
+                            </Grid>
 
-                        <Col xs={4}>
-                            <p className={estiloParaTextoDeSwitches}>Siempre activas</p>
-                        </Col>
-                    </Row>
-                </Container>
+                        </Grid>
+                    </Grid>
+                </Box>
             </>
         )
     }
+// FIN DE CAMBIO: GSS-110624
 Cuerpo.propTypes = {
     primerChecked: PropTypes.bool.isRequired,
     segundoChecked: PropTypes.bool.isRequired,
@@ -154,56 +182,68 @@ Cuerpo.propTypes = {
     onInputChange: PropTypes.func.isRequired
 }
 
+// INICIO CAMBIO: GSS-110624
 const Footer = ({onResetState, onAcceptAll}) => {
 
     const {setMostrarAdministradorDeCookiesModal} = useContext(ModalContext)
     return (
-        <Container fluid='xs'>
-            <Row>
-                <Col xs={ 6 }>
-                    <Button
-                        variant='contained'
-                        color='secondary'
-                        size='small'
-                        className='text-black fw-bolder text-nowrap'
-                        onClick={onAcceptAll}
-
-                    >
-                        Aceptar todas
-                    </Button>
-                </Col>
-
-                <Col xs = { 6 }>
-                    <Button
-                        variant='contained'
-                        color='secondary'
-                        size='small'
-                        className='text-black fw-bolder text-nowrap'
-                        onClick={onResetState}
-                    >
-                        Rechazar todas
-                    </Button>
-                </Col>
-            </Row>
-
-            <Row style={{marginTop: '20px'}}>
-                <Button
-                    variant='contained'
-                    color='success'
-                    onClick={() => setMostrarAdministradorDeCookiesModal(false)}
-                    size='small'
-                    className='text-white fs-6'
+        <>
+            <Box>
+                <Grid container spacing={1}
+                      sx={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                      }}
                 >
-                    Guardar cambios
-                </Button>
-            </Row>
-        </Container>
+                    <Grid item defaultMobileSize={6} >
+                        <Button
+                            fullWidth
+                            variant='contained'
+                            color='secondary'
+                            size='small'
+                            className='text-black fw-bolder text-nowrap'
+                            onClick={onAcceptAll}
+
+                        >
+                            Aceptar todas
+                        </Button>
+                    </Grid>
+
+                    <Grid item defaultMobileSize={6}>
+                        <Button
+                            fullWidth
+                            variant='contained'
+                            color='secondary'
+                            size='small'
+                            className='text-black fw-bolder text-nowrap'
+                            onClick={onResetState}
+                        >
+                            Rechazar todas
+                        </Button>
+                    </Grid>
+
+                    <Grid item mt={1} defaultMobileSize={12} >
+                        <Button
+                            fullWidth
+                            variant='contained'
+                            color='success'
+                            onClick={() => setMostrarAdministradorDeCookiesModal(false)}
+                            size='small'
+                            className='text-white fs-6'
+                        >
+                            Guardar cambios
+                        </Button>
+                    </Grid>
+                </Grid>
+            </Box>
+            </>
     )
 }
+// FIN DE CAMBIO: GSS-110624
 
 Footer.propTypes = {
     onResetState: PropTypes.func.isRequired,
     onAcceptAll: PropTypes.func.isRequired
 }
-
-
