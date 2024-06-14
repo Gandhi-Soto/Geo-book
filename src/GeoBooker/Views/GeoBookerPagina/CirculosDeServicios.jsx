@@ -39,7 +39,7 @@ import {
 import {Box, Grid, ImageListItem, ImageListItemBar, useTheme} from "@mui/material";
 import {TypographySmallText} from "../../Theme/index.js";
 // INICIO CAMBIO GSS-050624
-import {useContext} from "react";
+import {Fragment, useContext} from "react";
 import {FormContext} from "../../Context/Index.js";
 import { animateScroll as scroll } from 'react-scroll';
 // FIN CAMBIO GSS-050624
@@ -74,7 +74,7 @@ export const CirculosDeServicios = () => {
         {/* FIN DE CAMBION BCMC-110624 */}
             {
                 ListaDeServicios.map(item =>
-                    <>
+                    <Fragment key={item.id}>
                     {/* INICIO CAMBIO BCMC-110624 */}
                     <Grid item defaultMobileSize={4} defaultWebSize={2.4}
                         sx={{
@@ -206,7 +206,7 @@ export const CirculosDeServicios = () => {
                             </Box>
                         </ImageListItem>
                     </Grid>
-                    </>
+                    </Fragment>
                 )
             }
         </Grid>

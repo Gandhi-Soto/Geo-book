@@ -9,7 +9,7 @@
 import { useState } from 'react';
 import validator from 'validator';
 import axios from 'axios';
-import cities from '../Data/ClavesLada';
+import {cities} from "../Data/Index.js";
 
 const UseFormulario = () => {
     const [nombre, setNombre] = useState('');
@@ -272,10 +272,6 @@ const verificarEdad = (edad) => {
     const edadNum = parseInt(edad, 10);
     return edadNum >= 18 && edadNum <= 99;
 }
-
-const verificarSelect = (genero) => {
-    return genero !== '';
-};
 
 const verificarNombreNegocio = (nombreNegocio) => {
     return /^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s]+$/.test(nombreNegocio);

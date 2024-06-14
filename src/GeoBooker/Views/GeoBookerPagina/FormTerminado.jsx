@@ -29,12 +29,11 @@ import logoColor from "../../../assets/GeoBooker/LogoColor.svg";
 import * as Icons from "../../../assets/RedesSociales/Index.js";
 import { Link } from "react-router-dom";
 import { FormContext, BreakpointsContext } from "../../Context/Index.js";
-import rrss from "../../Data/DataLinks.js";
+import {rrss} from "../../Data/Index.js";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { TypographySmallText, TypographyMediumText, TypographyLargeText } from '../../Theme/TypografiasParaTextos';
-import { TypographySmallTitle, TypographyMediumTitle, TypographyLargeTitle } from '../../Theme/TypografiasParaTitulos';
+import { TypographySmallTitle, TypographyMediumTitle, TypographyMediumText } from '../../Theme/index.js';
 // INICIO DE CAMBIO: BCMC-110624
-import { ListaDeRedesSociales } from "../../Components/ListaDeRedesSociales.jsx";
+import { ListaDeRedesSociales } from "../../Components/Index.js";
 import { ModalContext } from "../../Context/Index.js";
 // FIN DE CAMBIO: BCMC-110624
 
