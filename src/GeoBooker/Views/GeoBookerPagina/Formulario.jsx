@@ -22,6 +22,11 @@
 //   --# Modificacion        : Se agrego labels para cada textfield                   #
 //   --# Marca de cambio     : GSS-130624                                             #
 //   ---------------------------------------------------------------------------------#-->
+//   --# Autor               : Gandhi Soto Sanchez                                    #
+//   --# Fecha               : 13/06/2024                                             #
+//   --# Modificacion        : Se agrega los nuevos servicios a las categorias        #
+//   --# Marca de cambio     : GSS-130624                                             #
+//   ---------------------------------------------------------------------------------#-->
 // INICIO DE CAMBIO: GSS-110624
 import {useState, useContext} from 'react'
 // FIN DE CAMBIO: GSS-110624
@@ -52,6 +57,7 @@ import {
 } from '../../Theme/index.js';
 // INICIO CAMBIO GSS-110624
 import {ModalContext} from '../../Context/Index.js';
+import {categorias} from "../../Data/Index.js";
 // FIN CAMBIO GSS-110624
 
 const sxParaLosTypographyDeLosInputLabels = {
@@ -69,6 +75,7 @@ const overrideSizesParaLosTypographyDeLosInputLabels = {
     wideWebSize: '2.5rem'
 }
 
+// TODO checar por que manda este error  -> MUI: `children` must be passed when using the `TextField` component with `select`.
 // INICIO CAMBIO GSS-110624
 function Formulario() {
 
@@ -339,7 +346,7 @@ const PreRegistro = (props) => {
                     fullWidth
                     id="categoria"
                     select
-                    label="Seleccione la categoria"
+                    label="Seleccione la categoría"
                     value={servicio}
                     onChange={handleServicio}
                     helperText={servicioTocado && !servicioValido ? '*Por favor, selecciona una opción' : ' '}
@@ -349,14 +356,16 @@ const PreRegistro = (props) => {
                         verticalAlign: 'middle', // Añadido
                     }}
                 >
-                    {categorias.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                            {option.label}
+                    {categorias.map((categoria) => (
+                        <MenuItem key={categoria.value} value={categoria.value}>
+                            {categoria.label}
                         </MenuItem>
                     ))}
                 </TextField>
             </Grid>
 
+
+            {/*INICIO CAMBIO GSS-130624*/}
             <Grid item defaultMobileSize={6} defaultWebSize={4}>
                 <InputLabel shrink htmlFor='servicio' sx={sxParaLosInputLabels}>
                     <TypographySmallText
@@ -376,14 +385,19 @@ const PreRegistro = (props) => {
                     error={subservicioTocado && !subservicioValido}
                     variant="filled"
                     fullWidth
+                    disabled={!servicio}
                 >
-                    {subservicios.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                        </MenuItem>
-                    ))}
+                    {
+                        servicio &&
+                        categorias.find(categoria => categoria.value === servicio).servicios.map((servicio) => (
+                            <MenuItem key={servicio.name} value={servicio.name}>
+                                {servicio.label}
+                            </MenuItem>
+                        ))
+                    }
                 </TextField>
             </Grid>
+            {/*FIN CAMBIO GSS-130624*/}
 
         </Grid>
     )
@@ -841,64 +855,3 @@ const generos = [
         label: 'Otro',
     }
 ];
-
-//array de valores para el select de categoria
-const categorias = [
-    {
-        value: 'Atención médica',
-        label: 'Atención médica',
-    },
-    {
-        value: 'Salud y belleza',
-        label: 'Salud y belleza',
-    },
-    {
-        value: 'Alimentos y bebidas',
-        label: 'Alimentos y bebidas',
-    },
-    {
-        value: 'Diversión y entretenimiento',
-        label: 'Diversión y entretenimiento',
-    },
-    {
-        value: 'Servicios profesionales',
-        label: 'Servicios profesionales',
-    },
-    {
-        value: 'Servicios vehiculares',
-        label: 'Servicios vehiculares',
-    },
-    {
-        value: 'Mantenimiento y construcción',
-        label: 'Mantenimiento y construcción',
-    },
-    {
-        value: 'Educación y capacitación',
-        label: 'Educación y capacitación',
-    },
-    {
-        value: 'Comercios - mayoreo y menudeo',
-        label: 'Comercios - mayoreo y menudeo',
-    }
-];
-
-//array de valores para el select de subservicios
-const subservicios = [
-    {
-        value: 'Subservicio 1',
-        label: 'SS1',
-    },
-    {
-        value: 'Subservicio 2',
-        label: 'SS2',
-    },
-    {
-        value: 'Subservicio 3',
-        label: 'SS3',
-    },
-    {
-        value: 'Subservicio 4',
-        label: 'SS4',
-    },
-];
-// FIN CAMBIO: GSS-110624

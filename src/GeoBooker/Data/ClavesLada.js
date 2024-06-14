@@ -7,7 +7,7 @@
 //                             telefono en el hook UseFormulario                      #
 //   ---------------------------------------------------------------------------------#-->
 
-const cities = [
+export const cities = [
   { "city": "Aguascalientes", "state": "Aguascalientes", "lada": "449" },
   { "city": "Asientos", "state": "Aguascalientes", "lada": "465" },
   { "city": "Calvillo", "state": "Aguascalientes", "lada": "495" },
@@ -204,4 +204,3 @@ const cities = [
   { "city": "Nochistlán", "state": "Zacatecas", "lada": "346" }
 ];
 
-export default cities;

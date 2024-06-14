@@ -41,8 +41,6 @@ import {
     TypographySmallTitle
 } from "../../Theme/index.js";
 // FIN CAMBIO GSS-310524
-import { useContext } from "react";
-import { BreakpointsContext } from "../../Context/Index.js";
 
 /**
  * Despliega la primera vista que tiene el usuario al ingresar a la aplicación.
@@ -53,8 +51,6 @@ import { BreakpointsContext } from "../../Context/Index.js";
 export const GeoBooker = () => {
 
     const theme = useTheme();
-
-    const { isWeb } = useContext(BreakpointsContext);
 
     return (
         <>
@@ -129,7 +125,7 @@ export const GeoBooker = () => {
                     }
                 }}
             >
-                <Box fullWidth className="d-flex justify-content-center py-5"
+                <Box className="d-flex justify-content-center py-5"
                     sx={{
                         [theme.breakpoints.up('defaultWebSize')]: {
                             backgroundImage: `url(${ImagenDeFondoWeb})`,
