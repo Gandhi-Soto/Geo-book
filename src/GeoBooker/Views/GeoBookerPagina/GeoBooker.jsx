@@ -66,10 +66,10 @@ export const GeoBooker = () => {
 
                     backgroundPosition: "center",
                     [theme.breakpoints.up('smallMobileSize')]: {
-                        height: "55rem",
+                        // height: "55rem",
                     },
                     [theme.breakpoints.up('mediumMobileSize')]: {
-                        height: "57rem",
+                        height: "45rem",
                     },
                     [theme.breakpoints.up('defaultWebSize')]: {
                         display: "none"
