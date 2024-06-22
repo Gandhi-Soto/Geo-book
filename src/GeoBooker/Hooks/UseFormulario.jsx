@@ -80,6 +80,7 @@ const UseFormulario = () => {
     const [subservicioTocado, setSubservicioTocado] = useState(false);
 
     const handleServicio = (e) => {
+        setServicio("");
         const valor = e.target.value;
         setServicio(valor);
         setServicioValido(verificarServicio(valor));
@@ -245,6 +246,28 @@ const UseFormulario = () => {
         setColoniaTocada(true);
     }
 
+    const [ fkIdCategoriaServicio, setFkIdCategoriaServicio ] = useState("");
+
+    const [ dataForm, setDataForm ] = useState({
+        telefono: '',
+        email: '',
+        nombre: '',
+        apellido_paterno: '',
+        apellido_materno: '',
+        genero: '',
+        nombre_negocio: '',
+        codigo_postal: '',
+        estado: '',
+        municipio: '',
+        colonia: '',
+        calle: '',
+        numero_domicilio: '',
+        fecha_creacion: null,
+        fecha_modificacion: null,
+        fk_id_categoria_servicio: null
+    });
+
+
     return {
         nombre, nombreValido, nombreTocado, setNombreTocado, handleNombre,
         apellidoPaterno, apellidoPaternoValido, apellidoPaternoTocado, setApellidoPaternoTocado, handleApellidoPaterno,
@@ -260,7 +283,9 @@ const UseFormulario = () => {
         correo, correoValido, correoTocado, setCorreoTocado, handleCorreo, mensajeCorreo,
         checkbox, checkboxTocado, checkboxValido, setCheckboxTocado, handleCheckbox,
         codigoPostal, codigoPostalTocado, codigoPostalValido, setCodigoPostalTocado, handleCodigoPostal,
-        estado, municipio, colonias, colonia, setColonia, coloniaValida, coloniaTocada, setColoniaTocada, handleColonia
+        estado, municipio, colonias, colonia, setColonia, coloniaValida, coloniaTocada, setColoniaTocada, handleColonia,
+        fkIdCategoriaServicio, setFkIdCategoriaServicio,
+        dataForm, setDataForm
     };
 };
 

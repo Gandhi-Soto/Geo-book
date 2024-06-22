@@ -28,7 +28,7 @@
 //   --# Marca de cambio     : GSS-130624                                             #
 //   ---------------------------------------------------------------------------------#-->
 // INICIO DE CAMBIO: GSS-110624
-import {useState, useContext} from 'react'
+import {useState, useContext, useEffect} from 'react'
 // FIN DE CAMBIO: GSS-110624
 
 // INICIO DE CAMBIO: GSS-130624
@@ -57,8 +57,11 @@ import {
 } from '../../Theme/index.js';
 // INICIO CAMBIO GSS-110624
 import {ModalContext} from '../../Context/Index.js';
-import {categorias} from "../../Data/Index.js";
+import { obtenerCategorias, obtenerServicios} from "../../Data/Index.js";
 // FIN CAMBIO GSS-110624
+
+import axios from 'axios';
+import { DB_CONNECTION } from '../../../DbConfig.js';
 
 const sxParaLosTypographyDeLosInputLabels = {
     textAlign: 'start',
@@ -185,7 +188,8 @@ const PreRegistro = (props) => {
         subservicio,
         handleSubservicio,
         subservicioTocado,
-        subservicioValido
+        subservicioValido,
+        setFkIdCategoriaServicio,
     } = props;
     const {
         theme,
@@ -195,6 +199,66 @@ const PreRegistro = (props) => {
     const sxParaLosInputLabels = {
         marginBottom: isUpDefaultWebSize ? '-1rem' : '-0.5rem'
     }
+
+    const [ categoriasArray, setCategoriasArray ] = useState([]);
+
+    useEffect(() => {
+        const fetchCategorias = async () => {
+            const categorias = await obtenerCategorias();
+            setCategoriasArray(categorias);
+        };
+        fetchCategorias();
+    }, []);
+
+    const idCategoria = categoriasArray.find(categoria => categoria.value === servicio)?.id_categoria;
+    // console.log(idCategoria);
+
+    const [ idsDeServicios, setIdsDeServicios ] = useState([]);
+
+    useEffect(() => {
+        
+        if(idCategoria) {
+            const fetchIds = async () => {
+                const response = await axios.get(`${DB_CONNECTION}/categorias-servicios/${idCategoria}`);
+                const data = response.data;
+                    
+                const nuevosIdsDeServicios = data.map(item => item.fk_id_servicio);
+                    
+                setIdsDeServicios(nuevosIdsDeServicios);
+            }
+    
+            fetchIds();
+        }
+
+    }, [idCategoria]);
+
+    const [ serviciosArray, setServiciosArray ] = useState([]);
+
+    useEffect(() => {
+        const fetchServicios = async () => {
+            const servicios = await obtenerServicios();
+            const data = servicios.filter(servicio => idsDeServicios.includes(servicio.id_servicio));
+
+            setServiciosArray(data);
+        };
+        fetchServicios();
+    }, [idsDeServicios]);
+
+    const idServicio = serviciosArray.find(servicio => servicio.servicio_nombre === subservicio)?.id_servicio;
+
+
+
+    useEffect(() => {
+        if(idCategoria && idServicio) {
+            const fetchFkIdCatServicio = async () => {
+                const response = await axios.get(`${DB_CONNECTION}/categorias-servicios/${idCategoria}/${idServicio}`);
+                const data = response.data;
+                setFkIdCategoriaServicio(data[0].id_categoria_servicio);
+            }
+            fetchFkIdCatServicio();
+        }
+    }, [ idCategoria, idServicio ]);
+    
 
     // INICIO CAMBIO GSS-130624
     return (
@@ -356,8 +420,8 @@ const PreRegistro = (props) => {
                         verticalAlign: 'middle', // Añadido
                     }}
                 >
-                    {categorias.map((categoria) => (
-                        <MenuItem key={categoria.value} value={categoria.value}>
+                    {categoriasArray.map((categoria) => (
+                        <MenuItem key={categoria.id_categoria} value={categoria.value}>
                             {categoria.label}
                         </MenuItem>
                     ))}
@@ -388,10 +452,9 @@ const PreRegistro = (props) => {
                     disabled={!servicio}
                 >
                     {
-                        servicio &&
-                        categorias.find(categoria => categoria.value === servicio).servicios.map((servicio) => (
-                            <MenuItem key={servicio.name} value={servicio.name}>
-                                {servicio.label}
+                        serviciosArray.map((servicio) => (
+                            <MenuItem key={servicio.id_servicio} value={servicio.servicio_nombre}>
+                                {servicio.servicio_nombre}
                             </MenuItem>
                         ))
                     }
@@ -722,12 +785,20 @@ const Manifiesto = (props) => {
         setCodigoPostalTocado,
         nombreValido, apellidoPaternoValido, apellidoMaternoValido, generoValido,
         servicioValido, subservicioValido, coloniaValida, nombreNegocioValido,
-        calleValida, numeroValido, telefonoValido, correoValido, codigoPostalValido
+        calleValida, numeroValido, telefonoValido, correoValido, codigoPostalValido,
+        //Variables de states que se pasan al state dataForm al terminar el formulario
+        telefono, correo, nombre, apellidoPaterno, apellidoMaterno, genero, nombreNegocio, codigoPostal, estado, municipio, colonia, calle, numero,
+        fkIdCategoriaServicio,
     } = props;
 
     const [textoCheckbox, setTextoCheckbox] = useState(' ');
     const [formValido] = useState(false);
     const {setFormTerminado, setVistaFinal} = useContext(FormContext);
+    const [ clienteExistente, setClienteExistente ] = useState(false);
+    const [ telefonoEncontrado, setTelefonoEncontrado ] = useState(false);
+    const [ correoEncontrado, setCorreoEncontrado ] = useState(false);
+    const [ dataForm, setDataForm ] = useState({});
+    const [ verificacionCompletada, setVerificacionCompletada ] = useState(false);
 
     const validarFormulario = () => {
         // Marcar como tocados los campos que no se hayan tocado previamente
@@ -747,6 +818,7 @@ const Manifiesto = (props) => {
         setCheckboxTocado(true);
         setCodigoPostalTocado(true);
 
+
         // Verificar si todos los campos son válidos
         if (
             nombreValido && apellidoPaternoValido && apellidoMaternoValido && generoValido &&
@@ -755,10 +827,49 @@ const Manifiesto = (props) => {
         ) {
             // Mostrar mensaje en la consola si el formulario es válido
             // console.log('Formulario válido');
-            localStorage.setItem('formTerminado', 'true');
-            localStorage.setItem("vistaFinal", "true");
-            setFormTerminado('true');
-            setVistaFinal('true');
+
+            setDataForm({
+                telefono: telefono,
+                email: correo,
+                nombre: nombre,
+                apellido_paterno: apellidoPaterno,
+                apellido_materno: apellidoMaterno,
+                genero: genero,
+                nombre_negocio: nombreNegocio,
+                codigo_postal: codigoPostal,
+                estado: estado,
+                municipio: municipio,
+                colonia: colonia,
+                calle: calle,
+                numero_domicilio: numero,
+                fecha_creacion: new Date(),
+                fecha_modificacion: null,
+                fk_id_categoria_servicio: fkIdCategoriaServicio
+            });
+
+            const encontrarTelefono = async () => {
+                try {
+                    await axios.get(`${DB_CONNECTION}/clientes/buscar/tel?tel=${telefono}`);
+                    console.log("Telefono encontrado en la base de datos");
+                    setTelefonoEncontrado(true);
+                } catch (error) {
+                    console.error("No se encontró el telefono en la base de datos");
+                }
+            }
+
+            const encontrarEmail = async () => {
+                try {
+                    await axios.get(`${DB_CONNECTION}/clientes/buscar/email?email=${correo}`);
+                    console.log("Email encontrado en la base de datos");
+                    setCorreoEncontrado(true);
+                } catch (error) {
+                    console.error("No se encontró el email en la base de datos");
+                }
+            }
+
+            Promise.all([encontrarTelefono(), encontrarEmail()]).then(() => {
+                setVerificacionCompletada(true);
+            });
         } else {
             // Mostrar mensaje en la consola si el formulario no es válido
             if (checkboxValido) {
@@ -775,6 +886,43 @@ const Manifiesto = (props) => {
             setVistaFinal('false');
         }
     };
+
+    useEffect(() => {
+        if (!verificacionCompletada) return;
+
+        const postDataForm = async () => {
+            try {
+                
+                if (telefonoEncontrado == true || correoEncontrado == true) {
+                    console.log('El usuario ya existe');
+                    setClienteExistente(true);
+                    setTextoCheckbox('Usuario ya registrado');
+                    setCorreoEncontrado(false);
+                    setTelefonoEncontrado(false);
+                    setVerificacionCompletada(false);
+                    return;
+                } else {
+                    try {
+                        const response = await axios.post(`${DB_CONNECTION}/clientes`, dataForm);
+                        console.log("Cliente creado", response.data);
+
+                        //Guardar en el LocalStorage un objeto con el telefono y correo
+                        localStorage.setItem('telefono', telefono);
+                        localStorage.setItem('correo', correo);
+                        localStorage.setItem('formTerminado', 'true');
+                        localStorage.setItem("vistaFinal", "true");
+                        setFormTerminado('true');
+                        setVistaFinal('true');
+                    } catch (error) {
+                        console.error("No se pudo crear el cliente: ", error);
+                    }
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        postDataForm();
+    }, [ verificacionCompletada ])
 
     return (
         <>
@@ -801,6 +949,11 @@ const Manifiesto = (props) => {
 
                 <Grid item defaultMobileSize={12}>
                     {checkboxValido ? null : <p className='text-danger text-center'>{textoCheckbox}</p>}
+                    <p className='text-center text-primary'><a href="#"></a></p>
+                </Grid>
+
+                <Grid item defaultMobileSize={12}>
+                    {!clienteExistente ? null : <p className='text-danger text-center'>{textoCheckbox}</p>}
                     <p className='text-center text-primary'><a href="#"></a></p>
                 </Grid>
 
