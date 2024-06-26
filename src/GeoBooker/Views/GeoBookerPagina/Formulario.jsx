@@ -93,7 +93,7 @@ function Formulario() {
             {/* INICIO CAMBIO GSS-130624 */}
             <Box className="bg-dark pt-3 bg-opacity-25 pb-5 d-flex justify-content-center">
 
-                <Grid container defaultMobileSize={11} className='mx-4 bg-light rounded px-4 pb-4'>
+                <Grid container defaultMobileSize={11} className='mx-4 bg-light rounded px-4 pb-4' justifyContent='center'>
                     <PreRegistro {...variablesDeFormulario} />
 
                     <UbicacionYContacto {...variablesDeFormulario} />
