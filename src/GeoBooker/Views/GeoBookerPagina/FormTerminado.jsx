@@ -22,8 +22,16 @@
 //   --# Modificacion        : Mejor distrubución y proporción de elementos responsive#
 //   --# Marca de cambio     : BCMC-130624                                            #
 //   ---------------------------------------------------------------------------------#-->
+//   --# Autor               : Caleb Martinez Cavazos                                 #
+//   --# Fecha               : 25/06/2024                                             #
+//   --# Modificacion        : Funcion para el boton de "Creo que aun no me he        #
+//                             registrado"                                            #
+//   --# Marca de cambio     : BCMC-250624                                            #
+//   ---------------------------------------------------------------------------------#-->
 
-import { useContext } from "react";
+// INICIO DE CAMBIO: BCMC-250624
+import { useState, useContext } from "react";
+// FIN DE CAMBIO: BCMC-250624
 import { Box, Grid, Stack, Button, useTheme } from '@mui/material';
 import logoColor from "../../../assets/GeoBooker/LogoColor.svg";
 import * as Icons from "../../../assets/RedesSociales/Index.js";
@@ -73,6 +81,22 @@ const FormTerminado = () => {
     const { setMostrarAvisoDePrivacidadModal } = useContext(ModalContext);
     // FIN DE CAMBIO: BCMC-110624
 
+    // INICIO DE CAMBIO: BCMC-250624
+    const [ telefono, setTelefono ] = useState(localStorage.getItem('telefono') || '');
+    const [ correo, setCorreo ] = useState(localStorage.getItem('correo') || '');
+    const [ telefonoEncontrado, setTelefonoEncontrado ] = useState(false);
+    const [ correoEncontrado, setCorreoEncontrado ] = useState(false);
+    const [ verificacionCompletada, setVerificacionCompletada ] = useState(false);
+
+
+    const handleVerificarRegistro = () => {
+        // if(telefono == '' && correo == '') {
+            localStorage.setItem('vistaFinal', 'false');
+            localStorage.setItem('formTerminado', 'false');
+            window.reload();
+        // }
+    }
+    // FIN DE CAMBIO: BCMC-250624
     return (
         <div ref={formReferencia}>
             {vistaFinal === 'true'
@@ -606,15 +630,19 @@ const FormTerminado = () => {
                             }
                         </Grid>
 
-                        <TypographyMediumText
-                            sx={{
-                                marginTop: '1.5rem',
-                                marginBottom: '1rem',
-                                fontWeight: 'bold!important'
-                            }}
-                        >
-                            Creo que aún no me he registrado.
-                        </TypographyMediumText>
+                        {/* INICIO DE CAMBIO: BCMC-250624 */}
+                        <Link style={{textDecoration: "none", cursor: "pointer"}} onClick={() => handleVerificarRegistro()}>
+                            <TypographyMediumText
+                                sx={{
+                                    marginTop: '1.5rem',
+                                    marginBottom: '1rem',
+                                    fontWeight: 'bold!important'
+                                }}
+                            >
+                                Creo que aún no me he registrado.
+                            </TypographyMediumText>
+                        </Link>
+                        {/* FIN DE CAMBIO: BCMC-250624 */}
 
                         <Link to={isWeb ? rrss.whatsappWeb : rrss.whatsappMobile} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: "black" }}>
                             <TypographyMediumText

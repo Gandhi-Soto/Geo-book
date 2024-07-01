@@ -27,6 +27,12 @@
 //   --# Modificacion        : Se agrega los nuevos servicios a las categorias        #
 //   --# Marca de cambio     : GSS-130624                                             #
 //   ---------------------------------------------------------------------------------#-->
+//   --# Autor               : Caleb Martinez Cavazos                                 #
+//   --# Fecha               : 25/06/2024                                             #
+//   --# Modificacion        : Se quitaron console logs y cambios menores en las      #
+//                             funciones de obtener categorias y servicios            #
+//   --# Marca de cambio     : BCMC-250624                                            #
+//   ---------------------------------------------------------------------------------#-->
 // INICIO DE CAMBIO: GSS-110624
 import {useState, useContext, useEffect} from 'react'
 // FIN DE CAMBIO: GSS-110624
@@ -219,7 +225,9 @@ const PreRegistro = (props) => {
         
         if(idCategoria) {
             const fetchIds = async () => {
-                const response = await axios.get(`${DB_CONNECTION}/categorias-servicios/${idCategoria}`);
+                // INICIO CAMBIO: BCMC-250624
+                const response = await DB_CONNECTION.get(`/categorias-servicios/${idCategoria}`);
+                // FIN CAMBIO: BCMC-250624
                 const data = response.data;
                     
                 const nuevosIdsDeServicios = data.map(item => item.fk_id_servicio);
@@ -251,7 +259,9 @@ const PreRegistro = (props) => {
     useEffect(() => {
         if(idCategoria && idServicio) {
             const fetchFkIdCatServicio = async () => {
-                const response = await axios.get(`${DB_CONNECTION}/categorias-servicios/${idCategoria}/${idServicio}`);
+                // INICIO CAMBIO: BCMC-250624
+                const response = await DB_CONNECTION.get(`/categorias-servicios/${idCategoria}/${idServicio}`);
+                // FIN CAMBIO: BCMC-250624
                 const data = response.data;
                 setFkIdCategoriaServicio(data[0].id_categoria_servicio);
             }
@@ -849,8 +859,10 @@ const Manifiesto = (props) => {
 
             const encontrarTelefono = async () => {
                 try {
-                    await axios.get(`${DB_CONNECTION}/clientes/buscar/tel?tel=${telefono}`);
-                    console.log("Telefono encontrado en la base de datos");
+                    // INICIO DE CAMBIO: BCMC-250624
+                    await DB_CONNECTION.get(`/clientes/buscar/tel?tel=${telefono}`);
+                    // console.log("Telefono encontrado en la base de datos");
+                    // FIN DE CAMBIO: BCMC-250624
                     setTelefonoEncontrado(true);
                 } catch (error) {
                     console.error("No se encontró el telefono en la base de datos");
@@ -859,8 +871,10 @@ const Manifiesto = (props) => {
 
             const encontrarEmail = async () => {
                 try {
-                    await axios.get(`${DB_CONNECTION}/clientes/buscar/email?email=${correo}`);
-                    console.log("Email encontrado en la base de datos");
+                    // INICIO DE CAMBIO: BCMC-250624
+                    await DB_CONNECTION.get(`/clientes/buscar/email?email=${correo}`);
+                    // console.log("Email encontrado en la base de datos");
+                    // FIN DE CAMBIO: BCMC-250624
                     setCorreoEncontrado(true);
                 } catch (error) {
                     console.error("No se encontró el email en la base de datos");
@@ -894,7 +908,9 @@ const Manifiesto = (props) => {
             try {
                 
                 if (telefonoEncontrado == true || correoEncontrado == true) {
-                    console.log('El usuario ya existe');
+                    // INICIO DE CAMBIO: BCMC-250624
+                    // console.log('El usuario ya existe');
+                    // FIN DE CAMBIO: BCMC-250624
                     setClienteExistente(true);
                     setTextoCheckbox('Usuario ya registrado');
                     setCorreoEncontrado(false);
@@ -903,8 +919,10 @@ const Manifiesto = (props) => {
                     return;
                 } else {
                     try {
-                        const response = await axios.post(`${DB_CONNECTION}/clientes`, dataForm);
-                        console.log("Cliente creado", response.data);
+                        // INICIO DE CAMBIO: BCMC-250624
+                        const response = await DB_CONNECTION.post(`/clientes`, dataForm);
+                        // console.log("Cliente creado", response.data);
+                        // FIN DE CAMBIO: BCMC-250624
 
                         //Guardar en el LocalStorage un objeto con el telefono y correo
                         localStorage.setItem('telefono', telefono);
@@ -918,7 +936,9 @@ const Manifiesto = (props) => {
                     }
                 }
             } catch (error) {
-                console.log(error);
+                // INICIO DE CAMBIO: BCMC-250624
+                // console.log(error);
+                // FIN DE CAMBIO: BCMC-250624
             }
         }
         postDataForm();
