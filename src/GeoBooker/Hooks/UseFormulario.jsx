@@ -5,11 +5,20 @@
 //   --# Proyecto            : GeoBooker                       Fecha: 20/05/2024      #
 //   --# Descripcion General : Hook para realizar verificaciones al formulario        #
 //   ---------------------------------------------------------------------------------#-->
+//   --# Autor               : Caleb Martinez Cavazos                                 #
+//   --# Fecha               : 25/06/2024                                             #
+//   --# Modificacion        : Uso de nuevo endpoint para acceder a la api de geoNames#
+//                             y evitar problemass de seguridad                       #
+//   --# Marca de cambio     : BCMC-250624                                            #
+//   ---------------------------------------------------------------------------------#-->
 
 import { useState } from 'react';
 import validator from 'validator';
 import axios from 'axios';
 import {cities} from "../Data/Index.js";
+// INICIO DE CAMBIO: BCMC-250624
+import { DB_CONNECTION } from '../../DbConfig.js';
+// FIN DE CAMBIO: BCMC-250624
 
 const UseFormulario = () => {
     const [nombre, setNombre] = useState('');
@@ -193,9 +202,9 @@ const UseFormulario = () => {
             // Llamada a la API de GeoNames después de 1 segundo si el código postal es válido
             setTimeout(async () => {
                 try {
-                    const response = await axios.get(
-                        `http://api.geonames.org/postalCodeLookupJSON?postalcode=${valor}&country=MX&username=${username}`
-                    );
+                    // INICIO DE CAMBIO: BCMC-250624
+                    const response = await DB_CONNECTION.get(`/proxy/postalCodeLookup?postalcode=${valor}&country=MX&username=${username}`);
+                    // FIN DE CAMBIO: BCMC-250624
                     const postalCodes = response.data.postalcodes;
                     
                     if (postalCodes.length > 0) {

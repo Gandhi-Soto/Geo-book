@@ -22,6 +22,11 @@
 //   --# Modificacion        : Mejor distrubución y proporción de elementos responsive#
 //   --# Marca de cambio     : BCMC-130624                                            #
 //   ---------------------------------------------------------------------------------#-->
+//   --# Autor               : Caleb Martinez Cavazos                                 #
+//   --# Fecha               : 25/06/2024                                             #
+//   --# Modificacion        : Correcion de un titulo repetido                        #
+//   --# Marca de cambio     : BCMC-250624                                            #
+//   ---------------------------------------------------------------------------------#-->
 
 /**
  * Este componente despliega los 9 circulos de servicios en la pagina de GeoBooker
@@ -256,7 +261,9 @@ const ListaDeServicios = [
     },
     {
         id: 9,
-        nombre: 'Educación y capacitación',
+        // INICIO DE CAMBIO: BCMC-250624
+        nombre: 'Comercios mayoreo y menudeo',
+        // FIN DE CAMBIO: BCMC-250624
         icono: IconoComerciosMayoreoYMenudeo
     }
 ]
