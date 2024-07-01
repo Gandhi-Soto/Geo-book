@@ -30,6 +30,11 @@
 //   --# Modificacion        : Estilos responsivos para textos y cajita amarilla      #
 //   --# Marca de cambio     : BCMC-130624                                            #
 //   ---------------------------------------------------------------------------------#-->
+//   --# Autor               : Gandhi Soto Sanchez                                    #
+//   --# Fecha               : 25/06/2024                                             #
+//   --# Modificacion        : Correcta animacion de la caja amarilla                 #
+//   --# Marca de cambio     : GSS-240624                                             #
+//   ---------------------------------------------------------------------------------#-->
 
 import { Box, Grid, useTheme } from "@mui/material";
 import { ImagenDeFondo, LogoGeoBooker, ImagenDeFondoWeb } from '../../../assets/GeoBooker/Index.js'
@@ -198,6 +203,7 @@ export const GeoBooker = () => {
                     </Grid>
 
                     <Grid item defaultMobileSize={12} mt='0.5rem' sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        {/* INICIO CAMBIO GSS-250624 */}
                         {/* INICIO CAMBIO: BCMC-130624 */}
                         <CajitaAmarilla 
                             sx={{ 
@@ -215,9 +221,12 @@ export const GeoBooker = () => {
                                     width: '35rem',
                                     height: '1.5rem'
                                 }
-                            }} 
+                            }}
+                            animacionDeAnimateCss='animate__slideInLeft'
                         />
                         {/* FIN DE CAMBIO: BCMC-130624 */}
+                        {/* FIN CAMBIO GSS-250624 */}
+
                     </Grid>
                     {/*FIN CAMBIO GSS-310524*/}
 

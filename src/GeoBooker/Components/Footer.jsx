@@ -27,6 +27,11 @@
 //   --# Modificacion        : El footer es responsivo en todos los breakpoints       #
 //   --# Marca de cambio     : GSS-130624                                             #
 //   ---------------------------------------------------------------------------------#-->
+//   --# Autor               : Gandhi Soto Sanchez                                    #
+//   --# Fecha               : 25/06/2024                                             #
+//   --# Modificacion        : Bug de responsive solucionado                          #
+//   --# Marca de cambio     : GSS-130624                                             #
+//   ---------------------------------------------------------------------------------#-->
 
 import {useContext} from 'react';
 // INICIO CAMBIO GSS-310524
@@ -83,7 +88,8 @@ export const Footer = () => {
 
     // INICIO CAMBIO GSS-110624
     return (
-        <Grid container maxWidth sx={{bgcolor: 'black', color: 'white', py: 3, display: 'flex', justifyContent: 'center'}}>
+        <Grid container maxWidth
+              sx={{bgcolor: 'black', color: 'white', py: 3, display: 'flex', justifyContent: 'center'}}>
             <Grid item
                   defaultMobileSize={11}
                   sx={{
@@ -159,10 +165,14 @@ const MobileFootFooter =
          overrideSizes
      }) => {
 
-    const {
-        isDownSmallMobileSize
-    } = useContext(BreakpointsContext)
-    const tamanoDeLaFirma = isDownSmallMobileSize ? '10rem' : '15rem';
+        // INICIO CAMBIO GSS-250624
+        const {
+            isDownSmallMobile
+        } = useContext(BreakpointsContext)
+        const tamanoDeLaFirma = isDownSmallMobile ? '10rem' : '13rem';
+        console.log("is Down small mobile size ", isDownSmallMobile)
+
+        // FIN CAMBIO GSS-250624
 
         return (
             <Grid container
@@ -199,14 +209,14 @@ const MobileFootFooter =
                         </TypographySmallText>
                     </Link>
 
-                    <Box width='4.5rem' />
+                    <Box width='4.5rem'/>
 
                     <Link href="https://codigogeek.com.mx/" target="_blank">
                         <img
                             className='Img-Color-PoweredBy'
                             src={PoweredBy}
                             alt='Código Geek'
-                            style={{ width: tamanoDeLaFirma }} // Controla el tamaño de la imagen
+                            style={{width: tamanoDeLaFirma}} // Controla el tamaño de la imagen
                         />
                     </Link>
                 </Grid>
@@ -234,10 +244,10 @@ const WebFootFooter =
          theme,
          overrideSizes
      }) => {
-    const {
-        isUpWideWebSize
-    } = useContext(BreakpointsContext)
-    const tamanoDeLaFirma = isUpWideWebSize ? '25rem' : '15rem';
+        const {
+            isUpWideWebSize
+        } = useContext(BreakpointsContext)
+        const tamanoDeLaFirma = isUpWideWebSize ? '25rem' : '15rem';
         return (
             <Grid container
                   rowSpacing={2}
@@ -281,7 +291,7 @@ const WebFootFooter =
                             className='Img-Color-PoweredBy'
                             src={PoweredBy}
                             alt='Código Geek'
-                            style={{ width: tamanoDeLaFirma }} // Controla el tamaño de la imagen
+                            style={{width: tamanoDeLaFirma}} // Controla el tamaño de la imagen
                         />
                     </Link>
                 </Grid>

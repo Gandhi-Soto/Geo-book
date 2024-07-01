@@ -12,7 +12,7 @@
 //   --# Modificacion        : Referencias de todos los breakpoints a toda la app     #
 //   --# Marca de cambio     : GSS-130624                                             #
 //   ---------------------------------------------------------------------------------#-->
-import React, { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import {useMediaQuery, useTheme} from "@mui/material";
 import PropTypes from "prop-types";
 

@@ -29,6 +29,11 @@
 //   --# Modificacion        : La lista es responsiva en todos los breakpoints        #
 //   --# Marca de cambio     : GSS-130624                                             #
 //   ---------------------------------------------------------------------------------#-->
+//   --# Autor               : Gandhi Soto Sanchez                                    #
+//   --# Fecha               : 25/06/2024                                             #
+//   --# Modificacion        : Correctos links de geobooker                           #
+//   --# Marca de cambio     : GSS-250624                                             #
+//   ---------------------------------------------------------------------------------#-->
 
 // INICIO CAMBIO GSS-110624
 import {ImageList, ImageListItem, Link, useTheme} from "@mui/material";
@@ -131,40 +136,42 @@ export const ListaDeRedesSociales = () => {
 }
 // INICIO FIN GSS-310524
 
+// INICIO CAMBIO GSS-250624
 const itemData = [
     {
         icon: FacebookIcon,
         alt: 'Facebook',
-        link: "https://www.facebook.com/codigogeekmx"
+        link: "https://www.facebook.com/profile.php?id=61560350821668"
     },
     {
         icon: InstagramIcon,
         alt: 'Instagram',
-        link: "https://www.instagram.com/codigogeekmx/"
+        link: "https://www.instagram.com/geobookermx/"
     },
     {
         icon: TikTokIcon,
         alt: 'TikTok',
-        link: "https://www.tiktok.com/@codigogeek?_t=8dJEB7rmInl&_r=1"
+        link: "https://www.tiktok.com/@geobookermx"
     },
     {
         icon: TwitterIcon,
         alt: 'Twitter',
-        link: "https://twitter.com/codigogeekmx?lang=es"
+        link: "https://x.com/GeoBookermx"
     },
     {
         icon: YouTubeIcon,
         alt: 'YouTube',
-        link: "https://www.youtube.com/channel/UCsfdvyXWQafA6FvHTVmVEGQ"
+        link: "https://www.youtube.com/channel/UCqYxcEGtVeo34101HqFT6IA"
     },
     {
         icon: LinkedInIcon,
         alt: 'LinkedIn',
-        link: "https://mx.linkedin.com/company/codigo-geek"
+        link: "https://www.linkedin.com/showcase/97211783/admin/feed/posts/"
     },
     {
         icon: WhatsappIcon,
         alt: 'Whatsapp',
-        link: "https://www.whatsapp.com/catalog/5215527076098/?app_absent=0"
+        link: "https://www.whatsapp.com/catalog/5215533977053/?app_absent=0"
     }
 ]
+// FIN CAMBIO GSS-250624
